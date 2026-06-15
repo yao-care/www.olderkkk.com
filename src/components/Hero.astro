@@ -1,0 +1,11 @@
+---
+interface Props { slides: { image: string; alt?: string }[]; }
+const { slides } = Astro.props;
+---
+<div class="hero">
+  {slides.map((s) => <img src={s.image} alt={s.alt ?? ""} />)}
+</div>
+<style>
+  .hero { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0; border-radius: 12px; }
+  .hero img { flex: 0 0 100%; scroll-snap-align: start; object-fit: cover; max-height: 480px; width: 100%; }
+</style>
