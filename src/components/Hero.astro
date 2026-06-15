@@ -32,7 +32,8 @@ const { slides } = Astro.props;
     let idx = 0;
     const go = (i) => {
       idx = (i + imgs.length) % imgs.length;
-      imgs[idx].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      // 只捲動 Hero 軌道的水平位置，不可用 scrollIntoView（會連帶垂直捲動整頁）
+      track.scrollTo({ left: idx * track.clientWidth, behavior: "smooth" });
       dots.forEach((d, di) => d.setAttribute("aria-current", di === idx ? "true" : "false"));
     };
     dots.forEach((d, di) => d.addEventListener("click", () => go(di)));
