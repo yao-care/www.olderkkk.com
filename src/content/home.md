@@ -27,7 +27,7 @@ slides:
     
     能夠更快有有效解決身體問題!
     
-    [![](/images/f4daa73b59d2.png)](tel:0970686319) [![](/images/3cb1815d1d3c.png)](https://www.facebook.com/olderk/) [![](/images/0ff627656224.png)](https://goo.gl/maps/5ycqSypugBVycsi4A) [![](/images/a2e19398449f.png)](https://www.olderkkk.com/paper/contact_index.php?title_id=298#page) [![](/images/fb163c675026.png)](https://line.me/R/ti/p/%40275nxace)
+    [![](/images/f4daa73b59d2.png)](tel:0970686319) [![](/images/3cb1815d1d3c.png)](https://www.facebook.com/olderk/) [![](/images/0ff627656224.png)](https://goo.gl/maps/5ycqSypugBVycsi4A) [![](/images/a2e19398449f.png)](/contact) [![](/images/fb163c675026.png)](https://line.me/R/ti/p/%40275nxace)
     
 
 *   ![](/images/08ff142713bf.png)
@@ -36,7 +36,7 @@ slides:
     
     ###### 訓練健身∥減脂重量肌力訓練
     
-    [健康概念分享](https://www.olderkkk.com/paper/share_index.php?title_id=295#page) [瀏覽最新消息](https://www.olderkkk.com/paper/promotions_index.php?title_id=297#page)
+    [健康概念分享](/health) [瀏覽最新消息](/news)
     
 *   ![](/images/81d04e2f74bd.png)
 
@@ -52,22 +52,22 @@ slides:
 
 課程介紹
 
-](http://www.olderkkk.com/paper/other_page.php?id=294#page)[![](/images/de5e966af013.jpg)
+](/courses)[![](/images/de5e966af013.jpg)
 
 服務項目
 
-](http://www.olderkkk.com/paper/services_index.php?title_id=293#page)
+](/services)
 
 ### NEW ARRIVALS\- 最新商品 -
 
 [](#)
 
-*   [![](/images/be78da314d9b.png)](https://www.olderkkk.com)
+*   [![](/images/be78da314d9b.png)](/)
 *   TEL: 0970686319
 *   E-mail:[d28281778@gmail.com](mailto:d28281778@gmail.com)
 *   地址:台中市西屯區工業區一路58巷11弄83號
 
-[台中整脊](https://www.olderkkk.com/) [西屯整脊](https://www.olderkkk.com/) [台中整骨](https://www.olderkkk.com/) [西屯整骨](https://www.olderkkk.com/) [台中整椎](https://www.olderkkk.com/) [台中整復](https://www.olderkkk.com/) [台中整復推薦](http://www.olderkkk.com)
+[台中整脊](/) [西屯整脊](/) [台中整骨](/) [西屯整骨](/) [台中整椎](/) [台中整復](/) [台中整復推薦](/)
 
 瀏覽人數: 1138999 © All Rights Reserved.
 

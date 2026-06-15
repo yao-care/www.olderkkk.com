@@ -23,64 +23,64 @@ sourcePath: "/paper/share_index.php?title_id=295"
     
 *   202307/06
     
-    [台中西屯—鄭骨館體雕中心](?id=4904&useno=olderk&title_id=295#page)
+    [台中西屯—鄭骨館體雕中心](?id=4904&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [尾椎外凸,骨盆前傾\_鄭骨館體雕中心](?id=4635&useno=olderk&title_id=295#page)
+    [尾椎外凸,骨盆前傾\_鄭骨館體雕中心](?id=4635&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [打籃球腰與腳不舒服\_鄭骨館體雕中心](?id=4634&useno=olderk&title_id=295#page)
+    [打籃球腰與腳不舒服\_鄭骨館體雕中心](?id=4634&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [打棒球肩膀卡卡\_鄭骨館體雕中心](?id=4633&useno=olderk&title_id=295#page)
+    [打棒球肩膀卡卡\_鄭骨館體雕中心](?id=4633&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [搬重物腰痛與腰痠\_鄭骨館體雕中心](?id=4632&useno=olderk&title_id=295#page)
+    [搬重物腰痛與腰痠\_鄭骨館體雕中心](?id=4632&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [身體歪斜,肩膀一邊高一邊低\_鄭骨館體雕中心](?id=4631&useno=olderk&title_id=295#page)
+    [身體歪斜,肩膀一邊高一邊低\_鄭骨館體雕中心](?id=4631&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [練瑜珈骨盆卡卡\_鄭骨館體雕中心](?id=4630&useno=olderk&title_id=295#page)
+    [練瑜珈骨盆卡卡\_鄭骨館體雕中心](?id=4630&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [就是喜歡翹腳\_鄭骨館體雕中心](?id=4629&useno=olderk&title_id=295#page)
+    [就是喜歡翹腳\_鄭骨館體雕中心](?id=4629&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [腳底疼痛,走路痛\_鄭骨館體雕中心](?id=4628&useno=olderk&title_id=295#page)
+    [腳底疼痛,走路痛\_鄭骨館體雕中心](?id=4628&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [長者運動身體疼痛\_鄭骨館體雕中心](?id=4627&useno=olderk&title_id=295#page)
+    [長者運動身體疼痛\_鄭骨館體雕中心](?id=4627&useno=olderk&title_id=295)
     
 *   202305/08
     
-    [腳痛,腿痛,腳拉傷\_鄭骨館體雕中心](?id=4626&useno=olderk&title_id=295#page)
+    [腳痛,腿痛,腳拉傷\_鄭骨館體雕中心](?id=4626&useno=olderk&title_id=295)
     
 *   202208/22
     
-    [歪斜以及高低肩訓練矯正](?id=3679&useno=olderk&title_id=295#page)
+    [歪斜以及高低肩訓練矯正](?id=3679&useno=olderk&title_id=295)
     
 *   202202/09
     
-    [腰痠痛-大掃除或是工作長時間彎腰造成腰痠嗎?](?id=3068&useno=olderk&title_id=295#page)
+    [腰痠痛-大掃除或是工作長時間彎腰造成腰痠嗎?](?id=3068&useno=olderk&title_id=295)
     
 *   202202/09
     
-    [腳底痛是足底筋膜炎?](?id=3067&useno=olderk&title_id=295#page)
+    [腳底痛是足底筋膜炎?](?id=3067&useno=olderk&title_id=295)
     
 *   202112/06
     
-    [人體的骨骼支撐整個活動力~很重要!調理身體結構再結合中醫調理，由內而外提升身心靈健康生活](?id=2854&useno=olderk&title_id=295#page)
+    [人體的骨骼支撐整個活動力~很重要!調理身體結構再結合中醫調理，由內而外提升身心靈健康生活](?id=2854&useno=olderk&title_id=295)
     
 
 *   1
- *   [2](/paper/share_index.php?page=2&useno=olderk#page)
+ *   [2](/paper/share_index.php?page=2&useno=olderk)

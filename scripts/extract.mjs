@@ -11,9 +11,8 @@ const td = new TurndownService({ headingStyle: "atx", codeBlockStyle: "fenced" }
 
 const PAGES = [
   { slug: "services", path: "/paper/services_index.php?title_id=293",   dir: "src/content/pages", selector: ".content" },
-  { slug: "courses",  path: "/paper/other_page.php?id=294",            dir: "src/content/pages", selector: ".content" },
+  { slug: "courses",  path: "/paper/other_page.php?id=294",            dir: "src/content/pages", selector: ".hs_box" },
   { slug: "health",   path: "/paper/share_index.php?title_id=295",      dir: "src/content/pages", selector: ".content" },
-  { slug: "works",    path: "/workshow/index.php?title_id=296",         dir: "src/content/works", selector: ".content" },
   { slug: "news",     path: "/paper/promotions_index.php?title_id=297",  dir: "src/content/news",  selector: ".content" },
   { slug: "contact",  path: "/paper/contact_index.php?title_id=298",     dir: "src/content/pages", selector: ".content" },
   { slug: "home",     path: "/",                                         dir: "src/content",       selector: ".hs_box", slidesSelector: ".flexslider .slides img" },

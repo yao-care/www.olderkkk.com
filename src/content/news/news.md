@@ -55,72 +55,72 @@ YAHOO新聞推薦:[https://rink.cc/mdbhx](https://rink.cc/mdbhx?fbclid=IwZXh0bgN
     
 *   202605/06
     
-    [寵愛媽咪，讓愛回歸自然](?id=14477&useno=olderk&title_id=297#page)
+    [寵愛媽咪，讓愛回歸自然](?id=14477&useno=olderk&title_id=297)
     
 *   202605/06
     
-    [【價格調整公告】](?id=14476&useno=olderk&title_id=297#page)
+    [【價格調整公告】](?id=14476&useno=olderk&title_id=297)
     
 *   202605/06
     
-    [你有沒有遇過這種情況？](?id=14475&useno=olderk&title_id=297#page)
+    [你有沒有遇過這種情況？](?id=14475&useno=olderk&title_id=297)
     
 *   202605/06
     
-    [春酒吃好料](?id=14474&useno=olderk&title_id=297#page)
+    [春酒吃好料](?id=14474&useno=olderk&title_id=297)
     
 *   202605/06
     
-    [【改善案例分享】](?id=14473&useno=olderk&title_id=297#page)
+    [【改善案例分享】](?id=14473&useno=olderk&title_id=297)
     
 *   202605/06
     
-    [久坐工作的人一定要注意這種狀況](?id=14472&useno=olderk&title_id=297#page)
+    [久坐工作的人一定要注意這種狀況](?id=14472&useno=olderk&title_id=297)
     
 *   202601/12
     
-    [褲子真的鬆很多！假跨寬改善超有感](?id=13565&useno=olderk&title_id=297#page)
+    [褲子真的鬆很多！假跨寬改善超有感](?id=13565&useno=olderk&title_id=297)
     
 *   202601/12
     
-    [新春限定優惠｜把身體也一起保養好](?id=13564&useno=olderk&title_id=297#page)
+    [新春限定優惠｜把身體也一起保養好](?id=13564&useno=olderk&title_id=297)
     
 *   202601/12
     
-    [「不是我胖，是褲子很難買」的那種痛，你懂嗎？](?id=13563&useno=olderk&title_id=297#page)
+    [「不是我胖，是褲子很難買」的那種痛，你懂嗎？](?id=13563&useno=olderk&title_id=297)
     
 *   202510/02
     
-    [設計系學生的調整回饋](?id=12639&useno=olderk&title_id=297#page)
+    [設計系學生的調整回饋](?id=12639&useno=olderk&title_id=297)
     
 *   202510/02
     
-    [中秋佳節快樂](?id=12638&useno=olderk&title_id=297#page)
+    [中秋佳節快樂](?id=12638&useno=olderk&title_id=297)
     
 *   202510/02
     
-    [跟著我們，一起走到新家吧！](?id=12637&useno=olderk&title_id=297#page)
+    [跟著我們，一起走到新家吧！](?id=12637&useno=olderk&title_id=297)
     
 *   202510/02
     
-    [【骨友真心推薦】](?id=12636&useno=olderk&title_id=297#page)
+    [【骨友真心推薦】](?id=12636&useno=olderk&title_id=297)
     
 *   202507/24
     
-    [鄭骨館體雕中心 新址開幕 X 暑期限定優惠雙重登場！](?id=12019&useno=olderk&title_id=297#page)
+    [鄭骨館體雕中心 新址開幕 X 暑期限定優惠雙重登場！](?id=12019&useno=olderk&title_id=297)
     
 *   202507/24
     
-    [鄭骨館體雕中心新址開幕優惠活動](?id=12018&useno=olderk&title_id=297#page)
+    [鄭骨館體雕中心新址開幕優惠活動](?id=12018&useno=olderk&title_id=297)
     
 
 *   1
- *   [2](/paper/promotions_index.php?page=2#page#page)
- *   [3](/paper/promotions_index.php?page=3#page#page)
- *   [4](/paper/promotions_index.php?page=4#page#page)
- *   [5](/paper/promotions_index.php?page=5#page#page)
- *   [6](/paper/promotions_index.php?page=6#page#page)
- *   [7](/paper/promotions_index.php?page=7#page#page)
- *   [8](/paper/promotions_index.php?page=8#page#page)
- *   [9](/paper/promotions_index.php?page=9#page#page)
- *   [10](/paper/promotions_index.php?page=10#page#page)
+ *   [2](/paper/promotions_index.php?page=2)
+ *   [3](/paper/promotions_index.php?page=3)
+ *   [4](/paper/promotions_index.php?page=4)
+ *   [5](/paper/promotions_index.php?page=5)
+ *   [6](/paper/promotions_index.php?page=6)
+ *   [7](/paper/promotions_index.php?page=7)
+ *   [8](/paper/promotions_index.php?page=8)
+ *   [9](/paper/promotions_index.php?page=9)
+ *   [10](/paper/promotions_index.php?page=10)

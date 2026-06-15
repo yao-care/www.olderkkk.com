@@ -5,33 +5,24 @@ keywords: "鄭骨館體雕中心-台中整骨,台中整骨推薦,台中整脊-�
 sourcePath: "/paper/other_page.php?id=294"
 ---
 
-[![](/images/be78da314d9b.png)
+*   ![](/images/7d9c802392ac.png)
+*   ![](/images/958e3781dfc1.png)
 
-# 鄭骨館體雕中心-台中整骨,台中整骨推薦,台中整脊
+#### 團課指導
 
-](https://www.olderkkk.com)
+*   ![](/images/9c44e771b727.jpg)
+*   ![](/images/67d8a90c3f57.jpg)
+*   ![](/images/01c1794204b9.jpg)
+    
+*   ![](/images/6b9dcef821fe.jpg)
+*   ![](/images/294513b94f92.jpg)
+*   [![](/images/722058915fc7.jpg)](https://youtu.be/49EDIEm6324)
+    
 
-*   [關於老K](https://www.olderkkk.com#page)
-*   [服務項目](https://www.olderkkk.com/paper/services_index.php?title_id=293#page)
-*   [課程介紹](https://www.olderkkk.com/paper/other_page.php?id=294#page)
-*   [健康槪念分享](https://www.olderkkk.com/paper/share_index.php?title_id=295#page)
-*   [成果分享](https://www.olderkkk.com/workshow/index.php?title_id=296#page)
-*   [最新消息](https://www.olderkkk.com/paper/promotions_index.php?title_id=297#page)
-*   [聯絡我們](https://www.olderkkk.com/paper/contact_index.php?title_id=298#page)
-*   [![](/images/9f669a0a51ea.png)](https://www.olderkkk.com/products/car.php?title_id=)
+#### 一對一指導
 
-*   [關於老K](https://www.olderkkk.com#page)
-*   [服務項目](https://www.olderkkk.com/paper/services_index.php?title_id=293#page)
-*   [課程介紹](https://www.olderkkk.com/paper/other_page.php?id=294#page)
-*   [健康槪念分享](https://www.olderkkk.com/paper/share_index.php?title_id=295#page)
-*   [成果分享](https://www.olderkkk.com/workshow/index.php?title_id=296#page)
-*   [最新消息](https://www.olderkkk.com/paper/promotions_index.php?title_id=297#page)
-*   [聯絡我們](https://www.olderkkk.com/paper/contact_index.php?title_id=298#page)
-
-[](#menu)[](https://www.olderkkk.com/products/car.php?title_id=)[](javascript:void\(0\))[![](/images/be78da314d9b.png)](https://www.olderkkk.com)
-
- 
-
-## 課程介紹
-
-[首頁](../index.php) / 課程介紹
+*   ![](/images/b78988dbdf24.jpg)
+*   ![](/images/babc349e57c7.jpg)
+*   ![](/images/4bc2c9bb00f2.jpg)
+*   ![](/images/868e241b615b.jpg)
+*   ![](/images/988c3bfef5ab.jpg)
