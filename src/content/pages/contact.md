@@ -31,6 +31,6 @@ sourcePath: "/paper/contact_index.php?title_id=298"
     
 *   驗證碼\*必填
     
-     ![](/images/3feb2033fe4f.jpg)
+     ![](/images/253b9bb4e274.jpg)
     
 *
