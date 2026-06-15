@@ -1,9 +1,10 @@
 ---
 import Nav from "./Nav.astro";
+import { withBase } from "../lib/withBase";
 ---
 <header class="header">
   <div class="container header__inner">
-    <a href="/" class="header__brand">鄭骨館體雕中心</a>
+    <a href={withBase("/")} class="header__brand">鄭骨館體雕中心</a>
     <Nav />
   </div>
 </header>

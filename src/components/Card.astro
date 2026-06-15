@@ -1,9 +1,10 @@
 ---
+import { withBase } from "../lib/withBase";
 interface Props { href: string; title: string; excerpt?: string; image?: string; }
 const { href, title, excerpt = "", image } = Astro.props;
 ---
-<a class="card" href={href}>
-  {image && <img src={image} alt={title} />}
+<a class="card" href={withBase(href)}>
+  {image && <img src={withBase(image)} alt={title} />}
   <h3>{title}</h3>
   {excerpt && <p>{excerpt}</p>}
 </a>
