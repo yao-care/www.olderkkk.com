@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import { pickOgImage } from "../../lib/ogImage";
 export async function getStaticPaths() {
   const items = await getCollection("news");
   return items.map((a) => ({ params: { slug: a.id } }));
@@ -9,8 +10,7 @@ const { slug } = Astro.params;
 const entry = await getEntry("news", slug);
 if (!entry) return Astro.redirect("/404");
 const { Content } = await render(entry);
-const imgs = [...(entry.body ?? "").matchAll(/!\[[^\]]*\]\((\S+?)(?:\s+"[^"]*")?\)/g)].map((m) => m[1]);
-const firstImg = imgs.find((u) => !/\.gif(\?|$)/i.test(u)) || imgs[0] || "";
+const firstImg = pickOgImage(entry.body ?? "");
 ---
 <Base title={entry.data.title} description={entry.data.description} keywords={entry.data.keywords} image={firstImg}>
   <h1>{entry.data.title}</h1>
