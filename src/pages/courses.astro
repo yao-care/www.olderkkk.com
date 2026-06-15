@@ -10,6 +10,13 @@ const { Content } = await render(entry);
 </Base>
 <style>
   .prose :global(p) { font-size: var(--text-base); margin: 1rem 0; }
-  .prose :global(h2) { margin: 2rem 0 1rem; }
-  .prose :global(img) { border-radius: 8px; margin: 1rem 0; }
+  .prose :global(h4) { font-size: var(--text-xl); margin: 2rem 0 1rem; }
+  .prose :global(img) { border-radius: 8px; margin: 0; }
+  .prose :global(> p > img) { margin: 1rem 0; }
+  .prose :global(ul) {
+    list-style: none; padding: 0; margin: 1rem 0 2rem;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;
+  }
+  .prose :global(li) { margin: 0; }
+  .prose :global(li img) { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
 </style>

@@ -40,6 +40,8 @@ slides:
     
 *   ![](/images/81d04e2f74bd.png)
 
+<!-- -->
+
 *   ![](/images/7d5af9a94464.jpg)
 *   ![](/images/aad335a56625.png)
 *   ![](/images/f8cc1ac3c4f3.png)
