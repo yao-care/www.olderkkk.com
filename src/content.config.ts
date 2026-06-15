@@ -14,7 +14,14 @@ const pages = defineCollection({
 });
 const works = defineCollection({
   loader: glob({ pattern: "*.md", base: "src/content/works" }),
-  schema: z.object({ ...seo, group: z.string().optional() }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().default(""),
+    keywords: z.string().default(""),
+    album: z.string().default(""),
+    group: z.string().optional(),
+    photos: z.array(z.object({ src: z.string(), caption: z.string().default("") })).default([]),
+  }),
 });
 const news = defineCollection({
   loader: glob({ pattern: "*.md", base: "src/content/news" }),
