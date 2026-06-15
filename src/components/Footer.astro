@@ -1,0 +1,15 @@
+---
+import SeoKeywords from "./SeoKeywords.astro";
+const keywords = ["台中整骨", "台中整骨推薦", "台中整脊", "西屯整脊", "台中整復", "體雕中心"];
+---
+<footer class="footer">
+  <div class="container">
+    <p>鄭骨館體雕中心 · 台中市西屯區</p>
+    <p>電話 <a href="tel:0970686319">0970686319</a> · Email <a href="mailto:d28281778@gmail.com">d28281778@gmail.com</a></p>
+    <SeoKeywords keywords={keywords} />
+  </div>
+</footer>
+<style>
+  .footer { background: var(--bg-overlay); border-top: 1px solid var(--border-subtle); padding: 2rem 0; margin-top: 3rem; }
+  .footer p { font-size: var(--text-sm); color: var(--text-secondary); }
+</style>

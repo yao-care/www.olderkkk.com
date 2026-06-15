@@ -1,0 +1,19 @@
+---
+const line = "https://line.me/R/ti/p/%40275nxace";
+const tel = "0970686319";
+const mail = "d28281778@gmail.com";
+const map = "https://goo.gl/maps/5ycqSypugBVycsi4A";
+---
+<div class="cta">
+  <a class="cta__btn cta__btn--line" href={line}>加 LINE 諮詢</a>
+  <a class="cta__btn" href={`tel:${tel}`}>撥打電話 {tel}</a>
+  <a class="cta__btn" href={`mailto:${mail}`}>寄 Email</a>
+  <a class="cta__btn" href={map}>查看地圖</a>
+</div>
+<style>
+  .cta { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
+  .cta__btn { font-size: var(--text-base); padding: 0.75rem 1.5rem; border-radius: 8px;
+    background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-primary); }
+  .cta__btn:hover { background: var(--bg-hover); text-decoration: none; }
+  .cta__btn--line { background: var(--color-pass); color: #fff; border-color: transparent; }
+</style>

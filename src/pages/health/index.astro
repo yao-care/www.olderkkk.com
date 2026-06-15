@@ -1,0 +1,15 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Card from "../../components/Card.astro";
+const articles = (await getCollection("health")).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="健康概念分享-鄭骨館體雕中心-台中整骨,台中整骨推薦,台中整脊" description="健康概念分享">
+  <h1>健康概念分享</h1>
+  <div class="grid">
+    {articles.map((a) => <Card href={`/health/${a.id}`} title={a.data.title} excerpt={a.data.summary} />)}
+  </div>
+</Base>
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+</style>

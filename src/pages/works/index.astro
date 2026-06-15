@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Card from "../../components/Card.astro";
+const albums = await getCollection("works");
+---
+<Base title="成果分享-鄭骨館體雕中心-台中整骨,台中整骨推薦,台中整脊" description="成果分享">
+  <h1>成果分享</h1>
+  <div class="grid">
+    {albums.map((a) => (
+      <Card href={`/works/${a.id}`} title={a.data.album || a.data.title} image={a.data.photos[0]?.src} />
+    ))}
+  </div>
+</Base>
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+</style>
