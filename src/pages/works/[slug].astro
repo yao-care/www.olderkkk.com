@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { withBase } from "../../lib/withBase";
+import { absUrl, breadcrumbSchema } from "../../lib/site";
 export async function getStaticPaths() {
   const albums = await getCollection("works");
   return albums.map((a) => ({ params: { slug: a.id } }));
@@ -10,8 +11,23 @@ const { slug } = Astro.params;
 const entry = await getEntry("works", slug);
 if (!entry) return Astro.redirect("/404");
 const photos = entry.data.photos;
+const album = entry.data.album || "成果分享";
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "成果分享", url: absUrl("/works", Astro.site, base) },
+  { name: album, url: absUrl(`/works/${slug}`, Astro.site, base) },
+]);
+const gallery = {
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  name: `${album}｜鄭骨館體雕中心`,
+  image: photos.map((p) => absUrl(p.src, Astro.site, base)),
+};
+const seoTitle = `${album}｜成果分享｜鄭骨館體雕中心`;
+const seoDesc = `${album}相簿——台中西屯鄭骨館體雕中心整骨整脊體雕前後對比成果。`;
 ---
-<Base title={entry.data.title} description={entry.data.description} keywords={entry.data.keywords}>
+<Base title={seoTitle} description={seoDesc} image={photos[0]?.src} schemas={[crumb, gallery]}>
   <h1>{entry.data.album || entry.data.title}</h1>
   <div class="gallery">
     {photos.map((p) => (

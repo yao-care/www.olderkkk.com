@@ -2,10 +2,18 @@
 import { getEntry, render } from "astro:content";
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
+import { absUrl, breadcrumbSchema } from "../lib/site";
 const entry = await getEntry("pages", "contact");
 const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "聯絡我們", url: absUrl("/contact", Astro.site, base) },
+]);
+const seoTitle = "聯絡我們｜台中西屯・鄭骨館體雕中心";
+const seoDesc = "台中市西屯區工業區一路58巷11弄83號，電話 0970686319，LINE @275nxace。鄭骨館體雕中心採預約制。";
 ---
-<Base title={entry.data.title} description={entry.data.description} keywords={entry.data.keywords}>
+<Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
   <h1>聯絡我們</h1>
   <article class="prose"><Content /></article>
   <ContactCTA />

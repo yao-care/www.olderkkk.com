@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import { absUrl, breadcrumbSchema } from "../lib/site";
+
+const faqs = [
+  {
+    q: "鄭骨館體雕中心在哪裡？",
+    a: "本中心位於台中市西屯區工業區一路58巷11弄83號，鄰近西屯工業區，提供整骨、整脊、體雕與一對一訓練服務。",
+  },
+  {
+    q: "如何預約或聯絡？",
+    a: "本中心採預約制。可透過電話 0970686319、LINE（@275nxace）或 Facebook 粉絲專頁預約與諮詢。",
+  },
+  {
+    q: "提供哪些服務？",
+    a: "服務包含身體調理、歪斜調理、痠痛調理、運動動作矯正、動作失能矯正、運動按摩矯正，以及肌力訓練、減脂計畫、重量肌力訓練、全身張力平衡與一對一健身教練、團課指導。",
+  },
+  {
+    q: "整骨、調理的過程會痛嗎？",
+    a: "感受因人而異，會依個人緊繃與歪斜程度不同。師傅會視狀況調整力道，過程以可承受的範圍進行，過程中有任何不適都可隨時反映。",
+  },
+  {
+    q: "需要做幾次才會有效果？",
+    a: "依個人體態、生活與工作習慣而定。會先評估身體狀況，再安排合適的調理與訓練計畫，並搭配日常姿勢調整以維持成效。",
+  },
+  {
+    q: "費用如何計算？",
+    a: "費用依服務內容與堂數方案而定。最新優惠方案請參考「最新消息」，或透過 LINE、電話直接諮詢。",
+  },
+  {
+    q: "第一次來需要準備什麼？",
+    a: "建議穿著方便活動的服裝。請先以電話或 LINE 預約時段，到場後會先了解你的身體狀況與需求再進行。",
+  },
+];
+
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "常見問題", url: absUrl("/faq", Astro.site, base) },
+]);
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+const seoTitle = "常見問題 FAQ｜台中西屯・鄭骨館體雕中心";
+const seoDesc = "鄭骨館體雕中心常見問題：地址、預約方式、服務項目、費用與整骨調理疑問解答。台中市西屯區整骨整脊體雕。";
+---
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, faqSchema]}>
+  <h1>常見問題</h1>
+  <div class="faq">
+    {faqs.map((f) => (
+      <details class="faq__item">
+        <summary>{f.q}</summary>
+        <p>{f.a}</p>
+      </details>
+    ))}
+  </div>
+  <ContactCTA />
+</Base>
+<style>
+  .faq { margin: 1.5rem 0; }
+  .faq__item {
+    background: var(--bg-surface); border: 1px solid var(--border-subtle);
+    border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem;
+  }
+  .faq__item summary {
+    font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); cursor: pointer;
+  }
+  .faq__item p { font-size: var(--text-base); color: var(--text-secondary); margin-top: 0.75rem; }
+</style>

@@ -2,9 +2,17 @@
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Card from "../../components/Card.astro";
+import { absUrl, breadcrumbSchema } from "../../lib/site";
 const albums = await getCollection("works");
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "成果分享", url: absUrl("/works", Astro.site, base) },
+]);
+const seoTitle = "成果分享｜台中西屯・鄭骨館體雕中心";
+const seoDesc = "身體成果分享、腳部成果分享——台中整骨整脊體雕前後對比相簿。鄭骨館體雕中心。";
 ---
-<Base title="成果分享-鄭骨館體雕中心-台中整骨,台中整骨推薦,台中整脊" description="成果分享">
+<Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
   <h1>成果分享</h1>
   <div class="grid">
     {albums.map((a) => (

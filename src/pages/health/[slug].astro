@@ -2,6 +2,7 @@
 import { getCollection, getEntry, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { pickOgImage } from "../../lib/ogImage";
+import { absUrl, breadcrumbSchema, articleSchema, youtubeId, videoObjectSchema } from "../../lib/site";
 export async function getStaticPaths() {
   const items = await getCollection("health");
   return items.map((a) => ({ params: { slug: a.id } }));
@@ -11,8 +12,28 @@ const entry = await getEntry("health", slug);
 if (!entry) return Astro.redirect("/404");
 const { Content } = await render(entry);
 const firstImg = pickOgImage(entry.body ?? "");
+const base = import.meta.env.BASE_URL;
+const pageUrl = absUrl(`/health/${slug}`, Astro.site, base);
+const seoTitle = `${entry.data.title}｜健康概念分享｜鄭骨館體雕中心`;
+const seoDesc = entry.data.summary || `${entry.data.title}——台中西屯鄭骨館體雕中心健康概念分享。`;
+const schemas: object[] = [
+  breadcrumbSchema([
+    { name: "首頁", url: absUrl("/", Astro.site, base) },
+    { name: "健康概念分享", url: absUrl("/health", Astro.site, base) },
+    { name: entry.data.title, url: pageUrl },
+  ]),
+  articleSchema({
+    headline: entry.data.title,
+    description: seoDesc,
+    image: firstImg ? absUrl(firstImg, Astro.site, base) : undefined,
+    datePublished: entry.data.date,
+    url: pageUrl,
+  }),
+];
+const vid = youtubeId(entry.body ?? "");
+if (vid) schemas.push(videoObjectSchema({ id: vid, name: entry.data.title, description: seoDesc, uploadDate: entry.data.date }));
 ---
-<Base title={entry.data.title} description={entry.data.description} keywords={entry.data.keywords} image={firstImg}>
+<Base title={seoTitle} description={seoDesc} image={firstImg} schemas={schemas}>
   <h1>{entry.data.title}</h1>
   {entry.data.date && <p class="date">{entry.data.date}</p>}
   <article class="prose"><Content /></article>

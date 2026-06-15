@@ -2,9 +2,17 @@
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Card from "../../components/Card.astro";
+import { absUrl, breadcrumbSchema } from "../../lib/site";
 const articles = (await getCollection("news")).sort((a, b) => a.data.order - b.data.order);
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "最新消息", url: absUrl("/news", Astro.site, base) },
+]);
+const seoTitle = "最新消息｜台中西屯・鄭骨館體雕中心";
+const seoDesc = "鄭骨館體雕中心最新優惠與活動消息——台中西屯整骨整脊體雕。";
 ---
-<Base title="最新消息-鄭骨館體雕中心-台中整骨,台中整骨推薦,台中整脊" description="最新消息">
+<Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
   <h1>最新消息</h1>
   <div class="grid">
     {articles.map((a) => <Card href={`/news/${a.id}`} title={a.data.title} excerpt={a.data.summary} meta={a.data.date} />)}

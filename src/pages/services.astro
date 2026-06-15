@@ -1,10 +1,28 @@
 ---
 import { getEntry, render } from "astro:content";
 import Base from "../layouts/Base.astro";
+import { absUrl, breadcrumbSchema, SITE } from "../lib/site";
 const entry = await getEntry("pages", "services");
 const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "服務項目", url: absUrl("/services", Astro.site, base) },
+]);
+const services = ["身體調理", "歪斜調理", "痠痛調理", "運動動作矯正", "動作失能矯正", "運動按摩矯正", "肌力訓練", "減肥減脂計畫", "重量肌力訓練", "全身張力平衡", "一對一健身教練", "台中自由教練場地租借"];
+const catalog = {
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  name: "服務項目",
+  itemListElement: services.map((n) => ({
+    "@type": "Offer",
+    itemOffered: { "@type": "Service", name: n, areaServed: "台中市", provider: { "@type": "LocalBusiness", name: SITE.name } },
+  })),
+};
+const seoTitle = "服務項目｜台中西屯整骨整脊・鄭骨館體雕中心";
+const seoDesc = "身體調理、歪斜矯正、痠痛調理、運動動作矯正、肌力訓練、減脂與一對一健身教練——台中西屯鄭骨館體雕中心服務項目。";
 ---
-<Base title={entry.data.title} description={entry.data.description} keywords={entry.data.keywords}>
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, catalog]}>
   <h1>{entry.data.title.split("-")[0]}</h1>
   <article class="prose"><Content /></article>
 </Base>

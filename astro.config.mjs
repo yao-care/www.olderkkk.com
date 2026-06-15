@@ -28,10 +28,26 @@ function rehypeBasePrefix() {
   return (tree) => fix(tree);
 }
 
+// rehype 外掛：替 Markdown 內 alt 空白的圖片補上基本替代文字（無障礙 + 圖片 SEO）。
+function rehypeAltFill() {
+  const DEFAULT = '鄭骨館體雕中心－台中西屯整骨整脊體雕';
+  const fix = (node) => {
+    if (node.type === 'element' && node.tagName === 'img') {
+      const alt = node.properties && node.properties.alt;
+      if (!alt || (typeof alt === 'string' && alt.trim() === '')) {
+        node.properties = node.properties || {};
+        node.properties.alt = DEFAULT;
+      }
+    }
+    if (node.children) node.children.forEach(fix);
+  };
+  return (tree) => fix(tree);
+}
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE,
   base: BASE,
-  markdown: { rehypePlugins: [rehypeBasePrefix] },
+  markdown: { rehypePlugins: [rehypeBasePrefix, rehypeAltFill] },
   integrations: [mdx(), sitemap()],
 });
