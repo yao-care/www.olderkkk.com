@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import { withBase } from "../../lib/withBase";
 export async function getStaticPaths() {
   const albums = await getCollection("works");
   return albums.map((a) => ({ params: { slug: a.id } }));
@@ -14,8 +15,8 @@ const photos = entry.data.photos;
   <h1>{entry.data.album || entry.data.title}</h1>
   <div class="gallery">
     {photos.map((p) => (
-      <a href={p.src} class="gallery__item" title={p.caption}>
-        <img src={p.src} alt={p.caption} loading="lazy" />
+      <a href={withBase(p.src)} class="gallery__item" title={p.caption}>
+        <img src={withBase(p.src)} alt={p.caption} loading="lazy" />
       </a>
     ))}
   </div>

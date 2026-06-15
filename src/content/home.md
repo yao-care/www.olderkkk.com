@@ -48,12 +48,4 @@ slides:
 
 ##### 觀看更多服務項目與課程介紹
 
-[![](/images/42fa30462f66.jpg)
-
-課程介紹
-
-](/courses)[![](/images/de5e966af013.jpg)
-
-服務項目
-
-](/services)
+[![課程介紹](/images/42fa30462f66.jpg)](/courses) [![服務項目](/images/de5e966af013.jpg)](/services)

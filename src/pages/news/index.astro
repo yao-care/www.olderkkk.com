@@ -7,7 +7,7 @@ const articles = (await getCollection("news")).sort((a, b) => a.data.order - b.d
 <Base title="最新消息-鄭骨館體雕中心-台中整骨,台中整骨推薦,台中整脊" description="最新消息">
   <h1>最新消息</h1>
   <div class="grid">
-    {articles.map((a) => <Card href={`/news/${a.id}`} title={a.data.title} excerpt={a.data.summary} />)}
+    {articles.map((a) => <Card href={`/news/${a.id}`} title={a.data.title} excerpt={a.data.summary} meta={a.data.date} />)}
   </div>
 </Base>
 <style>
