@@ -8,14 +8,19 @@ export const SITE = {
   line: "https://line.me/R/ti/p/%40275nxace",
   lineId: "@275nxace",
   facebook: "https://www.facebook.com/olderk/",
-  map: "https://goo.gl/maps/5ycqSypugBVycsi4A",
+  map: "https://maps.app.goo.gl/dx4tE1qBJhFficMz6",
   addressText: "台中市西屯區工業區一路58巷11弄83號",
+  hoursText: "週一、二、三、五、六 14:00–17:00、20:00–22:00（週四、日公休）",
   address: {
     street: "工業區一路58巷11弄83號",
     locality: "西屯區",
     region: "台中市",
+    postalCode: "407",
     country: "TW",
   },
+  geo: { lat: 24.1775877, lng: 120.6136818 },
+  // 營業日（兩個時段：午場 14:00–17:00、晚場 20:00–22:00；週四、日公休）
+  openDays: ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday"],
   defaultImage: "/images/cc685b243660.jpg",
 };
 
@@ -98,8 +103,14 @@ export function localBusinessSchema(siteUrl: string, image: string) {
       streetAddress: SITE.address.street,
       addressLocality: SITE.address.locality,
       addressRegion: SITE.address.region,
+      postalCode: SITE.address.postalCode,
       addressCountry: SITE.address.country,
     },
+    geo: { "@type": "GeoCoordinates", latitude: SITE.geo.lat, longitude: SITE.geo.lng },
+    openingHoursSpecification: [
+      { "@type": "OpeningHoursSpecification", dayOfWeek: SITE.openDays, opens: "14:00", closes: "17:00" },
+      { "@type": "OpeningHoursSpecification", dayOfWeek: SITE.openDays, opens: "20:00", closes: "22:00" },
+    ],
     areaServed: { "@type": "City", name: "台中市" },
     hasMap: SITE.map,
     sameAs: [SITE.facebook, SITE.line],
