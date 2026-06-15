@@ -19,5 +19,6 @@ const { Content } = await render(entry);
   .date { font-size: var(--text-sm); color: var(--text-muted); }
   .prose :global(p) { font-size: var(--text-base); margin: 1rem 0; }
   .prose :global(img) { border-radius: 8px; margin: 0.5rem 0; }
+  .prose :global(iframe) { width: 100%; max-width: 720px; aspect-ratio: 16 / 9; height: auto; display: block; margin: 1rem auto; border: 0; border-radius: 8px; }
   .prose :global(a) { word-break: break-all; }
 </style>
