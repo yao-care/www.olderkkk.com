@@ -14,6 +14,10 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# 讓所有 JS actions 改用 Node 24 runtime，消除 Node 20 棄用警告
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
