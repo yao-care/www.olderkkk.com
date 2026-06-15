@@ -1,0 +1,38 @@
+---
+const links = [
+  { href: "/", label: "首頁" },
+  { href: "/services", label: "服務項目" },
+  { href: "/courses", label: "課程介紹" },
+  { href: "/health", label: "健康概念分享" },
+  { href: "/works", label: "成果分享" },
+  { href: "/news", label: "最新消息" },
+  { href: "/contact", label: "聯絡我們" },
+];
+const path = Astro.url.pathname;
+---
+<nav class="nav">
+  <ul class="nav__list">
+    {links.map((l) => (
+      <li><a href={l.href} aria-current={path === l.href ? "page" : undefined}>{l.label}</a></li>
+    ))}
+  </ul>
+  <details class="nav__mobile">
+    <summary aria-label="選單">☰</summary>
+    <ul>
+      {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </details>
+</nav>
+<style>
+  .nav__list { display: flex; gap: 1.5rem; list-style: none; }
+  .nav__list a { font-size: var(--text-base); color: var(--text-primary); }
+  .nav__list a[aria-current="page"] { color: var(--color-link); font-weight: 700; }
+  .nav__mobile { display: none; }
+  .nav__mobile summary { font-size: var(--text-xl); cursor: pointer; list-style: none; }
+  .nav__mobile ul { list-style: none; padding: 1rem 0; }
+  .nav__mobile li { padding: 0.5rem 0; }
+  @media (max-width: 768px) {
+    .nav__list { display: none; }
+    .nav__mobile { display: block; }
+  }
+</style>

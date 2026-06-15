@@ -1,0 +1,11 @@
+---
+interface Props { keywords: string[]; }
+const { keywords } = Astro.props;
+---
+<div class="seo-keywords">
+  {keywords.map((k) => <span>{k}</span>)}
+</div>
+<style>
+  .seo-keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .seo-keywords span { font-size: var(--text-xs); color: var(--text-muted); }
+</style>
