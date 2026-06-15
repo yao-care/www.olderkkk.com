@@ -14,5 +14,9 @@
   "dependencies": {
     "@astrojs/mdx": "^6.0.3",
     "astro": "^6.4.6"
+  },
+  "devDependencies": {
+    "node-html-parser": "^7.1.0",
+    "turndown": "^7.2.4"
   }
 }
