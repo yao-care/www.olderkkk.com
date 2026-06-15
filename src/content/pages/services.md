@@ -5,7 +5,7 @@ keywords: "服務項目-鄭骨館體雕中心-台中整骨,台中整骨推薦,�
 sourcePath: "/paper/services_index.php?title_id=293"
 ---
 
-![](/images/1d4c7f8775fb.png)
+![身體調理與矯正服務](/images/1d4c7f8775fb.png)
 
 *   ##### 1. 身體調理
     
@@ -20,7 +20,7 @@ sourcePath: "/paper/services_index.php?title_id=293"
     ##### 6. 運動按摩矯正
     
 
-![](/images/1b71147c8b13.png)
+![肌力訓練與健身教練服務](/images/1b71147c8b13.png)
 
 *   ##### 1. 肌力訓練
     

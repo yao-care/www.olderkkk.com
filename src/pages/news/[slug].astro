@@ -9,8 +9,10 @@ const { slug } = Astro.params;
 const entry = await getEntry("news", slug);
 if (!entry) return Astro.redirect("/404");
 const { Content } = await render(entry);
+const imgs = [...(entry.body ?? "").matchAll(/!\[[^\]]*\]\((\S+?)(?:\s+"[^"]*")?\)/g)].map((m) => m[1]);
+const firstImg = imgs.find((u) => !/\.gif(\?|$)/i.test(u)) || imgs[0] || "";
 ---
-<Base title={entry.data.title} description={entry.data.description} keywords={entry.data.keywords}>
+<Base title={entry.data.title} description={entry.data.description} keywords={entry.data.keywords} image={firstImg}>
   <h1>{entry.data.title}</h1>
   {entry.data.date && <p class="date">{entry.data.date}</p>}
   <article class="prose"><Content /></article>
