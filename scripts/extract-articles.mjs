@@ -49,9 +49,10 @@ for (const s of SECTIONS) {
     if (!content) { console.log(`  ! ${id}: no .content`); continue; }
     const aTitle = txt(content.querySelector(".article_title")) || (root.querySelector("title")?.text || "").trim();
     const date = txt(content.querySelector(".date"));
-    content.querySelectorAll("style, script, .date, .article_title").forEach((e) => e.remove());
-    for (const img of content.querySelectorAll("img")) { const sc = img.getAttribute("src"); if (sc) img.setAttribute("src", await dl(sc)); }
-    const md = td.turndown(content.innerHTML);
+    const body = content.querySelector(".edit") || content;
+    body.querySelectorAll("style, script, .other_promotion, .date, .article_title").forEach((e) => e.remove());
+    for (const img of body.querySelectorAll("img")) { const sc = img.getAttribute("src"); if (sc) img.setAttribute("src", await dl(sc)); }
+    const md = td.turndown(body.innerHTML);
     const summary = md.replace(/[#*!\[\]()_>`~-]/g, " ").replace(/https?:\/\/\S+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80);
     const fm = ["---",
       `title: ${JSON.stringify(aTitle)}`,
