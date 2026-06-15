@@ -8,7 +8,7 @@ sourcePath: "/paper/other_page.php?id=294"
 *   ![](/images/7d9c802392ac.png)
 *   ![](/images/958e3781dfc1.png)
 
-![課程介紹](/images/ok-class-banner.jpg)
+![課程介紹](/images/ok-class-banner.webp)
 
 #### 團課指導
 
