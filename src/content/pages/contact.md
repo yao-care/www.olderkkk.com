@@ -10,9 +10,3 @@ sourcePath: "/paper/contact_index.php?title_id=298"
 *   0970686319
 *   [d28281778@gmail.com](mailto:d28281778@gmail.com)
 
-*   ##### 匯款資訊
-
-*   戶 名：
-*   銀行名稱：
-*   銀行代碼：
-*   銀行帳號：

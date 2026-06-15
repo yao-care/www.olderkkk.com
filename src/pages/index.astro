@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 const entry = await getEntry("home", "home");
+if (!entry) throw new Error("home.md is missing");
 const { Content } = await render(entry);
 const slides = (entry.data.slides ?? []).map((image) => ({ image, alt: "鄭骨館體雕中心" }));
 ---

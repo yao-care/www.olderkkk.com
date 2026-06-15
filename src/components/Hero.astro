@@ -2,10 +2,43 @@
 interface Props { slides: { image: string; alt?: string }[]; }
 const { slides } = Astro.props;
 ---
-<div class="hero">
-  {slides.map((s) => <img src={s.image} alt={s.alt ?? ""} />)}
+<div class="hero" data-hero>
+  <div class="hero__track">
+    {slides.map((s) => <img src={s.image} alt={s.alt ?? ""} />)}
+  </div>
+  {slides.length > 1 && (
+    <div class="hero__dots">
+      {slides.map((_, i) => <button class="hero__dot" data-i={i} aria-label={`第 ${i + 1} 張`}></button>)}
+    </div>
+  )}
 </div>
 <style>
-  .hero { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0; border-radius: 12px; }
-  .hero img { flex: 0 0 100%; scroll-snap-align: start; object-fit: cover; max-height: 480px; width: 100%; }
+  .hero { position: relative; border-radius: 12px; overflow: hidden; }
+  .hero__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
+  .hero__track::-webkit-scrollbar { display: none; }
+  .hero__track { scrollbar-width: none; }
+  .hero__track img { flex: 0 0 100%; scroll-snap-align: start; object-fit: cover; max-height: 480px; width: 100%; }
+  .hero__dots { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; gap: 8px; justify-content: center; }
+  .hero__dot { width: 12px; height: 12px; border-radius: 50%; border: 0; cursor: pointer;
+    background: var(--bg-base); opacity: 0.6; }
+  .hero__dot[aria-current="true"] { opacity: 1; background: var(--color-link); }
 </style>
+<script>
+  document.querySelectorAll("[data-hero]").forEach((hero) => {
+    const track = hero.querySelector(".hero__track");
+    const imgs = track ? Array.from(track.querySelectorAll("img")) : [];
+    const dots = Array.from(hero.querySelectorAll(".hero__dot"));
+    if (imgs.length < 2) return;
+    let idx = 0;
+    const go = (i) => {
+      idx = (i + imgs.length) % imgs.length;
+      imgs[idx].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      dots.forEach((d, di) => d.setAttribute("aria-current", di === idx ? "true" : "false"));
+    };
+    dots.forEach((d, di) => d.addEventListener("click", () => go(di)));
+    go(0);
+    let timer = setInterval(() => go(idx + 1), 4000);
+    hero.addEventListener("mouseenter", () => clearInterval(timer));
+    hero.addEventListener("mouseleave", () => { timer = setInterval(() => go(idx + 1), 4000); });
+  });
+</script>

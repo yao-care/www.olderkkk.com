@@ -9,6 +9,7 @@ interface Props {
   keywords?: string;
 }
 const { title, description = "", keywords = "" } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
 ---
 <!doctype html>
 <html lang="zh-Hant">
@@ -18,8 +19,10 @@ const { title, description = "", keywords = "" } = Astro.props;
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {keywords && <meta name="keywords" content={keywords} />}
+    <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.ico" />
   </head>

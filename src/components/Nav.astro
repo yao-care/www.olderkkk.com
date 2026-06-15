@@ -11,14 +11,14 @@ const links = [
 const path = Astro.url.pathname;
 ---
 <nav class="nav">
-  <ul class="nav__list">
+  <ul class="nav__list" aria-label="主選單">
     {links.map((l) => (
       <li><a href={l.href} aria-current={path === l.href ? "page" : undefined}>{l.label}</a></li>
     ))}
   </ul>
   <details class="nav__mobile">
     <summary aria-label="選單">☰</summary>
-    <ul>
+    <ul aria-label="主選單">
       {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
     </ul>
   </details>
