@@ -1,0 +1,41 @@
+---
+import Base from "../layouts/Base.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import { absUrl, breadcrumbSchema, SITE } from "../lib/site";
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "媒體報導與體驗分享", url: absUrl("/reviews", Astro.site, base) },
+]);
+// 第三方部落客／媒體的體驗文章（外部來源，非本站內容）
+const articles = [
+  { title: "無痛整骨＋矯正運動一條龍，西屯整復新體驗！", source: "方格子 vocus", url: "https://vocus.cc/article/6846cf15fd897800013dc960" },
+  { title: "台中整骨推薦：舒緩痠痛的身體！3 間台中整骨店推薦", source: "udn 女子漾", url: "https://woman.udn.com/woman/story/123165/7996113" },
+  { title: "體雕／健身房推薦，一對一教練課一站式體驗", source: "冠婷生活趣", url: "https://kwytlife2019.net/%E3%80%90%E9%84%AD%E9%AA%A8%E9%A4%A8%E9%AB%94%E9%9B%95%E4%B8%AD%E5%BF%83%E3%80%912021%E9%AB%94%E9%9B%95-%E5%81%A5%E8%BA%AB%E6%88%BF%E6%8E%A8%E8%96%A6%EF%BC%8C%E4%B8%80%E5%B0%8D%E4%B8%80%E6%95%99/" },
+];
+const seoTitle = "媒體報導與體驗分享｜台中西屯・鄭骨館體雕中心";
+const seoDesc = "部落客與媒體對鄭骨館體雕中心的整骨、整脊與一對一訓練體驗報導整理。台中西屯整骨整脊體雕。";
+---
+<Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
+  <h1>媒體報導與體驗分享</h1>
+  <p class="lead">以下整理部落客與媒體對 {SITE.name} 的體驗文章（皆為外部第三方來源，連結將開啟原始文章）。</p>
+  <ul class="links">
+    {articles.map((a) => (
+      <li>
+        <a href={a.url}>{a.title}</a>
+        <span class="links__source">— {a.source}</span>
+      </li>
+    ))}
+  </ul>
+  <p class="note">想看更多即時分享，歡迎追蹤我們的 <a href={SITE.instagram}>Instagram</a>、<a href={SITE.facebook}>Facebook</a> 與 <a href={SITE.youtube}>YouTube</a>。</p>
+
+  <h2>想親自體驗？</h2>
+  <ContactCTA />
+</Base>
+<style>
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+  .links { margin: 1.5rem 0; padding-left: 1.25rem; }
+  .links li { font-size: var(--text-base); margin: 0.75rem 0; }
+  .links__source { font-size: var(--text-sm); color: var(--text-muted); }
+  .note { font-size: var(--text-base); color: var(--text-secondary); background: var(--bg-overlay); border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+</style>

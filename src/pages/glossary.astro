@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import { absUrl, breadcrumbSchema } from "../lib/site";
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "名詞解釋", url: absUrl("/glossary", Astro.site, base) },
+]);
+const terms = [
+  { term: "整骨", def: "民間常用的說法，泛指以徒手方式調整骨骼與關節排列、放鬆周邊軟組織，協助身體結構回到較理想的位置。本中心所稱整骨偏向結構調整與張力平衡，並非醫療骨科手術。" },
+  { term: "整脊", def: "針對脊椎與相連關節（如骨盆、肩、髖）的排列進行徒手調整，協助改善因姿勢或張力失衡造成的卡緊、歪斜。本中心整脊的全身調整通常涵蓋骨盆、膝蓋、腳踝與肩膀。" },
+  { term: "整復", def: "以徒手手法放鬆肌肉、調整關節活動度與排列的統稱，常與整骨、整脊概念重疊，著重讓身體恢復較順的活動與受力方式。" },
+  { term: "整椎", def: "與整脊相近的說法，特別強調脊椎椎體與關節排列的調整。" },
+  { term: "體雕", def: "透過張力平衡、姿勢調整與訓練，協助改善身形線條與體態的服務，著重肌肉發力方式與身體排列，而非單純減重。" },
+  { term: "一對一訓練", def: "由教練一對一帶領，針對個人的張力失衡、身體協調與肌力進行個人化訓練，幫助身體支撐的張力維持在較中立的位置，讓調理後的成果更穩定。" },
+  { term: "運動按摩", def: "針對運動後或長期緊繃的肌肉與筋膜，進行按摩與拉伸放鬆，協助緩解痠痛、恢復活動度。" },
+];
+const termSet = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  name: "整骨・整脊・整復・體雕 名詞解釋",
+  hasDefinedTerm: terms.map((t) => ({ "@type": "DefinedTerm", name: t.term, description: t.def })),
+};
+const seoTitle = "整骨、整脊、整復、體雕差在哪？名詞解釋｜鄭骨館體雕中心";
+const seoDesc = "整骨、整脊、整復、整椎、體雕、一對一訓練、運動按摩有什麼不同？台中西屯鄭骨館體雕中心用淺白方式說明這些常見名詞。";
+---
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, termSet]}>
+  <h1>名詞解釋：整骨、整脊、整復、體雕有什麼不同？</h1>
+  <p class="lead">這些名詞在民間常被混用。以下用淺白方式說明本中心對各服務的定位，幫助你了解差異。內容為一般觀念說明，不能取代個別評估或醫療診斷。</p>
+  <dl class="glossary">
+    {terms.map((t) => (
+      <div class="glossary__item">
+        <dt>{t.term}</dt>
+        <dd>{t.def}</dd>
+      </div>
+    ))}
+  </dl>
+  <p>想知道自己的狀況適合哪一種？歡迎先 <a href={`${base}booking`}>預約諮詢與評估</a>。</p>
+  <ContactCTA />
+</Base>
+<style>
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+  .glossary { margin: 1.5rem 0; }
+  .glossary__item { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+  .glossary dt { font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); }
+  .glossary dd { font-size: var(--text-base); color: var(--text-secondary); margin: 0.5rem 0 0; }
+</style>

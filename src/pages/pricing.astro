@@ -1,0 +1,47 @@
+---
+import Base from "../layouts/Base.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import { absUrl, breadcrumbSchema, PRICING, pricingOfferCatalogSchema } from "../lib/site";
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "收費方式", url: absUrl("/pricing", Astro.site, base) },
+]);
+const catalog = pricingOfferCatalogSchema();
+const seoTitle = "收費方式｜台中西屯整骨整脊・鄭骨館體雕中心";
+const seoDesc = "鄭骨館體雕中心收費方式：整脊全身調整、一對一教練課、小型團課、運動按摩價格一覽。台中西屯，採預約制。";
+---
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, catalog]}>
+  <h1>收費方式</h1>
+  <p class="lead">以下為各項服務的參考價格。實際費用會依個人狀況與方案而定，<strong>價格以現場或 LINE 最新公告為準</strong>。不確定適合哪一項時，建議先選擇「預約諮詢與評估」。</p>
+
+  <div class="price-list">
+    {PRICING.map((p) => (
+      <div class="price-item">
+        <div class="price-item__head">
+          <h2 class="price-item__name">{p.name}</h2>
+          <span class="price-item__price">{p.price != null ? `$${p.price} / ${p.unit}` : "先評估"}</span>
+        </div>
+        {p.duration && <p class="price-item__meta">{p.duration}</p>}
+        <p class="price-item__desc">{p.desc}</p>
+      </div>
+    ))}
+  </div>
+
+  <p class="note">整脊調整前，若有骨質疏鬆、心臟支架、脊椎開刀史等狀況請先告知；開刀或剖腹產後建議滿 3 個月再調整。詳見 <a href={`${base}booking`}>預約流程與初次須知</a>。</p>
+
+  <h2>想了解適合自己的方案？</h2>
+  <p>歡迎透過以下方式諮詢與預約：</p>
+  <ContactCTA />
+</Base>
+<style>
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+  .price-list { display: grid; gap: 1rem; margin: 1.5rem 0; }
+  .price-item { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1.25rem 1.5rem; }
+  .price-item__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+  .price-item__name { font-size: var(--text-lg); margin: 0; }
+  .price-item__price { font-size: var(--text-lg); font-weight: 700; color: var(--color-link); white-space: nowrap; }
+  .price-item__meta { font-size: var(--text-sm); color: var(--text-muted); margin: 0.25rem 0 0; }
+  .price-item__desc { font-size: var(--text-base); color: var(--text-secondary); margin: 0.5rem 0 0; }
+  .note { font-size: var(--text-sm); color: var(--text-secondary); background: var(--bg-overlay); border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+</style>

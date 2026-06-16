@@ -27,6 +27,71 @@ export const SITE = {
   defaultImage: "/images/cc685b243660.webp",
 };
 
+// 師傅／教練（對外公開）。鄭師傅即主理人老K（本名鄭博陽）。
+export const PRACTITIONERS = [
+  { name: "鄭師傅", aka: "老K（鄭博陽）", role: "整脊・整骨・體雕" },
+  { name: "何師傅", role: "整脊・整骨" },
+];
+
+// 收費方式（價格以現場或 LINE 最新公告為準）。
+export const PRICING = [
+  { name: "整脊全身調整（鄭師傅）", price: 1100, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的全身調整" },
+  { name: "整脊全身調整（何師傅）", price: 1000, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的全身調整" },
+  { name: "一對一教練課", price: 1800, unit: "堂", desc: "依個人張力失衡、身體協調與肌力進行個人化訓練；已接受調整服務者可用 780 元體驗一次" },
+  { name: "小型團課", price: 300, unit: "堂", desc: "4 人成班、每週一次，5 堂 1500 元；可揪親友或協助媒合成班" },
+  { name: "運動按摩放鬆", price: 1200, unit: "小時", desc: "針對運動後肌肉與筋膜緊繃、痠痛進行按摩與拉伸放鬆" },
+  { name: "預約諮詢與評估", price: null as number | null, desc: "先了解身體狀況，再一起決定合適的調理與訓練方向" },
+];
+
+// 停車（場館鄰近合作/推薦停車場）
+export const PARKING = { name: "天佑停車場", map: "https://maps.app.goo.gl/hqxsxipGU1m7GZGM8" };
+
+// 預約流程與初次須知（對外公開；採預約制）
+export const BOOKING = {
+  steps: [
+    { name: "選擇服務", text: "決定想預約的服務（整脊評估、一對一教練課、團課或運動按摩）。不確定時可先選「預約諮詢與評估」。" },
+    { name: "聯繫預約", text: "透過 LINE（@275nxace）或電話 0970686319 告知欲預約的項目與希望時段。" },
+    { name: "提供姓名電話", text: "預約時請提供姓名與聯絡電話，方便確認與聯繫。" },
+    { name: "等待確認", text: "小編回覆並確認姓名、電話後，才算預約成功。" },
+    { name: "依約到場", text: "依約定時間前往台中市西屯區工業區一路58巷11弄83號，鄰近可停天佑停車場。" },
+  ],
+  // 整脊調整前需主動告知的狀況（安全評估）
+  notice: [
+    "女生請避免穿著裙裝，以方便活動與檢查。",
+    "有骨質疏鬆、曾耳石滑脫、裝有心臟支架者，請於預約與到場時主動告知。",
+    "脊椎曾開刀（打釘、骨漿等）者請先告知，由師傅評估。",
+    "開刀或剖腹生產者，建議滿 3 個月後再進行調整。",
+    "若有明確外傷、急性疼痛或神經症狀（麻、無力），建議先就醫診斷。",
+  ],
+  confirm: "本中心採預約制；小編回覆並確認姓名、電話後才算預約成功。",
+};
+
+// 收費方式 OfferCatalog（含價格）
+export function pricingOfferCatalogSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    name: "收費方式",
+    itemListElement: PRICING.filter((p) => p.price != null).map((p) => ({
+      "@type": "Offer",
+      priceCurrency: "TWD",
+      price: p.price,
+      itemOffered: { "@type": "Service", name: p.name, provider: { "@type": "LocalBusiness", name: SITE.name } },
+    })),
+  };
+}
+
+// 預約流程 HowTo
+export function bookingHowToSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "如何預約鄭骨館體雕中心",
+    description: "鄭骨館體雕中心採預約制，透過 LINE 或電話完成預約。",
+    step: BOOKING.steps.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.name, text: s.text })),
+  };
+}
+
 // 以 site(URL) + base 產生絕對網址；path 以 "/" 開頭視為站內路徑
 export function absUrl(path: string, site: URL | undefined, baseUrl: string): string {
   const base = baseUrl.replace(/\/$/, "");

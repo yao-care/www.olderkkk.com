@@ -1,0 +1,51 @@
+---
+import Base from "../layouts/Base.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import { absUrl, breadcrumbSchema, bookingHowToSchema, BOOKING, PARKING, SITE } from "../lib/site";
+const base = import.meta.env.BASE_URL;
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: absUrl("/", Astro.site, base) },
+  { name: "預約流程", url: absUrl("/booking", Astro.site, base) },
+]);
+const howto = bookingHowToSchema();
+const seoTitle = "預約流程與初次須知｜台中西屯・鄭骨館體雕中心";
+const seoDesc = "鄭骨館體雕中心採預約制：如何用 LINE 或電話預約、第一次來的注意事項、整脊調整前需告知事項與停車資訊。台中西屯。";
+---
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, howto]}>
+  <h1>預約流程與初次須知</h1>
+  <p class="lead">本中心採預約制，請先預約時段再前往，以確保有合適的時段與充分的服務時間。</p>
+
+  <h2>如何預約？</h2>
+  <ol class="steps">
+    {BOOKING.steps.map((s) => (
+      <li>
+        <strong>{s.name}</strong>
+        <p>{s.text}</p>
+      </li>
+    ))}
+  </ol>
+  <p class="confirm">{BOOKING.confirm}</p>
+
+  <h2>整脊調整前，請先告知這些狀況</h2>
+  <p>為了安全，預約與到場時若有下列情形請主動告知，由師傅評估：</p>
+  <ul class="notice">
+    {BOOKING.notice.map((n) => <li>{n}</li>)}
+  </ul>
+
+  <h2>交通與停車</h2>
+  <p>場館地址：{SITE.addressText}。可導航至 <a href={SITE.map}>Google 地圖</a>；鄰近可停 <a href={PARKING.map}>{PARKING.name}</a>。</p>
+  <p>營業時間：{SITE.hoursText}。</p>
+
+  <h2>現在就預約</h2>
+  <ContactCTA />
+</Base>
+<style>
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+  .steps { margin: 1rem 0 1.5rem; padding-left: 1.25rem; }
+  .steps li { margin: 0.75rem 0; }
+  .steps strong { font-size: var(--text-lg); color: var(--text-primary); }
+  .steps p { font-size: var(--text-base); color: var(--text-secondary); margin: 0.25rem 0 0; }
+  .confirm { font-size: var(--text-base); font-weight: 700; color: var(--color-link); background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem 1.25rem; }
+  .notice { margin: 1rem 0 1.5rem; padding-left: 1.25rem; }
+  .notice li { font-size: var(--text-base); color: var(--text-secondary); margin: 0.5rem 0; }
+</style>

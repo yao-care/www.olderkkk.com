@@ -31,10 +31,15 @@ export const GET: APIRoute = ({ site }) => {
 ${PERSON.name}（${PERSON.jobTitle}）：${PERSON.description}
 
 ## 重要頁面
+- 關於我們（主理人老K／鄭博陽）：${abs("/about")}
 - 服務項目：${abs("/services")}
+- 收費方式：${abs("/pricing")}
+- 預約流程與初次須知：${abs("/booking")}
+- 名詞解釋（整骨/整脊/整復/體雕差異）：${abs("/glossary")}
 - 課程介紹：${abs("/courses")}
 - 健康概念分享：${abs("/health")}
 - 成果分享：${abs("/works")}
+- 媒體報導與體驗分享：${abs("/reviews")}
 - 最新消息：${abs("/news")}
 - 常見問題：${abs("/faq")}
 - 聯絡我們：${abs("/contact")}
