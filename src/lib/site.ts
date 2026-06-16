@@ -21,7 +21,7 @@ export const SITE = {
   geo: { lat: 24.1775877, lng: 120.6136818 },
   // 營業日（兩個時段：午場 14:00–17:00、晚場 20:00–22:00；週四、日公休）
   openDays: ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday"],
-  defaultImage: "/images/cc685b243660.jpg",
+  defaultImage: "/images/cc685b243660.webp",
 };
 
 // 以 site(URL) + base 產生絕對網址；path 以 "/" 開頭視為站內路徑
@@ -53,6 +53,7 @@ export function articleSchema(o: {
   image?: string;
   datePublished?: string;
   url: string;
+  siteUrl?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -63,7 +64,7 @@ export function articleSchema(o: {
     ...(o.datePublished ? { datePublished: o.datePublished.replace(/\//g, "-") } : {}),
     mainEntityOfPage: o.url,
     inLanguage: "zh-Hant",
-    author: { "@type": "Organization", name: SITE.name },
+    author: { "@type": "Person", name: PERSON.name, ...(o.siteUrl ? { "@id": o.siteUrl + "#founder" } : {}) },
     publisher: { "@type": "Organization", name: SITE.name },
     speakable: {
       "@type": "SpeakableSpecification",
@@ -87,6 +88,30 @@ export function videoObjectSchema(o: { id: string; name: string; description: st
     embedUrl: `https://www.youtube.com/embed/${o.id}`,
     contentUrl: `https://www.youtube.com/watch?v=${o.id}`,
     ...(o.uploadDate ? { uploadDate: o.uploadDate.replace(/\//g, "-") } : {}),
+  };
+}
+
+// 創辦人／具名專家（E-E-A-T）。事實僅取自首頁「關於老K」既有敘述，
+// 不杜撰證照、年資或學歷。
+export const PERSON = {
+  name: "老K",
+  jobTitle: "整骨體雕暨一對一訓練教練",
+  knowsAbout: ["健美式訓練", "整脊技術", "人體力學矯正", "肌力訓練", "體態矯正"],
+  description:
+    "結合健美式訓練、整脊技術與人體力學矯正，同時處理肌肉發力方式與調整關節排列位置，更快有效解決身體問題。",
+};
+
+// Person 結構化資料（全站輸出一次，供 LocalBusiness.founder 與文章 author 以 @id 參照）
+export function personSchema(siteUrl: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": siteUrl + "#founder",
+    name: PERSON.name,
+    jobTitle: PERSON.jobTitle,
+    description: PERSON.description,
+    knowsAbout: PERSON.knowsAbout,
+    worksFor: { "@id": siteUrl + "#business" },
   };
 }
 
@@ -119,6 +144,7 @@ export function localBusinessSchema(siteUrl: string, image: string) {
     areaServed: { "@type": "City", name: "台中市" },
     hasMap: SITE.map,
     sameAs: [SITE.facebook, SITE.line, SITE.map],
+    founder: { "@type": "Person", "@id": siteUrl + "#founder", name: PERSON.name },
     priceRange: "$$",
   };
 }

@@ -5,9 +5,9 @@ keywords: "鄭骨館體雕中心-台中整骨,台中整骨推薦,台中整脊-�
 sourcePath: "/paper/other_page.php?id=294"
 ---
 
-![](/images/7d9c802392ac.png)
+![](/images/7d9c802392ac.webp)
 
-![](/images/958e3781dfc1.png)
+![](/images/958e3781dfc1.webp)
 
 ![課程介紹](/images/ok-class-banner.webp)
 
@@ -24,8 +24,8 @@ sourcePath: "/paper/other_page.php?id=294"
 
 #### 一對一指導
 
-*   ![](/images/b78988dbdf24.jpg)
-*   ![](/images/babc349e57c7.jpg)
-*   ![](/images/4bc2c9bb00f2.jpg)
-*   ![](/images/868e241b615b.jpg)
-*   ![](/images/988c3bfef5ab.jpg)
+*   ![](/images/b78988dbdf24.webp)
+*   ![](/images/babc349e57c7.webp)
+*   ![](/images/4bc2c9bb00f2.webp)
+*   ![](/images/868e241b615b.webp)
+*   ![](/images/988c3bfef5ab.webp)

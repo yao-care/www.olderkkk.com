@@ -28,6 +28,7 @@ const schemas: object[] = [
     image: firstImg ? absUrl(firstImg, Astro.site, base) : undefined,
     datePublished: entry.data.date,
     url: pageUrl,
+    siteUrl: absUrl("/", Astro.site, base),
   }),
 ];
 const vid = youtubeId(entry.body ?? "");
