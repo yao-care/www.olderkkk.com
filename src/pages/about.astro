@@ -25,6 +25,10 @@ const seoDesc = "鄭骨館體雕中心由老K（鄭博陽）創立，從健美�
   <p class="lead">鄭骨館體雕中心位於{SITE.address.region}{SITE.address.locality}，由主理人老K（本名鄭博陽，店內稱「鄭師傅」）創立。我們專注一件事：把身體「喬正」之後，還要讓它「留得住」。</p>
 
   <h2>一條從訓練走到調理的路</h2>
+  <figure class="portrait">
+    <img src={withBase("/images/laok-profile.jpg")} alt="鄭骨館體雕中心主理人老K（本名鄭博陽）" loading="lazy" width="320" height="320" />
+    <figcaption>主理人老K（鄭博陽）</figcaption>
+  </figure>
   <p>老K最早接觸的是<strong>健美式訓練</strong>，在反覆的訓練裡，他開始理解肌肉是怎麼運作、怎麼發力的。後來接觸<strong>整脊技術</strong>，學會調整骨骼與關節的排列；但他發現，只練不調、或只調不練，效果都不持久——於是把兩者融合起來。再之後接觸<strong>人體力學矯正</strong>方法，讓他能同時處理「肌肉的發力方式」與「關節的排列位置」，從根源更快、更有效地協助解決身體問題。</p>
 
   <h2>我們的核心理念：調理回正，訓練維持</h2>
@@ -61,6 +65,10 @@ const seoDesc = "鄭骨館體雕中心由老K（鄭博陽）創立，從健美�
 </Base>
 <style>
   .hero { width: 100%; border-radius: 12px; margin: 0.5rem 0 1rem; }
+  .portrait { float: right; width: 200px; max-width: 45%; margin: 0 0 1rem 1.5rem; }
+  .portrait img { width: 100%; border-radius: 12px; display: block; }
+  .portrait figcaption { font-size: var(--text-sm); color: var(--text-muted); margin-top: 0.5rem; text-align: center; }
+  @media (max-width: 520px) { .portrait { float: none; width: 100%; max-width: 280px; margin: 0.5rem auto 1.5rem; } }
   .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
   p { font-size: var(--text-base); margin: 1rem 0; }
   ul.services, ul.people, ul.why { margin: 1rem 0; padding-left: 1.25rem; }
