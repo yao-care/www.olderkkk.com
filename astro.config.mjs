@@ -49,5 +49,27 @@ export default defineConfig({
   site: SITE,
   base: BASE,
   markdown: { rehypePlugins: [rehypeBasePrefix, rehypeAltFill] },
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      // 依頁面重要性差異化 priority / changefreq（預設全為 0.5 / weekly）
+      serialize(item) {
+        // 取站內路徑（去掉網域與 base 前綴），結尾不含斜線方便比對
+        let path = new URL(item.url).pathname;
+        if (BASE !== '/' && path.startsWith(BASE)) path = path.slice(BASE.length);
+        path = path.replace(/\/$/, '') || '/';
+        if (path === '/') {
+          item.priority = 1.0; item.changefreq = 'weekly';
+        } else if (['/services', '/courses', '/contact', '/faq'].includes(path)) {
+          item.priority = 0.8; item.changefreq = 'monthly';
+        } else if (['/health', '/news', '/works'].includes(path)) {
+          item.priority = 0.7; item.changefreq = 'weekly';
+        } else {
+          // 內頁文章 / 相簿
+          item.priority = 0.6; item.changefreq = 'monthly';
+        }
+        return item;
+      },
+    }),
+  ],
 });

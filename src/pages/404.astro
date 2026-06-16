@@ -1,0 +1,44 @@
+---
+import Base from "../layouts/Base.astro";
+import { withBase } from "../lib/withBase";
+import { SITE } from "../lib/site";
+
+const seoTitle = "找不到頁面（404）｜鄭骨館體雕中心";
+const seoDesc = "您要找的頁面不存在或已移動。回到鄭骨館體雕中心首頁，或瀏覽服務項目、課程介紹與健康概念分享。";
+const links = [
+  { href: "/", label: "回首頁" },
+  { href: "/services", label: "服務項目" },
+  { href: "/courses", label: "課程介紹" },
+  { href: "/health", label: "健康概念分享" },
+  { href: "/contact", label: "聯絡我們" },
+];
+---
+<Base title={seoTitle} description={seoDesc}>
+  <section class="nf">
+    <p class="nf__code">404</p>
+    <h1>找不到這個頁面</h1>
+    <p class="nf__lead">您要找的內容可能已移動或不存在。以下連結也許能幫上忙：</p>
+    <ul class="nf__links">
+      {links.map((l) => (
+        <li><a href={withBase(l.href)}>{l.label}</a></li>
+      ))}
+    </ul>
+    <p class="nf__cta">
+      預約／諮詢請洽 <a href={`tel:${SITE.telE164}`}>{SITE.tel}</a>
+      或 LINE <a href={SITE.line}>{SITE.lineId}</a>（採預約制）。
+    </p>
+  </section>
+</Base>
+<style>
+  .nf { text-align: center; padding: 2rem 0 3rem; }
+  .nf__code { font-size: var(--text-3xl); font-weight: 800; color: var(--text-muted); margin: 0; }
+  .nf h1 { font-size: var(--text-2xl); margin: 0.25rem 0 1rem; }
+  .nf__lead { font-size: var(--text-base); color: var(--text-secondary); }
+  .nf__links { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .nf__links a {
+    display: inline-block; font-size: var(--text-base); padding: 0.6rem 1.1rem;
+    background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px;
+    color: var(--color-link); text-decoration: none;
+  }
+  .nf__cta { font-size: var(--text-base); margin-top: 1.5rem; }
+</style>

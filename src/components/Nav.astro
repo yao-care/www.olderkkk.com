@@ -26,8 +26,8 @@ const path = Astro.url.pathname;
   </details>
 </nav>
 <style>
-  .nav__list { display: flex; gap: 1.5rem; list-style: none; }
-  .nav__list a { font-size: var(--text-base); color: var(--text-primary); }
+  .nav__list { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: clamp(0.75rem, 1.5vw, 1.5rem); list-style: none; }
+  .nav__list a { font-size: clamp(1.125rem, 1.5vw, 1.5rem); color: var(--text-primary); white-space: nowrap; }
   .nav__list a[aria-current="page"] { color: var(--color-link); font-weight: 700; }
   .nav__mobile { display: none; }
   .nav__mobile summary { font-size: var(--text-xl); cursor: pointer; list-style: none; }

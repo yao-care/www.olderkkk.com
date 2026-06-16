@@ -62,8 +62,13 @@ export function articleSchema(o: {
     ...(o.image ? { image: o.image } : {}),
     ...(o.datePublished ? { datePublished: o.datePublished.replace(/\//g, "-") } : {}),
     mainEntityOfPage: o.url,
+    inLanguage: "zh-Hant",
     author: { "@type": "Organization", name: SITE.name },
     publisher: { "@type": "Organization", name: SITE.name },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "article.prose p"],
+    },
   };
 }
 
@@ -113,7 +118,7 @@ export function localBusinessSchema(siteUrl: string, image: string) {
     ],
     areaServed: { "@type": "City", name: "台中市" },
     hasMap: SITE.map,
-    sameAs: [SITE.facebook, SITE.line],
+    sameAs: [SITE.facebook, SITE.line, SITE.map],
     priceRange: "$$",
   };
 }

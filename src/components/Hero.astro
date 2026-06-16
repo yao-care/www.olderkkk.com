@@ -1,10 +1,19 @@
 ---
+import { SITE } from "../lib/site";
 interface Props { slides: { image: string; alt?: string }[]; }
 const { slides } = Astro.props;
 ---
 <div class="hero" data-hero>
   <div class="hero__track">
-    {slides.map((s) => <img src={s.image} alt={s.alt ?? ""} />)}
+    {slides.map((s, i) => (
+      <img
+        src={s.image}
+        alt={s.alt ?? `${SITE.name}－${SITE.tagline}`}
+        loading={i === 0 ? "eager" : "lazy"}
+        fetchpriority={i === 0 ? "high" : "auto"}
+        decoding="async"
+      />
+    ))}
   </div>
   {slides.length > 1 && (
     <div class="hero__dots">

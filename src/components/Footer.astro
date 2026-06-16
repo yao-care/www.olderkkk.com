@@ -1,17 +1,30 @@
 ---
-import SeoKeywords from "./SeoKeywords.astro";
-const keywords = ["台中整骨", "台中整骨推薦", "台中整脊", "西屯整脊", "台中整復", "體雕中心"];
+import { withBase } from "../lib/withBase";
+import { SITE } from "../lib/site";
+const navLinks = [
+  { href: "/services", label: "服務項目" },
+  { href: "/courses", label: "課程介紹" },
+  { href: "/health", label: "健康概念分享" },
+  { href: "/works", label: "成果分享" },
+  { href: "/news", label: "最新消息" },
+  { href: "/faq", label: "常見問題" },
+  { href: "/contact", label: "聯絡我們" },
+];
 ---
 <footer class="footer">
   <div class="container">
-    <p>鄭骨館體雕中心 · <a href="https://maps.app.goo.gl/dx4tE1qBJhFficMz6">台中市西屯區工業區一路58巷11弄83號</a></p>
-    <p>電話 <a href="tel:0970686319">0970686319</a> · Email <a href="mailto:d28281778@gmail.com">d28281778@gmail.com</a></p>
-    <p>LINE <a href="https://line.me/R/ti/p/%40275nxace">@275nxace</a> · <a href="https://www.facebook.com/olderk/">Facebook 粉絲專頁</a> · <a href="https://maps.app.goo.gl/dx4tE1qBJhFficMz6">Google 地圖</a></p>
-    <p>營業時間 週一、二、三、五、六 14:00–17:00、20:00–22:00（週四、日公休）</p>
-    <SeoKeywords keywords={keywords} />
+    <nav class="footer__nav" aria-label="網站導覽">
+      {navLinks.map((l) => <a href={withBase(l.href)}>{l.label}</a>)}
+    </nav>
+    <p>{SITE.name} · <a href={SITE.map}>{SITE.addressText}</a></p>
+    <p>電話 <a href={`tel:${SITE.telE164}`}>{SITE.tel}</a> · Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+    <p>LINE <a href={SITE.line}>{SITE.lineId}</a> · <a href={SITE.facebook}>Facebook 粉絲專頁</a> · <a href={SITE.map}>Google 地圖</a></p>
+    <p>營業時間 {SITE.hoursText}</p>
   </div>
 </footer>
 <style>
   .footer { background: var(--bg-overlay); border-top: 1px solid var(--border-subtle); padding: 2rem 0; margin-top: 3rem; }
   .footer p { font-size: var(--text-sm); color: var(--text-secondary); }
+  .footer__nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-bottom: 1rem; }
+  .footer__nav a { font-size: var(--text-sm); color: var(--color-link); }
 </style>

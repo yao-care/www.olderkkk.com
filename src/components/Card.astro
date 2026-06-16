@@ -4,7 +4,7 @@ interface Props { href: string; title: string; excerpt?: string; image?: string;
 const { href, title, excerpt = "", image, meta = "" } = Astro.props;
 ---
 <a class="card" href={withBase(href)}>
-  {image && <img src={withBase(image)} alt={title} />}
+  {image && <img src={withBase(image)} alt={title} loading="lazy" decoding="async" />}
   {meta && <p class="card__meta">{meta}</p>}
   <h3>{title}</h3>
   {excerpt && <p>{excerpt}</p>}
