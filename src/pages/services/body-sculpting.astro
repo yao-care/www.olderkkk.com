@@ -1,0 +1,50 @@
+---
+import Base from "../../layouts/Base.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import { absUrl, breadcrumbSchema, serviceSchema } from "../../lib/site";
+const base = import.meta.env.BASE_URL;
+const siteHome = absUrl("/", Astro.site, base);
+const pageUrl = absUrl("/services/body-sculpting", Astro.site, base);
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: siteHome },
+  { name: "服務項目", url: absUrl("/services", Astro.site, base) },
+  { name: "體雕・體態調整", url: pageUrl },
+]);
+const svc = serviceSchema({
+  name: "體雕・體態調整",
+  description: "台中西屯鄭骨館體雕中心的體雕與體態調整，透過張力平衡、姿勢調整與訓練改善身形線條，而非單純減重。",
+  serviceType: "體雕・體態調整",
+  url: pageUrl,
+  siteUrl: siteHome,
+});
+const seoTitle = "體雕・體態調整｜台中西屯體雕・鄭骨館體雕中心";
+const seoDesc = "台中西屯體雕與體態調整：從張力平衡、姿勢調整與訓練改善身形線條與體態，而非單純減重。鄭骨館體雕中心，採預約制。";
+---
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, svc]}>
+  <h1>體雕・體態調整</h1>
+  <p class="lead">體雕著重身形線條與張力平衡的調整。很多看起來「壯」或「身形跑掉」的問題，其實和長期姿勢、肌肉張力失衡有關，而不只是胖瘦——因此我們從<strong>張力平衡、姿勢調整與訓練</strong>著手，而非單純減重。</p>
+
+  <h2>體雕可以改善哪些狀況？</h2>
+  <ul>
+    <li>圓肩、虎背熊腰、上半身看起來厚實</li>
+    <li>骨盆前傾、小腹凸、體態線條跑掉</li>
+    <li>左右不對稱、身形看起來歪斜</li>
+    <li>想在重要場合（如婚紗、拍照）前調整體態線條</li>
+  </ul>
+
+  <h2>我們怎麼做體態調整？</h2>
+  <p>先以調理放鬆過度緊縮的部位、協助關節與肩胛/骨盆排列回正，再透過訓練喚醒該出力卻偷懶的肌群，讓體態線條慢慢變得自然。體態調整需要時間，越早開始、越規律，成果越穩定。</p>
+
+  <h2>和減脂、訓練的關係</h2>
+  <p>體雕常與 <a href={`${base}services/personal-training`}>一對一訓練</a> 與減脂計畫搭配：訓練建立支撐身體的肌力，調整改善排列與張力，兩者一起做，體態才會穩定不易跑回去。</p>
+
+  <h2>費用與預約</h2>
+  <p>體態調整會依個人狀況規劃調理與訓練的搭配，費用依方案而定。建議先 <a href={`${base}booking`}>預約諮詢與評估</a>，相關收費見 <a href={`${base}pricing`}>收費方式</a>。本服務屬一般保健與體態調整範疇，不涉及醫療療程。</p>
+  <ContactCTA />
+</Base>
+<style>
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+  p { font-size: var(--text-base); margin: 1rem 0; }
+  ul { margin: 1rem 0; padding-left: 1.25rem; }
+  li { font-size: var(--text-base); color: var(--text-secondary); margin: 0.5rem 0; }
+</style>

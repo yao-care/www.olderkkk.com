@@ -1,0 +1,51 @@
+---
+import Base from "../../layouts/Base.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import { absUrl, breadcrumbSchema, serviceSchema } from "../../lib/site";
+const base = import.meta.env.BASE_URL;
+const siteHome = absUrl("/", Astro.site, base);
+const pageUrl = absUrl("/services/personal-training", Astro.site, base);
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: siteHome },
+  { name: "服務項目", url: absUrl("/services", Astro.site, base) },
+  { name: "一對一訓練", url: pageUrl },
+]);
+const svc = serviceSchema({
+  name: "一對一訓練",
+  description: "台中西屯鄭骨館體雕中心的一對一教練課，針對個人張力失衡、身體協調與肌力做個人化訓練，讓調理後的成果維持得住。",
+  serviceType: "一對一健身教練・肌力訓練",
+  url: pageUrl,
+  siteUrl: siteHome,
+  price: 1800,
+});
+const seoTitle = "一對一訓練｜台中西屯一對一健身教練・鄭骨館體雕中心";
+const seoDesc = "台中西屯一對一教練課：針對個人張力失衡、身體協調與肌力進行個人化訓練，讓調理後的成果更穩定。鄭骨館體雕中心，採預約制。";
+---
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, svc]}>
+  <h1>一對一訓練</h1>
+  <p class="lead">由教練全程一對一帶領，針對你的張力失衡、身體協調與肌力進行個人化訓練，幫助身體支撐的張力維持在較中立的位置，讓調理後的成果更穩定。</p>
+
+  <h2>一對一訓練適合誰？</h2>
+  <ul>
+    <li>做過整脊整骨調理、想讓成果維持住的人</li>
+    <li>姿勢不良、核心無力、容易痠痛的久坐族</li>
+    <li>想開始運動但不知如何下手、擔心姿勢錯誤的新手</li>
+    <li>想針對體態與肌力做個人化規劃的人</li>
+  </ul>
+
+  <h2>課程怎麼進行？</h2>
+  <p>會先評估你的體態、肌力與活動度，再安排適合的強度與動作，循序漸進。教練會引導你「該怎麼站、怎麼走、哪些肌肉要醒過來」，讓身體慢慢記住正確的發力與排列方式。<strong>不需要先具備運動經驗</strong>。</p>
+
+  <h2>和整脊調理怎麼搭配？</h2>
+  <p>調理協助身體「回正」，訓練協助「維持」。許多人會以 <a href={`${base}services/chiropractic`}>整脊整骨調理</a> 改善當下的歪斜與痠痛，再用一對一訓練鞏固成果，避免很快又跑回舊習慣。</p>
+
+  <h2>費用與預約</h2>
+  <p>一對一教練課單堂 1800 元；已接受調整服務者可用 780 元體驗一次。建議先 <a href={`${base}booking`}>預約諮詢與評估</a>，了解身體狀況後再決定。費用以現場或 LINE 最新公告為準，詳見 <a href={`${base}pricing`}>收費方式</a>。</p>
+  <ContactCTA />
+</Base>
+<style>
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+  p { font-size: var(--text-base); margin: 1rem 0; }
+  ul { margin: 1rem 0; padding-left: 1.25rem; }
+  li { font-size: var(--text-base); color: var(--text-secondary); margin: 0.5rem 0; }
+</style>

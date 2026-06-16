@@ -1,40 +1,93 @@
 ---
-import { getEntry, render } from "astro:content";
 import Base from "../layouts/Base.astro";
+import ContactCTA from "../components/ContactCTA.astro";
 import { absUrl, breadcrumbSchema, SITE } from "../lib/site";
-const entry = await getEntry("pages", "services");
-const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL;
 const crumb = breadcrumbSchema([
   { name: "首頁", url: absUrl("/", Astro.site, base) },
   { name: "服務項目", url: absUrl("/services", Astro.site, base) },
 ]);
-const services = ["身體調理", "歪斜調理", "痠痛調理", "運動動作矯正", "動作失能矯正", "運動按摩矯正", "肌力訓練", "減肥減脂計畫", "重量肌力訓練", "全身張力平衡", "一對一健身教練", "台中自由教練場地租借"];
+
+// 核心服務（有獨立分頁）
+const core = [
+  { href: "/services/chiropractic", title: "整脊・整骨調理", desc: "全身結構與張力的調整，協助歪斜回正、緩解痠痛。" },
+  { href: "/services/personal-training", title: "一對一訓練", desc: "個人化肌力與動作訓練，讓調理成果維持得住。" },
+  { href: "/services/body-sculpting", title: "體雕・體態調整", desc: "從張力平衡與訓練改善身形線條，而非單純減重。" },
+];
+
+// 調整矯正類
+const adjust = [
+  { name: "身體調理", desc: "整體放鬆過度緊繃的部位，協助關節排列回到較理想的位置。" },
+  { name: "歪斜調理", desc: "針對高低肩、骨盆歪斜、身體左右不對稱進行結構調整。" },
+  { name: "痠痛調理", desc: "處理肩頸、上背、腰部等因張力失衡造成的痠、緊、卡。" },
+  { name: "運動動作矯正", desc: "找出錯誤的發力與動作模式，重新建立正確的出力方式。" },
+  { name: "動作失能矯正", desc: "改善受限的關節活動度，讓卡住的動作恢復順暢。" },
+  { name: "運動按摩矯正", desc: "針對運動後肌肉與筋膜的緊繃痠痛，進行按摩與拉伸放鬆。" },
+];
+
+// 訓練健身類
+const train = [
+  { name: "肌力訓練", desc: "喚醒該出力卻偷懶的肌群，建立穩定身體的基礎肌力。" },
+  { name: "減肥減脂計畫", desc: "搭配訓練與生活調整，循序漸進改善體態與體組成。" },
+  { name: "重量肌力訓練", desc: "以漸進負荷提升肌力與肌耐力，強化身體支撐力。" },
+  { name: "全身張力平衡", desc: "調整全身肌肉張力的左右、前後平衡，減少代償。" },
+  { name: "一對一健身教練", desc: "教練全程一對一帶領，依個人狀況設計專屬課表。" },
+  { name: "台中自由教練場地租借", desc: "提供自由教練租借訓練場地使用。" },
+];
+
 const catalog = {
   "@context": "https://schema.org",
   "@type": "OfferCatalog",
   name: "服務項目",
-  itemListElement: services.map((n) => ({
+  itemListElement: [...adjust, ...train].map((s) => ({
     "@type": "Offer",
-    itemOffered: { "@type": "Service", name: n, areaServed: "台中市", provider: { "@type": "LocalBusiness", name: SITE.name } },
+    itemOffered: { "@type": "Service", name: s.name, description: s.desc, areaServed: "台中市", provider: { "@type": "LocalBusiness", name: SITE.name } },
   })),
 };
 const seoTitle = "服務項目｜台中西屯整骨整脊・鄭骨館體雕中心";
-const seoDesc = "身體調理、歪斜矯正、痠痛調理、運動動作矯正、肌力訓練、減脂與一對一健身教練——台中西屯鄭骨館體雕中心服務項目。";
+const seoDesc = "整脊整骨調理、體態矯正、痠痛調理、運動動作矯正、肌力訓練、減脂與一對一健身教練——台中西屯鄭骨館體雕中心服務項目與說明。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, catalog]}>
-  <h1>{entry.data.title.split("-")[0]}</h1>
-  <article class="prose"><Content /></article>
+  <h1>服務項目</h1>
+  <p class="lead">鄭骨館體雕中心結合<strong>整復調理</strong>與<strong>肌力訓練</strong>：先以調理協助身體排列回正，再用訓練讓成果維持住。以下為各項服務說明。</p>
+
+  <h2>核心服務</h2>
+  <div class="core">
+    {core.map((c) => (
+      <a class="core__card" href={`${base}${c.href.replace(/^\//, "")}`}>
+        <span class="core__title">{c.title}</span>
+        <span class="core__desc">{c.desc}</span>
+      </a>
+    ))}
+  </div>
+
+  <h2>調整矯正</h2>
+  <div class="grid">
+    {adjust.map((s) => (
+      <div class="card"><h3>{s.name}</h3><p>{s.desc}</p></div>
+    ))}
+  </div>
+
+  <h2>訓練健身</h2>
+  <div class="grid">
+    {train.map((s) => (
+      <div class="card"><h3>{s.name}</h3><p>{s.desc}</p></div>
+    ))}
+  </div>
+
+  <p class="note">各項收費請見 <a href={`${base}pricing`}>收費方式</a>；不確定適合哪一項時，建議先 <a href={`${base}booking`}>預約諮詢與評估</a>。</p>
+  <ContactCTA />
 </Base>
 <style>
-  .prose :global(p) { font-size: var(--text-base); margin: 0; }
-  .prose :global(img) { border-radius: 8px; margin: 1.5rem 0 0.75rem; max-width: 520px; }
-  .prose :global(ul) {
-    list-style: none; padding: 0; margin: 0.5rem 0 2rem;
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;
-  }
-  .prose :global(li) {
-    background: var(--bg-surface); border: 1px solid var(--border-subtle);
-    border-radius: 8px; padding: 1rem 1.25rem; font-size: var(--text-lg); font-weight: 700;
-  }
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+  .core { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
+  .core__card { display: flex; flex-direction: column; gap: 0.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1.25rem 1.5rem; }
+  .core__card:hover { background: var(--bg-hover); text-decoration: none; }
+  .core__title { font-size: var(--text-lg); font-weight: 700; color: var(--color-link); }
+  .core__desc { font-size: var(--text-base); color: var(--text-secondary); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
+  .card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem 1.25rem; }
+  .card h3 { font-size: var(--text-lg); margin: 0 0 0.5rem; }
+  .card p { font-size: var(--text-base); color: var(--text-secondary); margin: 0; }
+  .note { font-size: var(--text-sm); color: var(--text-secondary); background: var(--bg-overlay); border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
 </style>

@@ -81,6 +81,24 @@ export function pricingOfferCatalogSchema() {
   };
 }
 
+// 單一服務 Service schema（核心服務分頁用）
+export function serviceSchema(o: { name: string; description: string; url: string; siteUrl: string; price?: number | null; serviceType?: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: o.name,
+    description: o.description,
+    ...(o.serviceType ? { serviceType: o.serviceType } : {}),
+    provider: { "@type": "LocalBusiness", "@id": o.siteUrl + "#business", name: SITE.name },
+    areaServed: [
+      { "@type": "City", name: "台中市" },
+      ...["西屯區", "北屯區", "南屯區", "西區", "北區"].map((n) => ({ "@type": "AdministrativeArea", name: `台中市${n}` })),
+    ],
+    url: o.url,
+    ...(o.price != null ? { offers: { "@type": "Offer", priceCurrency: "TWD", price: o.price } } : {}),
+  };
+}
+
 // 預約流程 HowTo
 export function bookingHowToSchema() {
   return {
