@@ -12,6 +12,7 @@ export const SITE = {
   threads: "https://www.threads.com/@cheng_spine_fit_center",
   youtube: "https://www.youtube.com/@KKK0524TW",
   map: "https://maps.app.goo.gl/dx4tE1qBJhFficMz6",
+  logo: "/images/logo.png",
   addressText: "台中市西屯區工業區一路58巷11弄83號",
   hoursText: "週一、二、三、五、六 14:00–17:00、20:00–22:00（週四、日公休）",
   address: {
@@ -224,12 +225,13 @@ export function personSchema(siteUrl: string) {
 }
 
 // 全站 LocalBusiness 結構化資料
-export function localBusinessSchema(siteUrl: string, image: string) {
+export function localBusinessSchema(siteUrl: string, image: string, logo?: string) {
   return {
     "@context": "https://schema.org",
     "@type": ["HealthAndBeautyBusiness", "LocalBusiness"],
     "@id": siteUrl + "#business",
     name: SITE.name,
+    ...(logo ? { logo } : {}),
     description:
       "台中市西屯區整骨整脊體雕中心，結合健美式訓練、整脊技術與人體力學矯正，提供身體調理、歪斜矯正、痠痛調理、運動矯正與一對一肌力訓練。",
     image,

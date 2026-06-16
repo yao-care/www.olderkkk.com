@@ -4,12 +4,15 @@ import { withBase } from "../lib/withBase";
 ---
 <header class="header">
   <div class="container header__inner">
-    <a href={withBase("/")} class="header__brand">鄭骨館體雕中心</a>
+    <a href={withBase("/")} class="header__brand" aria-label="鄭骨館體雕中心 首頁">
+      <img src={withBase("/images/logo.png")} alt="鄭骨館體雕中心" width="220" height="80" />
+    </a>
     <Nav />
   </div>
 </header>
 <style>
   .header { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); }
   .header__inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; max-width: 1400px; padding: 1rem 1.5rem; }
-  .header__brand { font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+  .header__brand { display: flex; align-items: center; }
+  .header__brand img { height: 48px; width: auto; display: block; }
 </style>
