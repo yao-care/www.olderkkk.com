@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
-import { absUrl, breadcrumbSchema, PERSON, PRACTITIONERS, SITE } from "../lib/site";
+import { absUrl, breadcrumbSchema, PRACTITIONERS, PARKING, SITE } from "../lib/site";
 const base = import.meta.env.BASE_URL;
 const siteHome = absUrl("/", Astro.site, base);
 const crumb = breadcrumbSchema([
@@ -16,18 +16,27 @@ const profile = {
   about: { "@id": siteHome + "#business" },
 };
 const seoTitle = "關於我們｜主理人老K（鄭博陽）｜台中西屯・鄭骨館體雕中心";
-const seoDesc = "鄭骨館體雕中心由老K（鄭博陽）創立，結合健美式訓練、整脊技術與人體力學矯正。台中西屯整骨整脊體雕與一對一訓練。";
+const seoDesc = "鄭骨館體雕中心由老K（鄭博陽）創立，從健美式訓練走到整脊與人體力學矯正，主張「調理回正、訓練維持」。台中西屯整骨整脊體雕與一對一訓練。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, profile]}>
   <h1>關於我們</h1>
+  <p class="lead">鄭骨館體雕中心位於{SITE.address.region}{SITE.address.locality}，由主理人老K（本名鄭博陽，店內稱「鄭師傅」）創立。我們專注一件事：把身體「喬正」之後，還要讓它「留得住」。</p>
 
-  <h2>主理人：老K（本名鄭博陽）</h2>
-  <p>鄭骨館體雕中心位於{SITE.address.region}{SITE.address.locality}，由主理人老K（本名鄭博陽，店內稱「鄭師傅」）創立。</p>
-  <p>老K一開始接觸<strong>健美式訓練</strong>，了解肌肉的運作方式；之後接觸<strong>整脊技術</strong>，並將兩者融合運用；再接觸<strong>人體力學矯正</strong>方法，能夠同時處理肌肉的發力方式與調整關節的排列位置，更快、更有效地協助解決身體問題。</p>
+  <h2>一條從訓練走到調理的路</h2>
+  <p>老K最早接觸的是<strong>健美式訓練</strong>，在反覆的訓練裡，他開始理解肌肉是怎麼運作、怎麼發力的。後來接觸<strong>整脊技術</strong>，學會調整骨骼與關節的排列；但他發現，只練不調、或只調不練，效果都不持久——於是把兩者融合起來。再之後接觸<strong>人體力學矯正</strong>方法，讓他能同時處理「肌肉的發力方式」與「關節的排列位置」，從根源更快、更有效地協助解決身體問題。</p>
 
-  <h2>我們的做法</h2>
-  <p>{PERSON.description}</p>
-  <p>實務上會先評估身體狀況，以整復調理放鬆過度緊繃的部位、協助關節排列回正，再搭配動作矯正與肌力訓練，讓身體學會用正確的方式出力，把調理的成果維持住——<strong>「調理幫助回正，訓練幫助維持」</strong>。</p>
+  <h2>我們的核心理念：調理回正，訓練維持</h2>
+  <p>身體的痠、緊、歪斜，很少是單一原因造成的。鄭骨館的做法是先評估身體狀況，以整復調理放鬆過度緊繃的部位、協助關節排列回到較理想的位置；再透過動作矯正與肌力訓練，讓身體學會用正確的方式出力。<strong>調理幫助「回正」，訓練幫助「維持」</strong>，兩者搭配，成果才會穩定。</p>
+
+  <h2>我們提供什麼</h2>
+  <ul class="services">
+    <li><strong>整脊・整骨全身調整</strong>：一次約 30–40 分鐘，涵蓋骨盆、膝蓋、腳踝、肩膀；過程中會依個人緊繃與歪斜程度調整力道，有不舒服的地方都可隨時反映。</li>
+    <li><strong>體雕與體態調整</strong>：透過張力平衡與訓練改善身形線條，而非單純減重。</li>
+    <li><strong>一對一教練課</strong>：由教練一對一帶領，針對個人的張力失衡、身體協調與肌力做個人化訓練，讓調理後的成果更穩定。</li>
+    <li><strong>小型團課</strong>：4 人成班、每週一次，適合想和親友一起運動的新手。</li>
+    <li><strong>運動按摩放鬆</strong>：針對運動後肌肉與筋膜的緊繃與痠痛，進行按摩與拉伸。</li>
+  </ul>
+  <p>各項收費請見 <a href={`${base}pricing`}>收費方式</a>，服務總覽見 <a href={`${base}services`}>服務項目</a>。</p>
 
   <h2>師傅與教練</h2>
   <ul class="people">
@@ -36,14 +45,22 @@ const seoDesc = "鄭骨館體雕中心由老K（鄭博陽）創立，結合健�
     ))}
   </ul>
 
-  <h2>提供的服務</h2>
-  <p>整骨、整脊、體雕，以及一對一肌力訓練與小型團課，處理身體歪斜、痠痛、動作矯正與體態調整。詳見 <a href={`${base}services`}>服務項目</a> 與 <a href={`${base}pricing`}>收費方式</a>。</p>
+  <h2>為什麼選擇鄭骨館</h2>
+  <ul class="why">
+    <li>同時懂「訓練」與「調理」——不是只喬骨頭，也不是只帶訓練。</li>
+    <li>預約制、一對一，給每位客人完整的評估與服務時間。</li>
+    <li>位於台中西屯，鄰近工業區，可停 <a href={PARKING.map}>{PARKING.name}</a>。</li>
+  </ul>
+  <p class="note">本中心提供的是身體調理與訓練服務，屬一般保健範疇，不能取代醫療診斷；若有明確外傷、疾病或神經症狀，建議先就醫。</p>
 
   <h2>聯絡與預約</h2>
+  <p>歡迎先 <a href={`${base}booking`}>了解預約流程</a>，或直接透過以下方式聯繫：</p>
   <ContactCTA />
 </Base>
 <style>
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
   p { font-size: var(--text-base); margin: 1rem 0; }
-  .people { margin: 1rem 0; padding-left: 1.25rem; }
-  .people li { font-size: var(--text-base); color: var(--text-secondary); margin: 0.5rem 0; }
+  ul.services, ul.people, ul.why { margin: 1rem 0; padding-left: 1.25rem; }
+  ul.services li, ul.people li, ul.why li { font-size: var(--text-base); color: var(--text-secondary); margin: 0.6rem 0; }
+  .note { font-size: var(--text-sm); color: var(--text-secondary); background: var(--bg-overlay); border-radius: 8px; padding: 1rem 1.25rem; }
 </style>

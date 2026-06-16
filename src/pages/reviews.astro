@@ -13,12 +13,18 @@ const articles = [
   { title: "台中整骨推薦：舒緩痠痛的身體！3 間台中整骨店推薦", source: "udn 女子漾", url: "https://woman.udn.com/woman/story/123165/7996113" },
   { title: "體雕／健身房推薦，一對一教練課一站式體驗", source: "冠婷生活趣", url: "https://kwytlife2019.net/%E3%80%90%E9%84%AD%E9%AA%A8%E9%A4%A8%E9%AB%94%E9%9B%95%E4%B8%AD%E5%BF%83%E3%80%912021%E9%AB%94%E9%9B%95-%E5%81%A5%E8%BA%AB%E6%88%BF%E6%8E%A8%E8%96%A6%EF%BC%8C%E4%B8%80%E5%B0%8D%E4%B8%80%E6%95%99/" },
 ];
+// 影音體驗分享（外部來源）
+const videos = [
+  { title: "台中西屯・鄭骨館體雕中心體驗分享", source: "Ovi's 中醫日常（Instagram）", url: "https://www.instagram.com/reel/Ct1WlmJA-gZ/" },
+];
 const seoTitle = "媒體報導與體驗分享｜台中西屯・鄭骨館體雕中心";
 const seoDesc = "部落客與媒體對鄭骨館體雕中心的整骨、整脊與一對一訓練體驗報導整理。台中西屯整骨整脊體雕。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
   <h1>媒體報導與體驗分享</h1>
-  <p class="lead">以下整理部落客與媒體對 {SITE.name} 的體驗文章（皆為外部第三方來源，連結將開啟原始文章）。</p>
+  <p class="lead">不少部落客與媒體實際走訪 {SITE.name}，分享整骨、整脊與一對一訓練的體驗。以下整理這些報導與分享（皆為外部第三方來源，連結將開啟原始文章）。</p>
+
+  <h2>部落客與媒體報導</h2>
   <ul class="links">
     {articles.map((a) => (
       <li>
@@ -27,7 +33,18 @@ const seoDesc = "部落客與媒體對鄭骨館體雕中心的整骨、整脊與
       </li>
     ))}
   </ul>
-  <p class="note">想看更多即時分享，歡迎追蹤我們的 <a href={SITE.instagram}>Instagram</a>、<a href={SITE.facebook}>Facebook</a> 與 <a href={SITE.youtube}>YouTube</a>。</p>
+
+  <h2>影音體驗分享</h2>
+  <ul class="links">
+    {videos.map((v) => (
+      <li>
+        <a href={v.url}>{v.title}</a>
+        <span class="links__source">— {v.source}</span>
+      </li>
+    ))}
+  </ul>
+
+  <p class="note">想看更多即時分享與客人回饋，歡迎追蹤我們的 <a href={SITE.instagram}>Instagram</a>、<a href={SITE.facebook}>Facebook</a> 與 <a href={SITE.youtube}>YouTube</a>。</p>
 
   <h2>想親自體驗？</h2>
   <ContactCTA />
