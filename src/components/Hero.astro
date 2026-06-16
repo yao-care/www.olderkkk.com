@@ -30,7 +30,7 @@ const { slides } = Astro.props;
   .hero__dots { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; gap: 8px; justify-content: center; }
   .hero__dot { width: 12px; height: 12px; border-radius: 50%; border: 0; cursor: pointer;
     background: var(--bg-base); opacity: 0.6; }
-  .hero__dot[aria-current="true"] { opacity: 1; background: var(--color-link); }
+  .hero__dot[aria-current="true"] { opacity: 1; background: var(--color-accent); }
 </style>
 <script>
   document.querySelectorAll("[data-hero]").forEach((hero) => {

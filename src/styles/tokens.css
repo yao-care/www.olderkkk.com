@@ -1,19 +1,24 @@
 :root {
-  /* 背景層級 */
-  --bg-base: #f5f6f8;
-  --bg-surface: #ecedf0;
-  --bg-overlay: #dfe0e5;
-  --bg-hover: #e5e6ea;
+  /* 背景層級（中性微帶青綠 hue~205） */
+  --bg-base: #f3f7f7;
+  --bg-surface: #e8eef0;
+  --bg-overlay: #d9e4e5;
+  --bg-hover: #e0e9ea;
   /* 文字層級 */
-  --text-primary: #1e2030;
-  --text-secondary: #5e6070;
-  --text-muted: #8a8c98;
+  --text-primary: #1b2832;
+  --text-secondary: #54626b;
+  --text-muted: #84909a;
   /* 功能色 */
-  --color-link: #1e5ab8;
-  --color-pass: #1e8050;
+  --color-link: #0a7488;   /* 品牌青綠：連結/主重點 */
+  --color-pass: #1f7d4c;   /* 綠：LINE/成功（白字對比足） */
   --color-critical: #c93135;
+  /* 品牌色 */
+  --color-brand-deep: #005060;   /* 深青綠：主題色/深色區塊底 */
+  --color-accent: #d8be3e;       /* 金黃：標題線/卡片/頁尾連結（勿用於淺底文字） */
+  --color-accent-green: #5a8f42; /* 葉綠：裝飾 */
+  --text-on-dark: #e9f1f2;       /* 深色區塊上的淺色文字 */
   /* 邊框 */
-  --border-subtle: #d5d6da;
+  --border-subtle: #d3dadc;
   /* 字級量表（最小 18px） */
   --text-xs: 1.125rem;  /* 18px */
   --text-sm: 1.25rem;   /* 20px */
@@ -29,16 +34,20 @@
 }
 @supports (color: oklch(0.5 0.1 250)) {
   :root {
-    --bg-base: oklch(0.97 0.005 250);
-    --bg-surface: oklch(0.94 0.005 250);
-    --bg-overlay: oklch(0.90 0.008 250);
-    --bg-hover: oklch(0.92 0.005 250);
-    --text-primary: oklch(0.20 0.01 250);
-    --text-secondary: oklch(0.45 0.01 250);
-    --text-muted: oklch(0.60 0.008 250);
-    --color-link: oklch(0.48 0.15 250);
-    --color-pass: oklch(0.48 0.16 150);
+    --bg-base: oklch(0.975 0.006 200);
+    --bg-surface: oklch(0.945 0.009 200);
+    --bg-overlay: oklch(0.905 0.013 200);
+    --bg-hover: oklch(0.925 0.010 200);
+    --text-primary: oklch(0.25 0.022 215);
+    --text-secondary: oklch(0.46 0.022 215);
+    --text-muted: oklch(0.61 0.016 210);
+    --color-link: oklch(0.52 0.085 205);
+    --color-pass: oklch(0.50 0.13 150);
     --color-critical: oklch(0.55 0.22 25);
-    --border-subtle: oklch(0.85 0.005 250);
+    --color-brand-deep: oklch(0.40 0.07 205);
+    --color-accent: oklch(0.81 0.13 92);
+    --color-accent-green: oklch(0.60 0.11 142);
+    --text-on-dark: oklch(0.94 0.012 200);
+    --border-subtle: oklch(0.86 0.008 205);
   }
 }
