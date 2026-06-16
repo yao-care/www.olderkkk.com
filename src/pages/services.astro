@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
+import { withBase } from "../lib/withBase";
 import { absUrl, breadcrumbSchema, SITE } from "../lib/site";
 const base = import.meta.env.BASE_URL;
 const crumb = breadcrumbSchema([
@@ -49,6 +50,7 @@ const seoDesc = "整脊整骨調理、體態矯正、痠痛調理、運動動作
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, catalog]}>
   <h1>服務項目</h1>
+  <img class="hero" src={withBase("/images/cc685b243660.webp")} alt="鄭骨館體雕中心服務：整脊整骨調理、矯正課程與一對一肌力訓練" loading="eager" />
   <p class="lead">鄭骨館體雕中心結合<strong>整復調理</strong>與<strong>肌力訓練</strong>：先以調理協助身體排列回正，再用訓練讓成果維持住。以下為各項服務說明。</p>
 
   <h2>核心服務</h2>
@@ -79,6 +81,7 @@ const seoDesc = "整脊整骨調理、體態矯正、痠痛調理、運動動作
   <ContactCTA />
 </Base>
 <style>
+  .hero { width: 100%; border-radius: 12px; margin: 0.5rem 0 1rem; }
   .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
   .core { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
   .core__card { display: flex; flex-direction: column; gap: 0.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1.25rem 1.5rem; }

@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
+import { withBase } from "../../lib/withBase";
 import { absUrl, breadcrumbSchema, serviceSchema } from "../../lib/site";
 const base = import.meta.env.BASE_URL;
 const siteHome = absUrl("/", Astro.site, base);
@@ -34,6 +35,10 @@ const seoDesc = "台中西屯體雕與體態調整：從張力平衡、姿勢調
 
   <h2>我們怎麼做體態調整？</h2>
   <p>先以調理放鬆過度緊縮的部位、協助關節與肩胛/骨盆排列回正，再透過訓練喚醒該出力卻偷懶的肌群，讓體態線條慢慢變得自然。體態調整需要時間，越早開始、越規律，成果越穩定。</p>
+  <figure class="proof">
+    <img src={withBase("/images/7ceb2cf7f998.webp")} alt="鄭骨館體雕中心調整前後對比：上課四個月後身體中軸與體態明顯回正" loading="lazy" />
+    <figcaption>實際個案調整前後對比（上課四個月）。更多請見 <a href={`${base}works`}>成果分享</a>。</figcaption>
+  </figure>
 
   <h2>和減脂、訓練的關係</h2>
   <p>體雕常與 <a href={`${base}services/personal-training`}>一對一訓練</a> 與減脂計畫搭配：訓練建立支撐身體的肌力，調整改善排列與張力，兩者一起做，體態才會穩定不易跑回去。</p>
@@ -45,6 +50,9 @@ const seoDesc = "台中西屯體雕與體態調整：從張力平衡、姿勢調
 <style>
   .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
   p { font-size: var(--text-base); margin: 1rem 0; }
+  .proof { margin: 1rem 0; }
+  .proof img { width: 100%; max-width: 380px; border-radius: 12px; display: block; }
+  .proof figcaption { font-size: var(--text-sm); color: var(--text-muted); margin-top: 0.5rem; }
   ul { margin: 1rem 0; padding-left: 1.25rem; }
   li { font-size: var(--text-base); color: var(--text-secondary); margin: 0.5rem 0; }
 </style>

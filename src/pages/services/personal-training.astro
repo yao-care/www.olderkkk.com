@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
+import { withBase } from "../../lib/withBase";
 import { absUrl, breadcrumbSchema, serviceSchema } from "../../lib/site";
 const base = import.meta.env.BASE_URL;
 const siteHome = absUrl("/", Astro.site, base);
@@ -23,6 +24,7 @@ const seoDesc = "台中西屯一對一教練課：針對個人張力失衡、身
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, svc]}>
   <h1>一對一訓練</h1>
+  <img class="hero" src={withBase("/images/cc685b243660.webp")} alt="鄭骨館體雕中心一對一肌力與動作訓練，依個人張力失衡與肌力做個人化規劃" loading="eager" />
   <p class="lead">由教練全程一對一帶領，針對你的張力失衡、身體協調與肌力進行個人化訓練，幫助身體支撐的張力維持在較中立的位置，讓調理後的成果更穩定。</p>
 
   <h2>一對一訓練適合誰？</h2>
@@ -44,6 +46,7 @@ const seoDesc = "台中西屯一對一教練課：針對個人張力失衡、身
   <ContactCTA />
 </Base>
 <style>
+  .hero { width: 100%; border-radius: 12px; margin: 0.5rem 0 1rem; }
   .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
   p { font-size: var(--text-base); margin: 1rem 0; }
   ul { margin: 1rem 0; padding-left: 1.25rem; }

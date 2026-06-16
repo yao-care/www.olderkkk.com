@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
+import { withBase } from "../lib/withBase";
 import { absUrl, breadcrumbSchema, PRACTITIONERS, PARKING, SITE } from "../lib/site";
 const base = import.meta.env.BASE_URL;
 const siteHome = absUrl("/", Astro.site, base);
@@ -20,6 +21,7 @@ const seoDesc = "鄭骨館體雕中心由老K（鄭博陽）創立，從健美�
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, profile]}>
   <h1>關於我們</h1>
+  <img class="hero" src={withBase("/images/2cd75f2550f7.webp")} alt="鄭骨館體雕中心師傅徒手調整客人身體結構與關節排列" loading="eager" />
   <p class="lead">鄭骨館體雕中心位於{SITE.address.region}{SITE.address.locality}，由主理人老K（本名鄭博陽，店內稱「鄭師傅」）創立。我們專注一件事：把身體「喬正」之後，還要讓它「留得住」。</p>
 
   <h2>一條從訓練走到調理的路</h2>
@@ -58,6 +60,7 @@ const seoDesc = "鄭骨館體雕中心由老K（鄭博陽）創立，從健美�
   <ContactCTA />
 </Base>
 <style>
+  .hero { width: 100%; border-radius: 12px; margin: 0.5rem 0 1rem; }
   .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
   p { font-size: var(--text-base); margin: 1rem 0; }
   ul.services, ul.people, ul.why { margin: 1rem 0; padding-left: 1.25rem; }
