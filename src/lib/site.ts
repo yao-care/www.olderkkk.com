@@ -118,6 +118,7 @@ export function videoObjectSchema(o: { id: string; name: string; description: st
 // 不杜撰證照、年資或學歷。
 export const PERSON = {
   name: "老K",
+  alternateName: "鄭博陽", // 本名（用戶確認）；畫面顯示暱稱「老K」，結構化資料兩者並陳以利 AI 實體串接
   jobTitle: "整骨體雕暨一對一訓練教練",
   knowsAbout: ["健美式訓練", "整脊技術", "人體力學矯正", "肌力訓練", "體態矯正"],
   description:
@@ -131,6 +132,7 @@ export function personSchema(siteUrl: string) {
     "@type": "Person",
     "@id": siteUrl + "#founder",
     name: PERSON.name,
+    alternateName: PERSON.alternateName,
     jobTitle: PERSON.jobTitle,
     description: PERSON.description,
     knowsAbout: PERSON.knowsAbout,
