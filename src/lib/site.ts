@@ -10,6 +10,7 @@ export const SITE = {
   facebook: "https://www.facebook.com/olderk/",
   instagram: "https://www.instagram.com/cheng_spine_fit_center/",
   threads: "https://www.threads.com/@cheng_spine_fit_center",
+  youtube: "https://www.youtube.com/@KKK0524TW",
   map: "https://maps.app.goo.gl/dx4tE1qBJhFficMz6",
   addressText: "台中市西屯區工業區一路58巷11弄83號",
   hoursText: "週一、二、三、五、六 14:00–17:00、20:00–22:00（週四、日公休）",
@@ -170,7 +171,7 @@ export function localBusinessSchema(siteUrl: string, image: string) {
     ],
     knowsAbout: PERSON.knowsAbout,
     hasMap: SITE.map,
-    sameAs: [SITE.facebook, SITE.instagram, SITE.threads, SITE.line, SITE.map],
+    sameAs: [SITE.facebook, SITE.instagram, SITE.threads, SITE.youtube, SITE.line, SITE.map],
     founder: { "@type": "Person", "@id": siteUrl + "#founder", name: PERSON.name },
     priceRange: "$$",
   };
