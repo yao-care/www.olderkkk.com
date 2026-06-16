@@ -2,17 +2,21 @@
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Card from "../../components/Card.astro";
-import { absUrl, breadcrumbSchema } from "../../lib/site";
+import { absUrl, breadcrumbSchema, itemListSchema } from "../../lib/site";
 const articles = (await getCollection("health")).sort((a, b) => (b.data.date || "").localeCompare(a.data.date || ""));
 const base = import.meta.env.BASE_URL;
 const crumb = breadcrumbSchema([
   { name: "首頁", url: absUrl("/", Astro.site, base) },
   { name: "健康概念分享", url: absUrl("/health", Astro.site, base) },
 ]);
+const list = itemListSchema({
+  name: "健康概念分享",
+  items: articles.map((a) => ({ name: a.data.title, url: absUrl(`/health/${a.id}`, Astro.site, base) })),
+});
 const seoTitle = "健康概念分享｜台中西屯・鄭骨館體雕中心";
 const seoDesc = "整骨整脊、體態矯正與運動傷害的健康知識分享——台中西屯鄭骨館體雕中心。";
 ---
-<Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, list]}>
   <h1>健康概念分享</h1>
   <div class="grid">
     {articles.map((a) => <Card href={`/health/${a.id}`} title={a.data.title} excerpt={a.data.summary} meta={a.data.date} />)}

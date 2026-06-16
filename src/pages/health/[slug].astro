@@ -33,8 +33,9 @@ const schemas: object[] = [
 ];
 const vid = youtubeId(entry.body ?? "");
 if (vid) schemas.push(videoObjectSchema({ id: vid, name: entry.data.title, description: seoDesc, uploadDate: entry.data.date }));
+const publishedTime = (entry.data.date || "").replace(/\//g, "-");
 ---
-<Base title={seoTitle} description={seoDesc} image={firstImg} schemas={schemas}>
+<Base title={seoTitle} description={seoDesc} image={firstImg} schemas={schemas} ogType="article" publishedTime={publishedTime}>
   <h1>{entry.data.title}</h1>
   {entry.data.date && <p class="date">{entry.data.date}</p>}
   <article class="prose"><Content /></article>

@@ -8,6 +8,8 @@ export const SITE = {
   line: "https://line.me/R/ti/p/%40275nxace",
   lineId: "@275nxace",
   facebook: "https://www.facebook.com/olderk/",
+  instagram: "https://www.instagram.com/cheng_spine_fit_center/",
+  threads: "https://www.threads.com/@cheng_spine_fit_center",
   map: "https://maps.app.goo.gl/dx4tE1qBJhFficMz6",
   addressText: "台中市西屯區工業區一路58巷11弄83號",
   hoursText: "週一、二、三、五、六 14:00–17:00、20:00–22:00（週四、日公休）",
@@ -46,22 +48,42 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
   };
 }
 
+// 列表頁清單（健康/消息/相簿索引）—— 幫 AI 理解內容目錄與其順序
+export function itemListSchema(o: { name: string; items: { name: string; url: string }[] }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: o.name,
+    numberOfItems: o.items.length,
+    itemListElement: o.items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      url: it.url,
+    })),
+  };
+}
+
 // 文章（健康概念分享 / 最新消息）
 export function articleSchema(o: {
   headline: string;
   description: string;
   image?: string;
   datePublished?: string;
+  dateModified?: string;
   url: string;
   siteUrl?: string;
 }) {
+  const published = o.datePublished ? o.datePublished.replace(/\//g, "-") : undefined;
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: o.headline,
     description: o.description,
     ...(o.image ? { image: o.image } : {}),
-    ...(o.datePublished ? { datePublished: o.datePublished.replace(/\//g, "-") } : {}),
+    ...(published ? { datePublished: published } : {}),
+    // 新鮮度訊號：未另填 dateModified 時沿用 datePublished
+    ...(o.dateModified || published ? { dateModified: (o.dateModified || o.datePublished || "").replace(/\//g, "-") } : {}),
     mainEntityOfPage: o.url,
     inLanguage: "zh-Hant",
     author: { "@type": "Person", name: PERSON.name, ...(o.siteUrl ? { "@id": o.siteUrl + "#founder" } : {}) },
@@ -141,10 +163,28 @@ export function localBusinessSchema(siteUrl: string, image: string) {
       { "@type": "OpeningHoursSpecification", dayOfWeek: SITE.openDays, opens: "14:00", closes: "17:00" },
       { "@type": "OpeningHoursSpecification", dayOfWeek: SITE.openDays, opens: "20:00", closes: "22:00" },
     ],
-    areaServed: { "@type": "City", name: "台中市" },
+    // 服務範圍：主市 + 鄰近行政區（吃下「附近整骨」類在地查詢）
+    areaServed: [
+      { "@type": "City", name: "台中市" },
+      ...["西屯區", "北屯區", "南屯區", "西區", "北區"].map((n) => ({ "@type": "AdministrativeArea", name: `台中市${n}` })),
+    ],
+    knowsAbout: PERSON.knowsAbout,
     hasMap: SITE.map,
-    sameAs: [SITE.facebook, SITE.line, SITE.map],
+    sameAs: [SITE.facebook, SITE.instagram, SITE.threads, SITE.line, SITE.map],
     founder: { "@type": "Person", "@id": siteUrl + "#founder", name: PERSON.name },
     priceRange: "$$",
+  };
+}
+
+// 全站 WebSite 結構化資料（語言/發行者；協助 AI 將整站對應到單一實體）
+export function websiteSchema(siteUrl: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": siteUrl + "#website",
+    url: siteUrl,
+    name: SITE.name,
+    inLanguage: "zh-Hant",
+    publisher: { "@id": siteUrl + "#business" },
   };
 }
