@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Card from "../../components/Card.astro";
 import { absUrl, breadcrumbSchema } from "../../lib/site";
-const articles = (await getCollection("health")).sort((a, b) => a.data.order - b.data.order);
+const articles = (await getCollection("health")).sort((a, b) => (b.data.date || "").localeCompare(a.data.date || ""));
 const base = import.meta.env.BASE_URL;
 const crumb = breadcrumbSchema([
   { name: "首頁", url: absUrl("/", Astro.site, base) },
