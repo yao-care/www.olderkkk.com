@@ -10,7 +10,7 @@ const crumb = breadcrumbSchema([
   { name: "課程介紹", url: absUrl("/courses", Astro.site, base) },
 ]);
 const seoTitle = "課程介紹｜台中西屯・鄭骨館體雕中心";
-const seoDesc = "團課指導與一對一指導課程，結合整脊與肌力訓練，改善體態與動作。台中西屯鄭骨館體雕中心。";
+const seoDesc = "一對一指導課程，結合全身調理與肌力訓練，改善體態與動作。台中西屯鄭骨館體雕中心。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
   <h1>{entry.data.title.split("-")[0]}</h1>

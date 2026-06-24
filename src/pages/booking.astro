@@ -9,7 +9,7 @@ const crumb = breadcrumbSchema([
 ]);
 const howto = bookingHowToSchema();
 const seoTitle = "預約流程與初次須知｜台中西屯・鄭骨館體雕中心";
-const seoDesc = "鄭骨館體雕中心採預約制：如何用 LINE 或電話預約、第一次來的注意事項、整脊調整前需告知事項與停車資訊。台中西屯。";
+const seoDesc = "鄭骨館體雕中心採預約制：如何用 LINE 或電話預約、第一次來的注意事項、調理前需告知事項與停車資訊。台中西屯。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, howto]}>
   <h1>預約流程與初次須知</h1>
@@ -26,7 +26,7 @@ const seoDesc = "鄭骨館體雕中心採預約制：如何用 LINE 或電話預
   </ol>
   <p class="confirm">{BOOKING.confirm}</p>
 
-  <h2>整脊調整前，請先告知這些狀況</h2>
+  <h2>調理前，請先告知這些狀況</h2>
   <p>為了安全，預約與到場時若有下列情形請主動告知，由師傅評估：</p>
   <ul class="notice">
     {BOOKING.notice.map((n) => <li>{n}</li>)}

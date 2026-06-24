@@ -11,17 +11,6 @@ sourcePath: "/paper/other_page.php?id=294"
 
 ![課程介紹](/images/ok-class-banner.webp)
 
-#### 團課指導
-
-*   ![](/images/9c44e771b727.jpg)
-*   ![](/images/67d8a90c3f57.jpg)
-*   ![](/images/01c1794204b9.jpg)
-    
-*   ![](/images/6b9dcef821fe.jpg)
-*   ![](/images/294513b94f92.jpg)
-*   [![](/images/722058915fc7.jpg)](https://youtu.be/49EDIEm6324)
-    
-
 #### 一對一指導
 
 *   ![](/images/b78988dbdf24.webp)

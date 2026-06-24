@@ -31,5 +31,3 @@ sourcePath: "/paper/services_index.php?title_id=293"
 - 4\. 全身張力平衡
     
 - 5\. 一對一健身教練
-    
-- 6\. 台中自由教練場地租借

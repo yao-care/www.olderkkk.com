@@ -25,7 +25,7 @@ const gallery = {
   image: photos.map((p) => absUrl(p.src, Astro.site, base)),
 };
 const seoTitle = `${album}｜成果分享｜鄭骨館體雕中心`;
-const seoDesc = `${album}相簿——台中西屯鄭骨館體雕中心整骨整脊體雕前後對比成果。`;
+const seoDesc = `${album}相簿——台中西屯鄭骨館體雕中心全身調理體雕前後對比成果。`;
 ---
 <Base title={seoTitle} description={seoDesc} image={photos[0]?.src} schemas={[crumb, gallery]}>
   <h1>{entry.data.album || entry.data.title}</h1>

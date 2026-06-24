@@ -14,7 +14,7 @@ const list = itemListSchema({
   items: albums.map((a) => ({ name: a.data.album || a.data.title, url: absUrl(`/works/${a.id}`, Astro.site, base) })),
 });
 const seoTitle = "成果分享｜台中西屯・鄭骨館體雕中心";
-const seoDesc = "身體成果分享、腳部成果分享——台中整骨整脊體雕前後對比相簿。鄭骨館體雕中心。";
+const seoDesc = "身體成果分享、腳部成果分享——台中全身調理體雕前後對比相簿。鄭骨館體雕中心。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, list]}>
   <h1>成果分享</h1>

@@ -1,7 +1,7 @@
 // 商家基本資訊與結構化資料（SEO / AEO / GEO 共用）
 export const SITE = {
   name: "鄭骨館體雕中心",
-  tagline: "台中西屯整骨・整脊・體雕・一對一訓練",
+  tagline: "台中西屯・全身調理・體雕・一對一訓練",
   tel: "0970686319",
   telE164: "+886-970-686-319",
   email: "d28281778@gmail.com",
@@ -30,17 +30,15 @@ export const SITE = {
 
 // 師傅／教練（對外公開）。鄭師傅即主理人老K（本名鄭博陽）。
 export const PRACTITIONERS = [
-  { name: "鄭師傅", aka: "老K（鄭博陽）", role: "整脊・整骨・體雕" },
-  { name: "何師傅", role: "整脊・整骨" },
+  { name: "鄭師傅", aka: "老K（鄭博陽）", role: "全身調理・張力訓練" },
+  { name: "何師傅", role: "全身調理" },
 ];
 
 // 收費方式（價格以現場或 LINE 最新公告為準）。
 export const PRICING = [
-  { name: "整脊全身調整（鄭師傅）", price: 1100, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的全身調整" },
-  { name: "整脊全身調整（何師傅）", price: 1000, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的全身調整" },
-  { name: "一對一教練課", price: 1800, unit: "堂", desc: "依個人張力失衡、身體協調與肌力進行個人化訓練；已接受調整服務者可用 780 元體驗一次" },
-  { name: "小型團課", price: 300, unit: "堂", desc: "4 人成班、每週一次，5 堂 1500 元；可揪親友或協助媒合成班" },
-  { name: "運動按摩放鬆", price: 1200, unit: "小時", desc: "針對運動後肌肉與筋膜緊繃、痠痛進行按摩與拉伸放鬆" },
+  { name: "全身調理（鄭師傅）", price: 1100, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的全身調理" },
+  { name: "全身調理（何師傅）", price: 1000, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的全身調理" },
+  { name: "一對一教練課", price: 2000, unit: "堂", desc: "依個人張力失衡、身體協調與肌力進行個人化訓練" },
   { name: "預約諮詢與評估", price: null as number | null, desc: "先了解身體狀況，再一起決定合適的調理與訓練方向" },
 ];
 
@@ -50,13 +48,13 @@ export const PARKING = { name: "天佑停車場", map: "https://maps.app.goo.gl/
 // 預約流程與初次須知（對外公開；採預約制）
 export const BOOKING = {
   steps: [
-    { name: "選擇服務", text: "決定想預約的服務（整脊評估、一對一教練課、團課或運動按摩）。不確定時可先選「預約諮詢與評估」。" },
+    { name: "選擇服務", text: "決定想預約的服務（全身調理評估、一對一教練課）。不確定時可先選「預約諮詢與評估」。" },
     { name: "聯繫預約", text: "透過 LINE（@275nxace）或電話 0970686319 告知欲預約的項目與希望時段。" },
     { name: "提供姓名電話", text: "預約時請提供姓名與聯絡電話，方便確認與聯繫。" },
     { name: "等待確認", text: "小編回覆並確認姓名、電話後，才算預約成功。" },
     { name: "依約到場", text: "依約定時間前往台中市西屯區工業區一路58巷11弄83號，鄰近可停天佑停車場。" },
   ],
-  // 整脊調整前需主動告知的狀況（安全評估）
+  // 調理前需主動告知的狀況（安全評估）
   notice: [
     "女生請避免穿著裙裝，以方便活動與檢查。",
     "有骨質疏鬆、曾耳石滑脫、裝有心臟支架者，請於預約與到場時主動告知。",
@@ -203,10 +201,10 @@ export function videoObjectSchema(o: { id: string; name: string; description: st
 export const PERSON = {
   name: "老K",
   alternateName: "鄭博陽", // 本名（用戶確認）；畫面顯示暱稱「老K」，結構化資料兩者並陳以利 AI 實體串接
-  jobTitle: "整骨體雕暨一對一訓練教練",
-  knowsAbout: ["健美式訓練", "整脊技術", "人體力學矯正", "肌力訓練", "體態矯正"],
+  jobTitle: "全身調理體雕暨一對一訓練教練",
+  knowsAbout: ["健美式訓練", "全身調理", "人體力學矯正", "肌力訓練", "體態矯正"],
   description:
-    "結合健美式訓練、整脊技術與人體力學矯正，同時處理肌肉發力方式與調整關節排列位置，更快有效解決身體問題。",
+    "結合健美式訓練與人體力學矯正，同時處理肌肉發力方式與調整關節排列位置，更快有效解決身體問題。",
 };
 
 // Person 結構化資料（全站輸出一次，供 LocalBusiness.founder 與文章 author 以 @id 參照）
@@ -233,7 +231,7 @@ export function localBusinessSchema(siteUrl: string, image: string, logo?: strin
     name: SITE.name,
     ...(logo ? { logo } : {}),
     description:
-      "台中市西屯區整骨整脊體雕中心，結合健美式訓練、整脊技術與人體力學矯正，提供身體調理、歪斜矯正、痠痛調理、運動矯正與一對一肌力訓練。",
+      "台中市西屯區全身調理體雕中心，結合健美式訓練與人體力學矯正，提供全身調理、歪斜調理、痠痛調理、運動矯正與一對一肌力訓練。",
     image,
     telephone: SITE.telE164,
     email: SITE.email,
@@ -251,7 +249,7 @@ export function localBusinessSchema(siteUrl: string, image: string, logo?: strin
       { "@type": "OpeningHoursSpecification", dayOfWeek: SITE.openDays, opens: "14:00", closes: "17:00" },
       { "@type": "OpeningHoursSpecification", dayOfWeek: SITE.openDays, opens: "20:00", closes: "22:00" },
     ],
-    // 服務範圍：主市 + 鄰近行政區（吃下「附近整骨」類在地查詢）
+    // 服務範圍：主市 + 鄰近行政區（吃下「附近全身調理」類在地查詢）
     areaServed: [
       { "@type": "City", name: "台中市" },
       ...["西屯區", "北屯區", "南屯區", "西區", "北區"].map((n) => ({ "@type": "AdministrativeArea", name: `台中市${n}` })),
