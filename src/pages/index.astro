@@ -7,7 +7,7 @@ import { withBase } from "../lib/withBase";
 const entry = await getEntry("home", "home");
 if (!entry) throw new Error("home.md is missing");
 const { Content } = await render(entry);
-const slides = (entry.data.slides ?? []).map((image) => ({ image: withBase(image), alt: "台中西屯整骨整脊體雕・鄭骨館體雕中心" }));
+const slides = (entry.data.slides ?? []).map((s) => ({ ...s, image: withBase(s.image) }));
 const seoTitle = "台中西屯整骨整脊體雕・鄭骨館體雕中心";
 const seoDesc = "鄭骨館體雕中心位於台中市西屯區，結合整脊、整骨、體雕與一對一肌力訓練，處理身體歪斜、痠痛與動作矯正。預約電話 0970686319。";
 ---

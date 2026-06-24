@@ -1,54 +1,185 @@
 ---
 import { SITE } from "../lib/site";
-interface Props { slides: { image: string; alt?: string }[]; }
+interface Card { no: string; title: string; desc: string; }
+interface Slide { image: string; focus?: string; accent: string[]; main: string; lines: string[]; cards: Card[]; }
+interface Props { slides: Slide[]; }
 const { slides } = Astro.props;
 ---
-<div class="hero" data-hero>
-  <div class="hero__track">
-    {slides.map((s, i) => (
-      <img
-        src={s.image}
-        alt={s.alt ?? `${SITE.name}－${SITE.tagline}`}
-        loading={i === 0 ? "eager" : "lazy"}
-        fetchpriority={i === 0 ? "high" : "auto"}
-        decoding="async"
-      />
-    ))}
-  </div>
+<section class="hero" data-hero aria-roledescription="輪播" aria-label="主視覺">
+  {slides.map((s, i) => (
+    <div class={`hero__slide${i === 0 ? " is-active" : ""}`} data-slide aria-hidden={i === 0 ? "false" : "true"}>
+      <div class="hero__copy">
+        <h2 class="hero__title">
+          {s.accent.map((w) => <span class="hero__accent" data-anim>{w}</span>)}
+          {s.main && <span class="hero__main" data-anim>{s.main}</span>}
+        </h2>
+        <p class="hero__lines">
+          {s.lines.map((line) => <span class="hero__line" data-anim>{line}</span>)}
+        </p>
+      </div>
+      <div class="hero__media">
+        <div class="hero__frame" data-anim-photo>
+          <img
+            class="hero__photo"
+            src={s.image}
+            style={`object-position:${s.focus ?? "center"}`}
+            alt={`${SITE.name}－${SITE.tagline}`}
+            loading={i === 0 ? "eager" : "lazy"}
+            fetchpriority={i === 0 ? "high" : "auto"}
+            decoding="async"
+          />
+        </div>
+        {s.cards.length > 0 && (
+          <div class="hero__cards">
+            {s.cards.map((c) => (
+              <div class="hero__card" data-anim-card>
+                <p class="hero__card-head"><span class="hero__card-no">{c.no}.</span> {c.title}</p>
+                <p class="hero__card-desc">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
   {slides.length > 1 && (
-    <div class="hero__dots">
-      {slides.map((_, i) => <button class="hero__dot" data-i={i} aria-label={`第 ${i + 1} 張`}></button>)}
+    <div class="hero__dots" role="tablist" aria-label="切換主視覺">
+      {slides.map((_, i) => (
+        <button class="hero__dot" data-i={i} role="tab" aria-label={`第 ${i + 1} 張`} aria-selected={i === 0 ? "true" : "false"}></button>
+      ))}
     </div>
   )}
-</div>
+</section>
 <style>
-  .hero { position: relative; border-radius: 12px; overflow: hidden; }
-  .hero__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
-  .hero__track::-webkit-scrollbar { display: none; }
-  .hero__track { scrollbar-width: none; }
-  .hero__track img { flex: 0 0 100%; scroll-snap-align: start; object-fit: cover; max-height: 480px; width: 100%; }
-  .hero__dots { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; gap: 8px; justify-content: center; }
-  .hero__dot { width: 12px; height: 12px; border-radius: 50%; border: 0; cursor: pointer;
-    background: var(--bg-base); opacity: 0.6; }
-  .hero__dot[aria-current="true"] { opacity: 1; background: var(--color-accent); }
+  .hero {
+    position: relative; border-radius: 14px; overflow: hidden;
+    background: var(--bg-base);
+    min-height: 460px;
+  }
+  /* 斜角造型（呼應舊版的鑽石切角） */
+  .hero__slide {
+    position: absolute; inset: 0;
+    display: grid; grid-template-columns: 44% 56%; align-items: center;
+    opacity: 0; pointer-events: none;
+  }
+  .hero__slide.is-active { opacity: 1; pointer-events: auto; }
+
+  .hero__copy { padding: clamp(24px, 4vw, 56px); }
+  .hero__title { margin: 0 0 1.2rem; line-height: 1.02; font-weight: 800; letter-spacing: 0.01em; }
+  .hero__accent {
+    display: block; color: var(--color-link);
+    font-size: clamp(40px, 6.6vw, 86px);
+  }
+  .hero__main {
+    display: block; color: var(--text-primary);
+    font-size: clamp(28px, 4.4vw, 54px); font-weight: 700;
+  }
+  .hero__lines { margin: 0; color: var(--text-secondary); }
+  .hero__line { display: block; font-size: var(--text-sm); line-height: 1.7; }
+
+  .hero__media { position: relative; height: 100%; }
+  .hero__frame {
+    height: 100%;
+    background: var(--color-link);          /* 青色邊框 */
+    padding: 4px;
+    clip-path: polygon(7% 0, 100% 0, 100% 86%, 90% 100%, 0 100%, 0 14%);
+  }
+  .hero__photo {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    max-height: 480px;
+    clip-path: polygon(7% 0, 100% 0, 100% 86%, 90% 100%, 0 100%, 0 14%);
+  }
+
+  /* 疊在照片上的說明卡 */
+  .hero__cards {
+    position: absolute; top: 8%; right: 4%;
+    display: flex; flex-direction: column; gap: 12px;
+    width: min(40%, 320px);
+  }
+  .hero__card {
+    background: color-mix(in oklch, var(--color-brand-deep) 80%, transparent);
+    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+    color: var(--text-on-dark);
+    border-radius: 10px; padding: 12px 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  }
+  .hero__card-head { margin: 0 0 4px; font-weight: 700; font-size: var(--text-sm); }
+  .hero__card-no { color: var(--color-accent); font-style: italic; }
+  .hero__card-desc { margin: 0; font-size: var(--text-xs); line-height: 1.55; opacity: 0.95; }
+
+  .hero__dots { position: absolute; left: 0; right: 0; bottom: 14px; display: flex; gap: 8px; justify-content: center; z-index: 3; }
+  .hero__dot { width: 12px; height: 12px; border-radius: 50%; border: 0; cursor: pointer; background: var(--text-muted); opacity: 0.5; transition: opacity 0.2s, background 0.2s; }
+  .hero__dot[aria-selected="true"] { opacity: 1; background: var(--color-link); }
+
+  /* 手機：上下堆疊，卡片改列在文字下方 */
+  @media (max-width: 720px) {
+    .hero { min-height: 0; }
+    .hero__slide { position: relative; display: block; }
+    .hero__slide:not(.is-active) { display: none; }
+    .hero__media { order: -1; }
+    .hero__frame, .hero__photo { clip-path: none; }
+    .hero__photo { max-height: 320px; }
+    .hero__cards {
+      position: static; width: auto; flex-direction: column;
+      padding: 16px clamp(24px, 4vw, 56px) 0;
+    }
+    .hero__copy { padding-bottom: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__slide { transition: none; }
+  }
 </style>
 <script>
-  document.querySelectorAll("[data-hero]").forEach((hero) => {
-    const track = hero.querySelector(".hero__track");
-    const imgs = track ? Array.from(track.querySelectorAll("img")) : [];
-    const dots = Array.from(hero.querySelectorAll(".hero__dot"));
-    if (imgs.length < 2) return;
-    let idx = 0;
-    const go = (i) => {
-      idx = (i + imgs.length) % imgs.length;
-      // 只捲動 Hero 軌道的水平位置，不可用 scrollIntoView（會連帶垂直捲動整頁）
-      track.scrollTo({ left: idx * track.clientWidth, behavior: "smooth" });
-      dots.forEach((d, di) => d.setAttribute("aria-current", di === idx ? "true" : "false"));
+  import { gsap } from "gsap";
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll<HTMLElement>("[data-hero]").forEach((hero) => {
+    const slides = Array.from(hero.querySelectorAll<HTMLElement>("[data-slide]"));
+    const dots = Array.from(hero.querySelectorAll<HTMLElement>(".hero__dot"));
+    if (slides.length === 0) return;
+
+    const animate = (slide: HTMLElement) => {
+      if (reduce) return;
+      const photo = slide.querySelector<HTMLElement>("[data-anim-photo]");
+      const texts = slide.querySelectorAll<HTMLElement>("[data-anim]");
+      const cards = slide.querySelectorAll<HTMLElement>("[data-anim-card]");
+      const tl = gsap.timeline();
+      if (photo) tl.fromTo(photo, { scale: 1.12, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 1.0, ease: "power2.out" });
+      tl.fromTo(texts, { y: 38, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.11, ease: "power3.out" }, "-=0.65");
+      if (cards.length) tl.fromTo(cards, { x: 48, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.55, stagger: 0.16, ease: "back.out(1.4)" }, "-=0.35");
+      return tl;
     };
-    dots.forEach((d, di) => d.addEventListener("click", () => go(di)));
+
+    let idx = 0;
+    let started = false;
+
+    const go = (i: number) => {
+      i = (i + slides.length) % slides.length;
+      if (started && i === idx) return;
+      const next = slides[i];
+      const cur = slides[idx];
+      if (started && cur !== next) {
+        gsap.to(cur, { opacity: 0, duration: 0.4, onComplete: () => { cur.classList.remove("is-active"); cur.setAttribute("aria-hidden", "true"); } });
+      }
+      next.classList.add("is-active");
+      next.setAttribute("aria-hidden", "false");
+      gsap.set(next, { opacity: 1 });
+      animate(next);
+      dots.forEach((d, di) => d.setAttribute("aria-selected", di === i ? "true" : "false"));
+      idx = i;
+      started = true;
+    };
+
+    // 初始進場（首張）
     go(0);
-    let timer = setInterval(() => go(idx + 1), 4000);
-    hero.addEventListener("mouseenter", () => clearInterval(timer));
-    hero.addEventListener("mouseleave", () => { timer = setInterval(() => go(idx + 1), 4000); });
+
+    if (slides.length > 1) {
+      dots.forEach((d, di) => d.addEventListener("click", () => go(di)));
+      let timer = window.setInterval(() => go(idx + 1), 5000);
+      hero.addEventListener("mouseenter", () => clearInterval(timer));
+      hero.addEventListener("mouseleave", () => { timer = window.setInterval(() => go(idx + 1), 5000); });
+    }
   });
 </script>
