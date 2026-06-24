@@ -1,24 +1,31 @@
 ---
 import { SITE } from "../lib/site";
 interface Card { no: string; title: string; desc: string; }
-interface Slide { image: string; focus?: string; accent: string[]; main: string; lines: string[]; cards: Card[]; }
-interface Props { slides: Slide[]; }
-const { slides } = Astro.props;
+interface Copy { accent: string[]; main: string; lines: string[]; }
+interface Slide { image: string; focus?: string; cards: Card[]; }
+interface Props { copy: Copy; slides: Slide[]; }
+const { copy, slides } = Astro.props;
 ---
 <section class="hero" data-hero aria-roledescription="輪播" aria-label="主視覺">
-  {slides.map((s, i) => (
-    <div class={`hero__slide${i === 0 ? " is-active" : ""}`} data-slide aria-hidden={i === 0 ? "false" : "true"}>
-      <div class="hero__copy">
-        <h2 class="hero__title">
-          {s.accent.map((w) => <span class="hero__accent" data-anim>{w}</span>)}
-          {s.main && <span class="hero__main" data-anim>{s.main}</span>}
-        </h2>
-        <p class="hero__lines">
-          {s.lines.map((line) => <span class="hero__line" data-anim>{line}</span>)}
-        </p>
-      </div>
-      <div class="hero__media">
-        <div class="hero__frame" data-anim-photo>
+  <!-- 左欄：常駐文案，只進場一次 -->
+  <div class="hero__copy">
+    <h2 class="hero__title">
+      {copy.accent.map((w) => (
+        <span class="hero__mask"><span class="hero__word hero__accent" data-w>{w}</span></span>
+      ))}
+      {copy.main && <span class="hero__mask"><span class="hero__word hero__main" data-w>{copy.main}</span></span>}
+    </h2>
+    <span class="hero__rule" data-underline></span>
+    <p class="hero__lines">
+      {copy.lines.map((line) => <span class="hero__line" data-line>{line}</span>)}
+    </p>
+  </div>
+
+  <!-- 右側：照片輪播 -->
+  <div class="hero__stage">
+    {slides.map((s, i) => (
+      <div class={`hero__slide${i === 0 ? " is-active" : ""}`} data-slide aria-hidden={i === 0 ? "false" : "true"}>
+        <div class="hero__frame">
           <img
             class="hero__photo"
             src={s.image}
@@ -40,50 +47,44 @@ const { slides } = Astro.props;
           </div>
         )}
       </div>
-    </div>
-  ))}
-  {slides.length > 1 && (
-    <div class="hero__dots" role="tablist" aria-label="切換主視覺">
-      {slides.map((_, i) => (
-        <button class="hero__dot" data-i={i} role="tab" aria-label={`第 ${i + 1} 張`} aria-selected={i === 0 ? "true" : "false"}></button>
-      ))}
-    </div>
-  )}
+    ))}
+    {slides.length > 1 && (
+      <div class="hero__dots" role="tablist" aria-label="切換主視覺">
+        {slides.map((_, i) => (
+          <button class="hero__dot" data-i={i} role="tab" aria-label={`第 ${i + 1} 張`} aria-selected={i === 0 ? "true" : "false"}></button>
+        ))}
+      </div>
+    )}
+  </div>
 </section>
 <style>
   .hero {
-    position: relative; display: grid; border-radius: 14px; overflow: hidden;
-    background: var(--bg-base);
+    position: relative; display: grid; grid-template-columns: 44% 56%;
+    border-radius: 14px; overflow: hidden; background: var(--bg-base);
   }
-  /* 各 slide 疊在同一個 grid 格子 → 容器高度自動撐到最高的 slide，左欄文字不會被裁 */
-  .hero__slide {
-    grid-area: 1 / 1;
-    min-height: 460px;
-    display: grid; grid-template-columns: 44% 56%; align-items: stretch;
-    opacity: 0; pointer-events: none;
-  }
-  .hero__slide.is-active { opacity: 1; pointer-events: auto; }
 
-  /* 文字垂直置中，但容器會長到文字實際高度 */
-  .hero__copy { padding: clamp(24px, 4vw, 56px); display: flex; flex-direction: column; justify-content: center; }
-  .hero__title { margin: 0 0 1.2rem; line-height: 1.02; font-weight: 800; letter-spacing: 0.01em; }
-  .hero__accent {
-    display: block; color: var(--color-link);
-    font-size: clamp(40px, 6.6vw, 86px);
+  /* ── 左欄：常駐文案（高度自動撐開，文字不裁切） ── */
+  .hero__copy {
+    padding: clamp(24px, 4vw, 56px);
+    display: flex; flex-direction: column; justify-content: center;
+    min-height: 460px;
   }
-  .hero__main {
-    display: block; color: var(--text-primary);
-    font-size: clamp(28px, 4.4vw, 54px); font-weight: 700;
-  }
+  .hero__title { display: block; border-bottom: 0; padding-bottom: 0; margin: 0; line-height: 1.02; font-weight: 800; }
+  .hero__mask { display: block; overflow: hidden; padding: 0.04em 0; }
+  .hero__word { display: block; }
+  .hero__accent { color: var(--color-link); font-size: clamp(40px, 6.6vw, 86px); letter-spacing: 0.01em; }
+  .hero__main { color: var(--text-primary); font-size: clamp(28px, 4.4vw, 54px); font-weight: 700; }
+  .hero__rule { display: block; width: min(280px, 60%); height: 4px; background: var(--color-accent); margin: 1rem 0 1.2rem; transform-origin: left center; }
   .hero__lines { margin: 0; color: var(--text-secondary); }
   .hero__line { display: block; font-size: var(--text-sm); line-height: 1.7; }
 
-  .hero__media { position: relative; }
-  /* 照片框絕對填滿右欄（右欄高度跟著 slide 走），不參與高度計算 → 不會把左欄文字壓縮/裁切 */
+  /* ── 右側：照片輪播 ── */
+  .hero__stage { position: relative; display: grid; min-height: 460px; }
+  .hero__slide { grid-area: 1 / 1; position: relative; opacity: 0; pointer-events: none; }
+  .hero__slide.is-active { opacity: 1; pointer-events: auto; }
   .hero__frame {
     position: absolute; inset: 0;
-    background: var(--color-link);          /* 青色邊框 */
-    padding: 4px;
+    background: var(--color-link); padding: 4px;
     clip-path: polygon(7% 0, 100% 0, 100% 86%, 90% 100%, 0 100%, 0 14%);
   }
   .hero__photo {
@@ -93,9 +94,9 @@ const { slides } = Astro.props;
 
   /* 疊在照片上的說明卡 */
   .hero__cards {
-    position: absolute; top: 8%; right: 4%;
+    position: absolute; top: 8%; right: 4%; z-index: 2;
     display: flex; flex-direction: column; gap: 12px;
-    width: min(40%, 320px);
+    width: min(56%, 320px);
   }
   .hero__card {
     background: color-mix(in oklch, var(--color-brand-deep) 80%, transparent);
@@ -108,73 +109,77 @@ const { slides } = Astro.props;
   .hero__card-no { color: var(--color-accent); font-style: italic; }
   .hero__card-desc { margin: 0; font-size: var(--text-xs); line-height: 1.55; opacity: 0.95; }
 
-  .hero__dots { position: absolute; left: 0; right: 0; bottom: 14px; display: flex; gap: 8px; justify-content: center; z-index: 3; }
+  .hero__dots { position: absolute; left: 0; right: 0; bottom: 14px; z-index: 3; display: flex; gap: 8px; justify-content: center; }
   .hero__dot { width: 12px; height: 12px; border-radius: 50%; border: 0; cursor: pointer; background: var(--text-muted); opacity: 0.5; transition: opacity 0.2s, background 0.2s; }
   .hero__dot[aria-selected="true"] { opacity: 1; background: var(--color-link); }
 
-  /* 手機：上下堆疊，卡片改列在文字下方 */
+  /* 手機：上下堆疊，照片在上 */
   @media (max-width: 720px) {
-    .hero { display: block; }
-    .hero__slide { display: flex; flex-direction: column; min-height: 0; }
-    .hero__slide:not(.is-active) { display: none; }
-    .hero__media { order: -1; }
-    .hero__frame { position: static; padding: 0; background: none; }
-    .hero__frame, .hero__photo { clip-path: none; }
-    .hero__photo { height: 300px; }
-    .hero__cards {
-      position: static; width: auto; flex-direction: column;
-      padding: 16px clamp(24px, 4vw, 56px) 0;
-    }
-    .hero__copy { padding-bottom: 0; }
+    .hero { display: flex; flex-direction: column; }
+    .hero__stage { order: -1; min-height: 0; }
+    .hero__copy { min-height: 0; }
+    .hero__slide { position: relative; }
+    .hero__frame { position: static; padding: 0; background: none; clip-path: none; }
+    .hero__photo { clip-path: none; height: 300px; }
+    .hero__cards { position: absolute; top: 8%; right: 4%; width: min(56%, 300px); }
   }
 
+  /* 降級：不想要動畫的使用者，直接全部顯示 */
   @media (prefers-reduced-motion: reduce) {
-    .hero__slide { transition: none; }
+    .hero__word, .hero__rule, .hero__line, .hero__frame, .hero__card { opacity: 1 !important; visibility: visible !important; transform: none !important; }
   }
 </style>
 <script>
   import { gsap } from "gsap";
-
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   document.querySelectorAll<HTMLElement>("[data-hero]").forEach((hero) => {
+    const words = hero.querySelectorAll<HTMLElement>("[data-w]");
+    const underline = hero.querySelector<HTMLElement>("[data-underline]");
+    const lines = hero.querySelectorAll<HTMLElement>("[data-line]");
     const slides = Array.from(hero.querySelectorAll<HTMLElement>("[data-slide]"));
     const dots = Array.from(hero.querySelectorAll<HTMLElement>(".hero__dot"));
-    if (slides.length === 0) return;
+    if (!slides.length) return;
 
-    const animate = (slide: HTMLElement) => {
+    // 右側照片：每次切換時重播（進場 wipe + 卡片彈入）
+    const revealPhoto = (slide: HTMLElement) => {
       if (reduce) return;
-      const photo = slide.querySelector<HTMLElement>("[data-anim-photo]");
-      const texts = slide.querySelectorAll<HTMLElement>("[data-anim]");
+      const frame = slide.querySelector<HTMLElement>(".hero__frame");
       const cards = slide.querySelectorAll<HTMLElement>("[data-anim-card]");
       const tl = gsap.timeline();
-      if (photo) tl.fromTo(photo, { scale: 1.12, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 1.0, ease: "power2.out" });
-      tl.fromTo(texts, { y: 38, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.11, ease: "power3.out" }, "-=0.65");
-      if (cards.length) tl.fromTo(cards, { x: 48, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.55, stagger: 0.16, ease: "back.out(1.4)" }, "-=0.35");
-      return tl;
+      if (frame) tl.fromTo(frame, { autoAlpha: 0, scale: 1.12, xPercent: 6 }, { autoAlpha: 1, scale: 1, xPercent: 0, duration: 1.0, ease: "power3.out" });
+      if (cards.length) tl.fromTo(cards, { autoAlpha: 0, x: 54, rotate: 3 }, { autoAlpha: 1, x: 0, rotate: 0, duration: 0.6, stagger: 0.16, ease: "back.out(1.5)" }, "-=0.45");
     };
+
+    // 左欄文案：只進場一次（標題遮罩上滑 → 金線左展開 → 說明模糊轉清晰）
+    if (!reduce) {
+      gsap.set(words, { yPercent: 120 });
+      if (underline) gsap.set(underline, { scaleX: 0 });
+      gsap.set(lines, { autoAlpha: 0, y: 18, filter: "blur(8px)" });
+      const intro = gsap.timeline({ delay: 0.15 });
+      intro.to(words, { yPercent: 0, duration: 0.9, stagger: 0.1, ease: "power4.out" });
+      if (underline) intro.to(underline, { scaleX: 1, duration: 0.6, ease: "power3.inOut" }, "-=0.35");
+      intro.to(lines, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.7, stagger: 0.12, ease: "power2.out" }, "-=0.3");
+    }
 
     let idx = 0;
     let started = false;
-
     const go = (i: number) => {
       i = (i + slides.length) % slides.length;
       if (started && i === idx) return;
       const next = slides[i];
       const cur = slides[idx];
       if (started && cur !== next) {
-        gsap.to(cur, { opacity: 0, duration: 0.4, onComplete: () => { cur.classList.remove("is-active"); cur.setAttribute("aria-hidden", "true"); } });
+        gsap.to(cur, { opacity: 0, duration: 0.45, onComplete: () => { cur.classList.remove("is-active"); cur.setAttribute("aria-hidden", "true"); } });
       }
       next.classList.add("is-active");
       next.setAttribute("aria-hidden", "false");
       gsap.set(next, { opacity: 1 });
-      animate(next);
+      revealPhoto(next);
       dots.forEach((d, di) => d.setAttribute("aria-selected", di === i ? "true" : "false"));
       idx = i;
       started = true;
     };
-
-    // 初始進場（首張）
     go(0);
 
     if (slides.length > 1) {

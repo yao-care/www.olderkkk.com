@@ -45,21 +45,22 @@ const heroCard = z.object({
   title: z.string().default(""),
   desc: z.string().default(""),
 });
+// 左欄常駐文案（只進場一次，不隨輪播重播）
+const heroCopy = z.object({
+  accent: z.array(z.string()).default([]),   // 青色大標，每詞一行
+  main: z.string().default(""),              // 深色大標
+  lines: z.array(z.string()).default([]),    // 說明，逐行浮現
+});
 const heroSlide = z.object({
   image: z.string(),
   // 照片對焦位置（object-position），直式人像用來避免裁到頭，例 "50% 22%"
   focus: z.string().default("center"),
-  // 大標：accent 為青色詞（每個自成一行），main 為深色詞
-  accent: z.array(z.string()).default([]),
-  main: z.string().default(""),
-  // 說明段落（每行一個陣列元素，逐行浮現）
-  lines: z.array(z.string()).default([]),
   // 疊在照片上的說明卡（可空）
   cards: z.array(heroCard).default([]),
 });
 const home = defineCollection({
   loader: glob({ pattern: "home.md", base: "src/content" }),
-  schema: z.object({ ...seo, slides: z.array(heroSlide).default([]) }),
+  schema: z.object({ ...seo, heroCopy: heroCopy.default({}), slides: z.array(heroSlide).default([]) }),
 });
 
 export const collections = { pages, works, health, news, home };
