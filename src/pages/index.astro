@@ -29,19 +29,7 @@ const seoTitle = "台中西屯全身調理體雕・鄭骨館體雕中心";
 const seoDesc = "鄭骨館體雕中心位於台中市西屯區，結合全身調理、體雕與一對一肌力訓練，處理身體歪斜、痠痛與動作矯正。預約電話 0970686319。";
 ---
 <Base title={seoTitle} description={seoDesc}>
-  {slides.length > 0 && <Hero copy={copy} slides={slides} />}
-
-  <!-- 三大課程亮點（原本疊在照片上的卡片，改放 Hero 下方一排） -->
-  {heroCards.length > 0 && (
-    <section class="hl">
-      {heroCards.map((c) => (
-        <div class="hl__card">
-          <p class="hl__head"><span class="hl__no">{c.no}.</span> {c.title}</p>
-          <p class="hl__desc">{c.desc}</p>
-        </div>
-      ))}
-    </section>
-  )}
+  {slides.length > 0 && <Hero copy={copy} slides={slides} cards={heroCards} />}
 
   <!-- 關於老K -->
   <section class="home-about">
@@ -89,13 +77,6 @@ const seoDesc = "鄭骨館體雕中心位於台中市西屯區，結合全身調
 <style>
   section { margin: 2.5rem 0; }
   h2 { margin: 0 0 1.25rem; }
-
-  /* 三大課程亮點：Hero 下方一排青綠卡片 */
-  .hl { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1.25rem 0 2.5rem; }
-  .hl__card { background: var(--color-brand-deep); color: var(--text-on-dark); border-radius: 12px; padding: 1.25rem 1.5rem; }
-  .hl__head { margin: 0 0 0.4rem; font-size: var(--text-lg); font-weight: 700; }
-  .hl__no { color: var(--color-accent); font-style: italic; }
-  .hl__desc { margin: 0; font-size: var(--text-base); line-height: 1.6; opacity: 0.95; }
 
   /* 關於老K：文字 + 照片並排 */
   .home-about { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem 2rem; align-items: center; }
