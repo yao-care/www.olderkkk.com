@@ -24,10 +24,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      # 正式網域切換總開關：設 repo 變數 CUSTOM_DOMAIN=www.olderkkk.com 即切換；
+      # 未設時維持 GitHub Pages 子路徑（不影響現站）。
+      - name: Write CNAME for custom domain
+        if: ${{ vars.CUSTOM_DOMAIN != '' }}
+        run: echo "${{ vars.CUSTOM_DOMAIN }}" > public/CNAME
       - name: Build with Astro
         uses: withastro/action@v3
         with:
           node-version: 22
+        env:
+          BASE_PATH: ${{ vars.CUSTOM_DOMAIN != '' && '/' || '/www.olderkkk.com' }}
+          SITE_URL: ${{ vars.CUSTOM_DOMAIN != '' && format('https://{0}', vars.CUSTOM_DOMAIN) || 'https://yao-care.github.io' }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
