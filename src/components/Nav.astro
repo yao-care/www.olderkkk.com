@@ -1,42 +1,117 @@
 ---
 import { withBase } from "../lib/withBase";
-const links = [
+// 分層導覽：有 children 者為下拉群組；預約獨立為 CTA。
+const nav = [
   { href: "/", label: "首頁" },
-  { href: "/about", label: "關於我們" },
-  { href: "/services", label: "服務項目" },
-  { href: "/pricing", label: "收費方式" },
-  { href: "/courses", label: "課程介紹" },
-  { href: "/health", label: "健康概念分享" },
-  { href: "/works", label: "成果分享" },
-  { href: "/news", label: "最新消息" },
-  { href: "/faq", label: "常見問題" },
-  { href: "/booking", label: "預約" },
+  { label: "關於", children: [
+    { href: "/about", label: "關於我們" },
+    { href: "/faq", label: "常見問題" },
+  ] },
+  { label: "服務", children: [
+    { href: "/services", label: "服務項目" },
+    { href: "/pricing", label: "收費方式" },
+    { href: "/courses", label: "課程介紹" },
+  ] },
+  { label: "分享", children: [
+    { href: "/health", label: "健康概念分享" },
+    { href: "/works", label: "成果分享" },
+    { href: "/news", label: "最新消息" },
+  ] },
   { href: "/contact", label: "聯絡我們" },
 ];
+const cta = { href: "/booking", label: "預約" };
 const path = Astro.url.pathname;
+const isCurrent = (href: string) => (path === withBase(href) ? "page" : undefined);
 ---
-<nav class="nav">
-  <ul class="nav__list" aria-label="主選單">
-    {links.map((l) => (
-      <li><a href={withBase(l.href)} aria-current={path === withBase(l.href) ? "page" : undefined}>{l.label}</a></li>
+<nav class="nav" aria-label="主選單">
+  <!-- 桌機：分層下拉 -->
+  <ul class="nav__list">
+    {nav.map((item) => (
+      item.children ? (
+        <li class="nav__item nav__item--group">
+          <button type="button" class="nav__top" aria-haspopup="true">{item.label}<span class="nav__caret" aria-hidden="true">▾</span></button>
+          <ul class="nav__menu">
+            {item.children.map((c) => (
+              <li><a href={withBase(c.href)} aria-current={isCurrent(c.href)}>{c.label}</a></li>
+            ))}
+          </ul>
+        </li>
+      ) : (
+        <li class="nav__item"><a class="nav__top" href={withBase(item.href)} aria-current={isCurrent(item.href)}>{item.label}</a></li>
+      )
     ))}
+    <li class="nav__item"><a class="nav__cta" href={withBase(cta.href)} aria-current={isCurrent(cta.href)}>{cta.label}</a></li>
   </ul>
+
+  <!-- 手機：☰ 展開（分組） -->
   <details class="nav__mobile">
     <summary aria-label="選單">☰</summary>
-    <ul aria-label="主選單">
-      {links.map((l) => <li><a href={withBase(l.href)}>{l.label}</a></li>)}
+    <ul class="nav__mobile-list">
+      {nav.map((item) => (
+        item.children ? (
+          <>
+            <li class="nav__mobile-group">{item.label}</li>
+            {item.children.map((c) => <li><a href={withBase(c.href)}>{c.label}</a></li>)}
+          </>
+        ) : (
+          <li><a href={withBase(item.href)}>{item.label}</a></li>
+        )
+      ))}
+      <li><a class="nav__cta nav__cta--mobile" href={withBase(cta.href)}>{cta.label}</a></li>
     </ul>
   </details>
 </nav>
 <style>
-  .nav__list { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: clamp(0.75rem, 1.5vw, 1.5rem); list-style: none; }
-  .nav__list a { font-size: clamp(1.125rem, 1.5vw, 1.5rem); color: var(--text-primary); white-space: nowrap; }
-  .nav__list a[aria-current="page"] { color: var(--color-link); font-weight: 700; }
+  .nav__list { display: flex; flex-wrap: nowrap; align-items: center; justify-content: flex-end; gap: clamp(0.5rem, 1.5vw, 1.25rem); list-style: none; }
+  .nav__item { position: relative; }
+
+  /* 頂層項目（連結與群組按鈕同款） */
+  .nav__top {
+    display: inline-flex; align-items: center; gap: 0.2rem;
+    font-size: clamp(1.125rem, 1.4vw, 1.375rem); font-family: inherit;
+    color: var(--text-primary); background: none; border: 0; cursor: pointer;
+    white-space: nowrap; padding: 0.4rem 0.2rem; line-height: 1;
+  }
+  .nav__top:hover { color: var(--color-link); }
+  .nav__top[aria-current="page"] { color: var(--color-link); font-weight: 700; }
+  .nav__caret { font-size: 0.7em; }
+
+  /* 下拉選單（純 CSS：hover / focus-within 顯示） */
+  .nav__menu {
+    position: absolute; top: 100%; right: 0; z-index: 50;
+    min-width: 11rem; margin-top: 0.25rem; padding: 0.4rem;
+    background: var(--bg-base); border: 1px solid var(--border-subtle);
+    border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+    list-style: none; display: none;
+  }
+  .nav__item--group:hover .nav__menu,
+  .nav__item--group:focus-within .nav__menu { display: block; }
+  .nav__menu a {
+    display: block; padding: 0.55rem 0.75rem; border-radius: 6px;
+    font-size: var(--text-sm); color: var(--text-primary); white-space: nowrap;
+  }
+  .nav__menu a:hover { background: var(--bg-hover); color: var(--color-link); text-decoration: none; }
+  .nav__menu a[aria-current="page"] { color: var(--color-link); font-weight: 700; }
+
+  /* 預約 CTA 按鈕 */
+  .nav__cta {
+    display: inline-block; padding: 0.5rem 1.1rem; border-radius: 999px;
+    background: var(--color-link); color: #fff; font-weight: 700;
+    font-size: clamp(1.125rem, 1.4vw, 1.375rem); white-space: nowrap;
+  }
+  .nav__cta:hover { background: var(--color-brand-deep); text-decoration: none; }
+
+  /* 手機 ☰ */
   .nav__mobile { display: none; }
   .nav__mobile summary { font-size: var(--text-xl); cursor: pointer; list-style: none; }
-  .nav__mobile ul { list-style: none; padding: 1rem 0; }
-  .nav__mobile li { padding: 0.5rem 0; }
-  @media (max-width: 768px) {
+  .nav__mobile summary::-webkit-details-marker { display: none; }
+  .nav__mobile-list { list-style: none; padding: 0.75rem 0; }
+  .nav__mobile-list li { padding: 0; }
+  .nav__mobile-list a { display: block; padding: 0.55rem 0.5rem; font-size: var(--text-base); color: var(--text-primary); }
+  .nav__mobile-group { padding: 0.9rem 0.5rem 0.3rem; font-size: var(--text-sm); font-weight: 700; color: var(--color-link); }
+  .nav__cta--mobile { margin: 0.75rem 0.5rem 0; text-align: center; }
+
+  @media (max-width: 860px) {
     .nav__list { display: none; }
     .nav__mobile { display: block; }
   }
