@@ -33,27 +33,20 @@ const { copy, slides, cards = [] } = Astro.props;
 
   <!-- 中：照片輪播（直式框；contain 配模糊背景） -->
   <div class="hero__stage">
-    {slides.map((s, i) => {
-      const fit = s.fit ?? "contain";
-      return (
-        <div class={`hero__slide${i === 0 ? " is-active" : ""}`} data-slide aria-hidden={i === 0 ? "false" : "true"}>
-          <div class="hero__frame">
-            {fit === "contain" && (
-              <img class="hero__photo-bg" src={s.image} alt="" aria-hidden="true" decoding="async" />
-            )}
-            <img
-              class="hero__photo"
-              src={s.image}
-              style={`object-fit:${fit};object-position:${s.focus ?? "center"}`}
-              alt={`${SITE.name}－${SITE.tagline}`}
-              loading={i === 0 ? "eager" : "lazy"}
-              fetchpriority={i === 0 ? "high" : "auto"}
-              decoding="async"
-            />
-          </div>
+    {slides.map((s, i) => (
+      <div class={`hero__slide${i === 0 ? " is-active" : ""}`} data-slide aria-hidden={i === 0 ? "false" : "true"}>
+        <div class="hero__frame">
+          <img
+            class="hero__photo"
+            src={s.image}
+            alt={`${SITE.name}－${SITE.tagline}`}
+            loading={i === 0 ? "eager" : "lazy"}
+            fetchpriority={i === 0 ? "high" : "auto"}
+            decoding="async"
+          />
         </div>
-      );
-    })}
+      </div>
+    ))}
     {slides.length > 1 && (
       <div class="hero__dots" role="tablist" aria-label="切換主視覺">
         {slides.map((_, i) => (
@@ -81,7 +74,7 @@ const { copy, slides, cards = [] } = Astro.props;
     width: min(100vw - 2rem, 1560px);
     margin-inline: calc(50% - min(50vw - 1rem, 780px));
     position: relative; display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(340px, 28vw, 460px) clamp(250px, 22vw, 330px);
+    grid-template-columns: 25% 40% 35%;
     column-gap: clamp(20px, 2.5vw, 48px);
     align-items: center;
     border-radius: 14px; background: var(--bg-base);
@@ -105,18 +98,15 @@ const { copy, slides, cards = [] } = Astro.props;
   .hero__slide { grid-area: 1 / 1; display: grid; opacity: 0; pointer-events: none; }
   .hero__slide.is-active { opacity: 1; pointer-events: auto; }
   .hero__frame {
-    position: relative; width: 100%; aspect-ratio: 4 / 5; max-height: 560px;
+    position: relative; width: 100%; aspect-ratio: 5 / 4; max-height: 520px;
     background: var(--color-link); border-radius: 6px;
     clip-path: polygon(6% 0, 100% 0, 100% 90%, 94% 100%, 0 100%, 0 10%);
     overflow: hidden;
   }
-  .hero__photo, .hero__photo-bg {
-    position: absolute; inset: 4px;
+  .hero__photo {
+    position: absolute; inset: 4px; width: auto; height: auto; object-fit: cover;
     clip-path: polygon(6% 0, 100% 0, 100% 90%, 94% 100%, 0 100%, 0 10%);
   }
-  .hero__photo { z-index: 1; width: auto; height: auto; }
-  /* contain 時填滿留白的模糊同圖背景 */
-  .hero__photo-bg { z-index: 0; object-fit: cover; filter: blur(16px); transform: scale(1.12); opacity: 0.5; }
 
   /* 右欄卡片 */
   .hero__cards { display: flex; flex-direction: column; justify-content: center; gap: 12px; }
@@ -138,18 +128,14 @@ const { copy, slides, cards = [] } = Astro.props;
     .hero { width: auto; margin-inline: 0; display: flex; flex-direction: column; padding: 0; }
     .hero__stage { order: -1; }
     .hero__copy { min-height: 0; padding: clamp(16px, 4vw, 32px) clamp(16px, 4vw, 32px) 0; }
-    .hero__frame { aspect-ratio: auto; height: 340px; max-height: none; clip-path: none; border-radius: 12px; }
-    .hero__photo, .hero__photo-bg { clip-path: none; }
+    .hero__frame { max-height: none; clip-path: none; border-radius: 12px; }
+    .hero__photo { clip-path: none; }
     .hero__cards { flex-direction: row; flex-wrap: wrap; padding: 0 clamp(16px, 4vw, 32px); }
     .hero__card { flex: 1 1 200px; }
-  }
-  @media (max-width: 560px) {
-    .hero__frame { height: 280px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero__char, .hero__rule, .hero__line, .hero__frame, .hero__card { opacity: 1 !important; visibility: visible !important; transform: none !important; }
-    .hero__photo-bg { transform: scale(1.12) !important; }
   }
 </style>
 <script>
