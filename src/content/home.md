@@ -23,13 +23,14 @@ heroCards:
 # 右側照片輪播。image=乾淨底圖、focus=對焦(object-position)。
 slides:
   - image: "/images/hero-fitness.webp"
-    focus: "50% 20%"
-  - image: "/images/hero-martial.webp"
-    focus: "50% 28%"
-  - image: "/images/hero-capoeira.webp"
-    focus: "72% 42%"
-  - image: "/images/hero-suit.webp"
     focus: "50% 16%"
+  - image: "/images/hero-martial.webp"
+    focus: "50% 22%"
+  - image: "/images/hero-capoeira.webp"
+    focus: "50% 50%"
+    fit: "contain"
+  - image: "/images/hero-suit.webp"
+    focus: "50% 14%"
 ---
 
 <!-- 首頁 Hero 以下的版型由 src/pages/index.astro 直接排版（關於老K／服務與課程／營業時間／最新資訊）。

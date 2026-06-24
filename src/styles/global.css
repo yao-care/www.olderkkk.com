@@ -2,6 +2,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 100%; }
+html, body { overflow-x: clip; }   /* 保護 Hero 加寬(full-bleed)不產生水平捲動 */
 body {
   font-family: var(--font-sans);
   font-size: var(--text-base);
