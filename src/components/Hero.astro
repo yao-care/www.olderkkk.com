@@ -95,10 +95,11 @@ const { copy, slides, cards = [] } = Astro.props;
 
   /* 中欄：直式照片框 */
   .hero__stage { position: relative; display: grid; }
-  .hero__slide { grid-area: 1 / 1; display: grid; opacity: 0; pointer-events: none; }
+  .hero__slide { grid-area: 1 / 1; display: grid; place-items: center; opacity: 0; pointer-events: none; }
   .hero__slide.is-active { opacity: 1; pointer-events: auto; }
   .hero__frame {
-    position: relative; width: 100%; aspect-ratio: 5 / 4; max-height: 520px;
+    position: relative; height: clamp(440px, 38vw, 580px); aspect-ratio: 2 / 3;
+    margin-inline: auto;
     background: var(--color-link); border-radius: 6px;
     clip-path: polygon(6% 0, 100% 0, 100% 90%, 94% 100%, 0 100%, 0 10%);
     overflow: hidden;
@@ -128,7 +129,7 @@ const { copy, slides, cards = [] } = Astro.props;
     .hero { width: auto; margin-inline: 0; display: flex; flex-direction: column; padding: 0; }
     .hero__stage { order: -1; }
     .hero__copy { min-height: 0; padding: clamp(16px, 4vw, 32px) clamp(16px, 4vw, 32px) 0; }
-    .hero__frame { max-height: none; clip-path: none; border-radius: 12px; }
+    .hero__frame { width: min(100%, 340px); height: auto; aspect-ratio: 2 / 3; clip-path: none; border-radius: 12px; }
     .hero__photo { clip-path: none; }
     .hero__cards { flex-direction: row; flex-wrap: wrap; padding: 0 clamp(16px, 4vw, 32px); }
     .hero__card { flex: 1 1 200px; }
