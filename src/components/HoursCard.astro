@@ -1,0 +1,51 @@
+---
+import { SITE } from "../lib/site";
+---
+<div class="hours">
+  <div class="hours__head">
+    <svg class="hours__icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M12 7v5l3.5 2"></path>
+    </svg>
+    <h2 class="hours__title">營業時間</h2>
+  </div>
+  <p class="hours__addr">台中館：{SITE.addressText}</p>
+  <p class="hours__days">{SITE.hours.openDaysText}</p>
+  <div class="hours__slots">
+    {SITE.hours.slots.map((s) => (
+      <div class="hours__slot">
+        <span class="hours__tag">{s.label}</span>
+        <span class="hours__time">{s.time}</span>
+      </div>
+    ))}
+  </div>
+  <p class="hours__off">{SITE.hours.offDaysText} 公休</p>
+</div>
+<style>
+  .hours {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-top: 4px solid var(--color-link);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    max-width: 560px;
+  }
+  .hours__head { display: flex; align-items: center; gap: 0.6rem; color: var(--color-link); }
+  .hours__icon { flex: 0 0 auto; }
+  .hours__title { margin: 0; font-size: var(--text-xl); color: var(--color-link); border: 0; padding: 0; }
+  .hours__addr { font-size: var(--text-sm); color: var(--text-secondary); margin: 0.75rem 0 0.25rem; }
+  .hours__days { font-size: var(--text-base); color: var(--text-primary); font-weight: 700; margin: 0 0 1rem; }
+  .hours__slots { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; }
+  .hours__slot { display: flex; align-items: center; gap: 0.6rem; }
+  .hours__tag {
+    background: var(--color-link); color: #fff;
+    font-size: var(--text-sm); font-weight: 700;
+    padding: 0.25rem 0.7rem; border-radius: 6px;
+  }
+  .hours__time { font-size: var(--text-lg); color: var(--text-primary); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .hours__off {
+    margin: 1.25rem 0 0; padding-top: 0.9rem;
+    border-top: 1px dashed var(--border-subtle);
+    font-size: var(--text-base); color: var(--text-secondary);
+  }
+</style>

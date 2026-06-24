@@ -15,6 +15,15 @@ export const SITE = {
   logo: "/images/logo.png",
   addressText: "台中市西屯區工業區一路58巷11弄83號",
   hoursText: "週一、二、三、五、六 14:00–17:00、20:00–22:00（週四、日公休）",
+  // 結構化營業時間（供 HoursCard 顯示用；與 hoursText / schema 並存）
+  hours: {
+    openDaysText: "週一、二、三、五、六",
+    offDaysText: "週四、週日",
+    slots: [
+      { label: "下午", time: "14:00–17:00" },
+      { label: "晚上", time: "20:00–22:00" },
+    ],
+  },
   address: {
     street: "工業區一路58巷11弄83號",
     locality: "西屯區",

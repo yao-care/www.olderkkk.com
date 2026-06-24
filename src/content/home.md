@@ -38,20 +38,5 @@ slides:
     cards: []
 ---
 
-## 關於老K
-
-![主理人老K（鄭博陽）](/images/laok-profile.jpg)
-
-一開始接觸健美式訓練，了解肌肉運作方式；再接觸全身調理技術，並將二者融合運用。後來接觸人體力學矯正方法，同時處理肌肉發力方式與調整關節排列位置，能夠更快、更有效地解決身體問題。
-
-[更多關於我們](/about)
-
-## 調理矯正動作 ∥ 訓練健身
-
-身體歪斜、痠痛調理；減脂、重量肌力訓練。
-
-[健康概念分享](/health) ｜ [瀏覽最新消息](/news)
-
-## 服務與課程
-
-[![課程介紹](/images/42fa30462f66.webp)](/courses) [![服務項目](/images/de5e966af013.jpg)](/services)
+<!-- 首頁 Hero 以下的版型由 src/pages/index.astro 直接排版（關於老K／服務與課程／營業時間／最新資訊）。
+     本檔只提供 Hero 設定（上方 frontmatter 的 heroCopy 與 slides）。改首頁區塊內容請編輯 index.astro。 -->
