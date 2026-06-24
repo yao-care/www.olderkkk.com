@@ -7,7 +7,7 @@ interface Props { copy: Copy; slides: Slide[]; cards?: Card[]; }
 const { copy, slides, cards = [] } = Astro.props;
 ---
 <section class="hero" data-hero aria-roledescription="輪播" aria-label="主視覺">
-  <!-- 左欄：常駐文案，只進場一次 -->
+  <!-- 左：常駐文案 -->
   <div class="hero__copy">
     <h2 class="hero__title">
       {copy.accent.map((w) => (
@@ -31,73 +31,69 @@ const { copy, slides, cards = [] } = Astro.props;
     </p>
   </div>
 
-  <!-- 右側：照片輪播 + 卡片欄（並排，卡片不覆蓋人像） -->
-  <div class="hero__right">
-    <div class="hero__stage">
-      {slides.map((s, i) => (
-        <div class={`hero__slide${i === 0 ? " is-active" : ""}`} data-slide aria-hidden={i === 0 ? "false" : "true"}>
-          <div class="hero__frame">
-            <img
-              class="hero__photo"
-              src={s.image}
-              style={`object-position:${s.focus ?? "center"}`}
-              alt={`${SITE.name}－${SITE.tagline}`}
-              loading={i === 0 ? "eager" : "lazy"}
-              fetchpriority={i === 0 ? "high" : "auto"}
-              decoding="async"
-            />
-          </div>
+  <!-- 中：照片輪播 -->
+  <div class="hero__stage">
+    {slides.map((s, i) => (
+      <div class={`hero__slide${i === 0 ? " is-active" : ""}`} data-slide aria-hidden={i === 0 ? "false" : "true"}>
+        <div class="hero__frame">
+          <img
+            class="hero__photo"
+            src={s.image}
+            style={`object-position:${s.focus ?? "center"}`}
+            alt={`${SITE.name}－${SITE.tagline}`}
+            loading={i === 0 ? "eager" : "lazy"}
+            fetchpriority={i === 0 ? "high" : "auto"}
+            decoding="async"
+          />
         </div>
-      ))}
-      {slides.length > 1 && (
-        <div class="hero__dots" role="tablist" aria-label="切換主視覺">
-          {slides.map((_, i) => (
-            <button class="hero__dot" data-i={i} role="tab" aria-label={`第 ${i + 1} 張`} aria-selected={i === 0 ? "true" : "false"}></button>
-          ))}
-        </div>
-      )}
-    </div>
-
-    {cards.length > 0 && (
-      <div class="hero__cards">
-        {cards.map((c) => (
-          <div class="hero__card" data-card>
-            <p class="hero__card-head"><span class="hero__card-no">{c.no}.</span> {c.title}</p>
-            <p class="hero__card-desc">{c.desc}</p>
-          </div>
+      </div>
+    ))}
+    {slides.length > 1 && (
+      <div class="hero__dots" role="tablist" aria-label="切換主視覺">
+        {slides.map((_, i) => (
+          <button class="hero__dot" data-i={i} role="tab" aria-label={`第 ${i + 1} 張`} aria-selected={i === 0 ? "true" : "false"}></button>
         ))}
       </div>
     )}
   </div>
+
+  <!-- 右：卡片欄（不覆蓋照片） -->
+  {cards.length > 0 && (
+    <div class="hero__cards">
+      {cards.map((c) => (
+        <div class="hero__card" data-card>
+          <p class="hero__card-head"><span class="hero__card-no">{c.no}.</span> {c.title}</p>
+          <p class="hero__card-desc">{c.desc}</p>
+        </div>
+      ))}
+    </div>
+  )}
 </section>
 <style>
+  /* 三欄：文字 25% / 照片 40% / 卡片 35% */
   .hero {
-    position: relative; display: grid; grid-template-columns: 38% 62%;
+    position: relative; display: grid; grid-template-columns: 25% 40% 35%;
     border-radius: 14px; overflow: hidden; background: var(--bg-base);
   }
 
-  /* ── 左欄：常駐文案 ── */
+  /* 左欄文案 */
   .hero__copy {
-    padding: clamp(24px, 3.5vw, 48px);
+    padding: clamp(18px, 2.4vw, 40px);
     display: flex; flex-direction: column; justify-content: center;
-    min-height: 460px;
+    min-height: 470px;
   }
-  .hero__title { display: block; border-bottom: 0; padding-bottom: 0; margin: 0; line-height: 1.04; font-weight: 800; perspective: 800px; }
+  .hero__title { display: block; border-bottom: 0; padding-bottom: 0; margin: 0; line-height: 1.05; font-weight: 800; perspective: 800px; }
   .hero__line3d { display: block; }
   .hero__cword { display: inline-block; }
   .hero__char { display: inline-block; transform-origin: 50% 60%; backface-visibility: hidden; }
-  .hero__accent { color: var(--color-link); font-size: clamp(36px, 5vw, 72px); letter-spacing: 0.01em; white-space: nowrap; }
-  .hero__main { color: var(--text-primary); font-size: clamp(26px, 3.6vw, 48px); font-weight: 700; }
-  .hero__rule { display: block; width: min(280px, 60%); height: 4px; background: var(--color-accent); margin: 1rem 0 1.2rem; transform-origin: left center; }
+  .hero__accent { color: var(--color-link); font-size: clamp(30px, 4vw, 60px); letter-spacing: 0.01em; white-space: nowrap; }
+  .hero__main { color: var(--text-primary); font-size: clamp(22px, 2.9vw, 40px); font-weight: 700; }
+  .hero__rule { display: block; width: min(220px, 70%); height: 4px; background: var(--color-accent); margin: 0.9rem 0 1.1rem; transform-origin: left center; }
   .hero__lines { margin: 0; color: var(--text-secondary); }
-  .hero__line { display: block; font-size: var(--text-sm); line-height: 1.7; }
+  .hero__line { display: block; font-size: var(--text-xs); line-height: 1.65; }
 
-  /* ── 右側：照片 + 卡片欄並排 ── */
-  .hero__right {
-    display: grid; grid-template-columns: 1fr minmax(200px, 290px);
-    gap: 16px; min-height: 460px; align-items: stretch; padding: 14px 14px 14px 0;
-  }
-  .hero__stage { position: relative; display: grid; }
+  /* 中欄照片 */
+  .hero__stage { position: relative; display: grid; min-height: 470px; margin: 14px 0; }
   .hero__slide { grid-area: 1 / 1; position: relative; opacity: 0; pointer-events: none; }
   .hero__slide.is-active { opacity: 1; pointer-events: auto; }
   .hero__frame {
@@ -110,37 +106,36 @@ const { copy, slides, cards = [] } = Astro.props;
     clip-path: polygon(6% 0, 100% 0, 100% 88%, 92% 100%, 0 100%, 0 12%);
   }
 
-  /* 卡片欄（自己的欄位，不覆蓋照片） */
-  .hero__cards { display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+  /* 右欄卡片 */
+  .hero__cards { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 14px 14px 14px 16px; }
   .hero__card {
     background: var(--color-brand-deep); color: var(--text-on-dark);
-    border-radius: 10px; padding: 12px 14px;
+    border-radius: 10px; padding: 12px 16px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
   }
   .hero__card-head { margin: 0 0 4px; font-weight: 700; font-size: var(--text-sm); }
   .hero__card-no { color: var(--color-accent); font-style: italic; }
   .hero__card-desc { margin: 0; font-size: var(--text-xs); line-height: 1.55; opacity: 0.95; }
 
-  .hero__dots { position: absolute; left: 0; right: 0; bottom: 12px; z-index: 3; display: flex; gap: 8px; justify-content: center; }
+  .hero__dots { position: absolute; left: 0; right: 0; bottom: 16px; z-index: 3; display: flex; gap: 8px; justify-content: center; }
   .hero__dot { width: 12px; height: 12px; border-radius: 50%; border: 0; cursor: pointer; background: var(--text-muted); opacity: 0.5; transition: opacity 0.2s, background 0.2s; }
   .hero__dot[aria-selected="true"] { opacity: 1; background: var(--color-link); }
 
-  /* 平板：右側改為照片在上、卡片在下一排 */
+  /* 平板以下：上下堆疊，照片在上、卡片成排 */
   @media (max-width: 1024px) {
-    .hero__right { grid-template-columns: 1fr; }
-    .hero__cards { flex-direction: row; flex-wrap: wrap; }
-    .hero__card { flex: 1 1 180px; }
-  }
-  /* 手機：整體上下堆疊 */
-  @media (max-width: 720px) {
     .hero { display: flex; flex-direction: column; }
-    .hero__right { order: -1; min-height: 0; padding: 0; gap: 12px; }
+    .hero__stage { order: -1; min-height: 0; margin: 0; }
     .hero__copy { min-height: 0; }
-    .hero__stage { min-height: 0; }
     .hero__slide { position: relative; }
     .hero__frame { position: static; padding: 0; background: none; clip-path: none; }
-    .hero__photo { clip-path: none; height: 280px; }
-    .hero__cards { padding: 0 clamp(16px, 4vw, 48px); }
+    .hero__photo { clip-path: none; height: 340px; }
+    .hero__cards { flex-direction: row; flex-wrap: wrap; padding: 0 clamp(16px, 4vw, 40px); }
+    .hero__card { flex: 1 1 200px; }
+  }
+  @media (max-width: 720px) {
+    .hero__photo { height: 280px; }
+    .hero__accent { font-size: clamp(34px, 11vw, 60px); }
+    .hero__main { font-size: clamp(24px, 8vw, 40px); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -160,14 +155,12 @@ const { copy, slides, cards = [] } = Astro.props;
     const dots = Array.from(hero.querySelectorAll<HTMLElement>(".hero__dot"));
     if (!slides.length) return;
 
-    // 右側照片：每次切換時重播（進場 wipe）
     const revealPhoto = (slide: HTMLElement) => {
       if (reduce) return;
       const frame = slide.querySelector<HTMLElement>(".hero__frame");
       if (frame) gsap.fromTo(frame, { autoAlpha: 0, scale: 1.1 }, { autoAlpha: 1, scale: 1, duration: 1.0, ease: "power3.out" });
     };
 
-    // 進場：左欄文案逐字翻面 + 金線 + 說明，最後卡片從右滑入（皆只播一次）
     if (!reduce) {
       const flips = [
         { rotationX: -110, y: 18 }, { rotationX: 110, y: -18 },

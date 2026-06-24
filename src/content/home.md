@@ -27,7 +27,7 @@ slides:
   - image: "/images/hero-martial.webp"
     focus: "50% 28%"
   - image: "/images/hero-capoeira.webp"
-    focus: "50% 45%"
+    focus: "72% 42%"
   - image: "/images/hero-suit.webp"
     focus: "50% 16%"
 ---
