@@ -30,7 +30,7 @@ function rehypeBasePrefix() {
 
 // rehype 外掛：替 Markdown 內 alt 空白的圖片補上基本替代文字（無障礙 + 圖片 SEO）。
 function rehypeAltFill() {
-  const DEFAULT = '鄭骨館體雕中心－台中西屯整骨整脊體雕';
+  const DEFAULT = '鄭骨館體雕中心－台中西屯全身調理體雕';
   const fix = (node) => {
     if (node.type === 'element' && node.tagName === 'img') {
       const alt = node.properties && node.properties.alt;

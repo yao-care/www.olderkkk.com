@@ -1,0 +1,57 @@
+---
+import Base from "../../layouts/Base.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import { withBase } from "../../lib/withBase";
+import { absUrl, breadcrumbSchema, serviceSchema } from "../../lib/site";
+const base = import.meta.env.BASE_URL;
+const siteHome = absUrl("/", Astro.site, base);
+const pageUrl = absUrl("/services/body-care", Astro.site, base);
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: siteHome },
+  { name: "服務項目", url: absUrl("/services", Astro.site, base) },
+  { name: "全身調理", url: pageUrl },
+]);
+const svc = serviceSchema({
+  name: "全身調理",
+  description: "台中西屯鄭骨館體雕中心的全身調理，涵蓋骨盆、膝蓋、腳踝、肩膀，協助歪斜回正、緩解痠痛。",
+  serviceType: "全身調理",
+  url: pageUrl,
+  siteUrl: siteHome,
+  price: 1000,
+});
+const seoTitle = "全身調理｜台中西屯・鄭骨館體雕中心";
+const seoDesc = "台中西屯全身調理：涵蓋骨盆、膝蓋、腳踝、肩膀，約 30–40 分鐘，協助身體歪斜回正與痠痛緩解。鄭骨館體雕中心，採預約制。";
+---
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, svc]}>
+  <h1>全身調理</h1>
+  <img class="hero" src={withBase("/images/2cd75f2550f7.webp")} alt="鄭骨館體雕中心全身調理，調整骨盆、膝蓋、腳踝與肩膀的排列" loading="eager" />
+  <p class="lead">針對全身結構與相連關節的排列進行徒手調理，協助改善因姿勢或張力失衡造成的歪斜、卡緊與痠痛。一次全身調理約 30–40 分鐘，涵蓋骨盆、膝蓋、腳踝與肩膀。</p>
+
+  <h2>適合哪些狀況？</h2>
+  <ul>
+    <li>高低肩、骨盆歪斜、身體左右不對稱</li>
+    <li>肩頸、上背、腰部長期痠緊</li>
+    <li>久坐久站、姿勢不良造成的張力失衡</li>
+    <li>運動後或日常累積的卡緊、活動受限</li>
+  </ul>
+
+  <h2>調理過程是怎麼進行的？</h2>
+  <p>師傅會先了解你的身體狀況與不適部位，再以徒手手法放鬆過度緊繃的地方、協助關節排列回到較理想的位置。過程會依個人緊繃與歪斜程度調整力道，有任何不適都可隨時反映。</p>
+
+  <h2>為什麼調理之後還建議搭配訓練？</h2>
+  <p>如果出力與姿勢習慣沒有改變，身體很快又會回到舊的方式。<strong>調理幫助「回正」，訓練幫助「維持」</strong>，因此我們常建議調理搭配 <a href={`${base}services/personal-training`}>一對一訓練</a>，讓成果更穩定。</p>
+
+  <h2>調理前請先告知</h2>
+  <p>有骨質疏鬆、曾耳石滑脫、心臟支架或脊椎開刀史者請先告知；開刀或剖腹產後建議滿 3 個月再調整。完整注意事項見 <a href={`${base}booking`}>預約流程與初次須知</a>。本服務屬一般保健範疇，不能取代醫療診斷。</p>
+
+  <h2>費用與預約</h2>
+  <p>全身調理：鄭師傅 1100 元、何師傅 1000 元（以現場或 LINE 最新公告為準，詳見 <a href={`${base}pricing`}>收費方式</a>）。</p>
+  <ContactCTA />
+</Base>
+<style>
+  .hero { width: 100%; border-radius: 12px; margin: 0.5rem 0 1rem; }
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+  p { font-size: var(--text-base); margin: 1rem 0; }
+  ul { margin: 1rem 0; padding-left: 1.25rem; }
+  li { font-size: var(--text-base); color: var(--text-secondary); margin: 0.5rem 0; }
+</style>

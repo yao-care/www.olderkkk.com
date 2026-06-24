@@ -35,7 +35,7 @@ ${PERSON.name}（${PERSON.jobTitle}）：${PERSON.description}
 - 服務項目：${abs("/services")}
 - 收費方式：${abs("/pricing")}
 - 預約流程與初次須知：${abs("/booking")}
-- 名詞解釋（整骨/整脊/整復/體雕差異）：${abs("/glossary")}
+- 名詞解釋（全身調理/體雕/一對一訓練）：${abs("/glossary")}
 - 課程介紹：${abs("/courses")}
 - 健康概念分享：${abs("/health")}
 - 成果分享：${abs("/works")}
