@@ -55,12 +55,11 @@ const heroSlide = z.object({
   image: z.string(),
   // 照片對焦位置（object-position），直式人像用來避免裁到頭，例 "50% 22%"
   focus: z.string().default("center"),
-  // 疊在照片上的說明卡（可空）
-  cards: z.array(heroCard).default([]),
 });
 const home = defineCollection({
   loader: glob({ pattern: "home.md", base: "src/content" }),
-  schema: z.object({ ...seo, heroCopy: heroCopy.default({}), slides: z.array(heroSlide).default([]) }),
+  // heroCards：Hero 正下方的三張課程卡（不再覆蓋照片）
+  schema: z.object({ ...seo, heroCopy: heroCopy.default({}), heroCards: z.array(heroCard).default([]), slides: z.array(heroSlide).default([]) }),
 });
 
 export const collections = { pages, works, health, news, home };

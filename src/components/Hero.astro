@@ -1,8 +1,7 @@
 ---
 import { SITE } from "../lib/site";
-interface Card { no: string; title: string; desc: string; }
 interface Copy { accent: string[]; main: string; lines: string[]; }
-interface Slide { image: string; focus?: string; cards: Card[]; }
+interface Slide { image: string; focus?: string; }
 interface Props { copy: Copy; slides: Slide[]; }
 const { copy, slides } = Astro.props;
 ---
@@ -46,16 +45,6 @@ const { copy, slides } = Astro.props;
             decoding="async"
           />
         </div>
-        {s.cards.length > 0 && (
-          <div class="hero__cards">
-            {s.cards.map((c) => (
-              <div class="hero__card" data-anim-card>
-                <p class="hero__card-head"><span class="hero__card-no">{c.no}.</span> {c.title}</p>
-                <p class="hero__card-desc">{c.desc}</p>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     ))}
     {slides.length > 1 && (
@@ -103,23 +92,6 @@ const { copy, slides } = Astro.props;
     clip-path: polygon(7% 0, 100% 0, 100% 86%, 90% 100%, 0 100%, 0 14%);
   }
 
-  /* 疊在照片上的說明卡 */
-  .hero__cards {
-    position: absolute; top: 8%; right: 4%; z-index: 2;
-    display: flex; flex-direction: column; gap: 12px;
-    width: min(56%, 320px);
-  }
-  .hero__card {
-    background: color-mix(in oklch, var(--color-brand-deep) 80%, transparent);
-    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
-    color: var(--text-on-dark);
-    border-radius: 10px; padding: 12px 14px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-  }
-  .hero__card-head { margin: 0 0 4px; font-weight: 700; font-size: var(--text-sm); }
-  .hero__card-no { color: var(--color-accent); font-style: italic; }
-  .hero__card-desc { margin: 0; font-size: var(--text-xs); line-height: 1.55; opacity: 0.95; }
-
   .hero__dots { position: absolute; left: 0; right: 0; bottom: 14px; z-index: 3; display: flex; gap: 8px; justify-content: center; }
   .hero__dot { width: 12px; height: 12px; border-radius: 50%; border: 0; cursor: pointer; background: var(--text-muted); opacity: 0.5; transition: opacity 0.2s, background 0.2s; }
   .hero__dot[aria-selected="true"] { opacity: 1; background: var(--color-link); }
@@ -132,12 +104,11 @@ const { copy, slides } = Astro.props;
     .hero__slide { position: relative; }
     .hero__frame { position: static; padding: 0; background: none; clip-path: none; }
     .hero__photo { clip-path: none; height: 300px; }
-    .hero__cards { position: absolute; top: 8%; right: 4%; width: min(56%, 300px); }
   }
 
   /* 降級：不想要動畫的使用者，直接全部顯示 */
   @media (prefers-reduced-motion: reduce) {
-    .hero__char, .hero__rule, .hero__line, .hero__frame, .hero__card { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+    .hero__char, .hero__rule, .hero__line, .hero__frame { opacity: 1 !important; visibility: visible !important; transform: none !important; }
   }
 </style>
 <script>
@@ -152,14 +123,11 @@ const { copy, slides } = Astro.props;
     const dots = Array.from(hero.querySelectorAll<HTMLElement>(".hero__dot"));
     if (!slides.length) return;
 
-    // 右側照片：每次切換時重播（進場 wipe + 卡片彈入）
+    // 右側照片：每次切換時重播（進場 wipe）
     const revealPhoto = (slide: HTMLElement) => {
       if (reduce) return;
       const frame = slide.querySelector<HTMLElement>(".hero__frame");
-      const cards = slide.querySelectorAll<HTMLElement>("[data-anim-card]");
-      const tl = gsap.timeline();
-      if (frame) tl.fromTo(frame, { autoAlpha: 0, scale: 1.12, xPercent: 6 }, { autoAlpha: 1, scale: 1, xPercent: 0, duration: 1.0, ease: "power3.out" });
-      if (cards.length) tl.fromTo(cards, { autoAlpha: 0, x: 54, rotate: 3 }, { autoAlpha: 1, x: 0, rotate: 0, duration: 0.6, stagger: 0.16, ease: "back.out(1.5)" }, "-=0.45");
+      if (frame) gsap.fromTo(frame, { autoAlpha: 0, scale: 1.12, xPercent: 6 }, { autoAlpha: 1, scale: 1, xPercent: 0, duration: 1.0, ease: "power3.out" });
     };
 
     // 左欄文案：只進場一次（標題遮罩上滑 → 金線左展開 → 說明模糊轉清晰）
