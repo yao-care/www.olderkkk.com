@@ -38,46 +38,20 @@ slides:
     cards: []
 ---
 
-*   ![](/images/c6f9e3a995cd.webp)
-*   #### ABOUT US
-    
-    ##### 關於老K
-    
-    ![](/images/5f0e3e53067d.png)
-    
-    一開始接觸健美式訓練了解肌肉運作方式
-    
-    再接觸到全身調理技術
-    
-    並將二者融合運用
-    
-    之後接觸到人體力學矯正方法
-    
-    同時處理肌肉發力方式與調整關節排列位置
-    
-    能夠更快有有效解決身體問題!
-    
-    [![](/images/f4daa73b59d2.png)](tel:0970686319) [![](/images/3cb1815d1d3c.png)](https://www.facebook.com/olderk/) [![](/images/0ff627656224.png)](https://goo.gl/maps/5ycqSypugBVycsi4A) [![](/images/a2e19398449f.png)](/contact) [![](/images/fb163c675026.png)](https://line.me/R/ti/p/%40275nxace)
-    
+## 關於老K
 
-*   ![](/images/08ff142713bf.png)
-    
-    ###### 調理矯正動作∥身體歪斜痠痛調理
-    
-    ###### 訓練健身∥減脂重量肌力訓練
-    
-    [健康概念分享](/health) [瀏覽最新消息](/news)
-    
-*   ![](/images/81d04e2f74bd.webp)
+![主理人老K（鄭博陽）](/images/laok-profile.jpg)
 
-<!-- -->
+一開始接觸健美式訓練，了解肌肉運作方式；再接觸全身調理技術，並將二者融合運用。後來接觸人體力學矯正方法，同時處理肌肉發力方式與調整關節排列位置，能夠更快、更有效地解決身體問題。
 
-*   ![](/images/7d5af9a94464.webp)
-*   ![](/images/aad335a56625.png)
-*   ![](/images/f8cc1ac3c4f3.webp)
+[更多關於我們](/about)
 
-#### Services & Courses
+## 調理矯正動作 ∥ 訓練健身
 
-##### 觀看更多服務項目與課程介紹
+身體歪斜、痠痛調理；減脂、重量肌力訓練。
+
+[健康概念分享](/health) ｜ [瀏覽最新消息](/news)
+
+## 服務與課程
 
 [![課程介紹](/images/42fa30462f66.webp)](/courses) [![服務項目](/images/de5e966af013.jpg)](/services)

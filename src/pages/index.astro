@@ -19,19 +19,10 @@ const seoDesc = "鄭骨館體雕中心位於台中市西屯區，結合全身調
 </Base>
 <style>
   .prose :global(p) { font-size: var(--text-base); margin: 1rem 0; }
-  .prose :global(h2) { margin: 2rem 0 1rem; }
-  .prose :global(img) { border-radius: 8px; margin: 1rem 0; }
-  /* 去除清單項目符號（原站圖片清單） */
-  .prose :global(ul) { list-style: none; padding-left: 0; }
-  .prose :global(li) { margin: 1rem 0; }
-  /* 聯絡圖示列：整齊一排小圖示 */
-  .prose :global(li a img) { display: inline-block; height: 48px; width: auto; margin: 0.25rem 0.5rem 0.25rem 0; }
-  /* 最後一組（三張）圖片改格狀排列 */
-  .prose :global(ul:last-of-type) {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;
-  }
-  .prose :global(ul:last-of-type li) { margin: 0; }
-  .prose :global(ul:last-of-type img) { width: 100%; margin: 0; }
+  .prose :global(h2) { margin: 2.5rem 0 1rem; }
+  .prose :global(img) { border-radius: 8px; }
+  /* 關於老K 照片：限制尺寸 */
+  .prose :global(p > img) { display: block; max-width: 300px; width: 100%; margin: 1rem 0; }
   /* 服務／課程入口圖：並排 */
   .prose :global(p a img) { width: 48%; min-width: 220px; margin: 0.5rem 0.5rem 0 0; }
 </style>
