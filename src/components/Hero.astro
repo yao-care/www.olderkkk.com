@@ -34,7 +34,7 @@ const { copy, slides, cards = [] } = Astro.props;
   <!-- 中：照片輪播（直式框；contain 配模糊背景） -->
   <div class="hero__stage">
     {slides.map((s, i) => {
-      const fit = s.fit ?? "cover";
+      const fit = s.fit ?? "contain";
       return (
         <div class={`hero__slide${i === 0 ? " is-active" : ""}`} data-slide aria-hidden={i === 0 ? "false" : "true"}>
           <div class="hero__frame">

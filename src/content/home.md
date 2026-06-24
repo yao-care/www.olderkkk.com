@@ -20,17 +20,12 @@ heroCards:
   - no: "03"
     title: "卡波耶拉"
     desc: "Capoeira 為巴西三大國民運動之一——是武術、是舞蹈，也是一種遊戲，新興的「極限武術運動」。"
-# 右側照片輪播。image=乾淨底圖、focus=對焦(object-position)。
+# 右側照片輪播。預設 fit=contain（整張完整顯示、不裁切，配模糊背景填留白）。
 slides:
   - image: "/images/hero-fitness.webp"
-    focus: "50% 16%"
   - image: "/images/hero-martial.webp"
-    focus: "50% 22%"
   - image: "/images/hero-capoeira.webp"
-    focus: "50% 50%"
-    fit: "contain"
   - image: "/images/hero-suit.webp"
-    focus: "50% 14%"
 ---
 
 <!-- 首頁 Hero 以下的版型由 src/pages/index.astro 直接排版（關於老K／服務與課程／營業時間／最新資訊）。

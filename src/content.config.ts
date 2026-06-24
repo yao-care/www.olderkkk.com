@@ -55,8 +55,8 @@ const heroSlide = z.object({
   image: z.string(),
   // 照片對焦位置（object-position），直式人像用來避免裁到頭，例 "50% 22%"
   focus: z.string().default("center"),
-  // cover=填滿裁切（直式人像）；contain=完整縮放（橫式照片，配模糊背景填留白）
-  fit: z.enum(["cover", "contain"]).default("cover"),
+  // contain=完整顯示不裁切（預設，配模糊背景填留白）；cover=填滿裁切（會裁到頭/腳，少用）
+  fit: z.enum(["cover", "contain"]).default("contain"),
 });
 const home = defineCollection({
   loader: glob({ pattern: "home.md", base: "src/content" }),
