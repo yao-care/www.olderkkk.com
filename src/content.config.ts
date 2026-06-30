@@ -21,17 +21,6 @@ const pages = defineCollection({
   loader: glob({ pattern: "*.md", base: "src/content/pages" }),
   schema: z.object(seo),
 });
-const works = defineCollection({
-  loader: glob({ pattern: "*.md", base: "src/content/works" }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string().default(""),
-    keywords: z.string().default(""),
-    album: z.string().default(""),
-    group: z.string().optional(),
-    photos: z.array(z.object({ src: z.string(), caption: z.string().default("") })).default([]),
-  }),
-});
 const health = defineCollection({
   loader: glob({ pattern: "*.md", base: "src/content/health" }),
   schema: z.object(article),
@@ -64,4 +53,4 @@ const home = defineCollection({
   schema: z.object({ ...seo, heroCopy: heroCopy.default({}), heroCards: z.array(heroCard).default([]), slides: z.array(heroSlide).default([]) }),
 });
 
-export const collections = { pages, works, health, news, home };
+export const collections = { pages, health, news, home };

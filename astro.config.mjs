@@ -62,10 +62,10 @@ export default defineConfig({
           item.priority = 1.0; item.changefreq = 'weekly';
         } else if (['/services', '/courses', '/contact', '/faq'].includes(path)) {
           item.priority = 0.8; item.changefreq = 'monthly';
-        } else if (['/health', '/news', '/works'].includes(path)) {
+        } else if (['/health', '/news'].includes(path)) {
           item.priority = 0.7; item.changefreq = 'weekly';
         } else {
-          // 內頁文章 / 相簿
+          // 內頁文章
           item.priority = 0.6; item.changefreq = 'monthly';
         }
         return item;

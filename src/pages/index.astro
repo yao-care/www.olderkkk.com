@@ -13,15 +13,14 @@ const slides = (entry.data.slides ?? []).map((s) => ({ ...s, image: withBase(s.i
 
 // 首頁服務／課程入口卡
 const services = [
-  { href: "/services/body-care", title: "全身調理", desc: "全身結構與張力的調整，協助歪斜回正、緩解痠痛。" },
+  { href: "/services/body-care", title: "全身調理", desc: "全身結構與張力的調理，協助歪斜回正、緩解痠痛。" },
   { href: "/services/personal-training", title: "一對一訓練", desc: "個人化肌力與動作訓練，讓調理成果維持得住。" },
-  { href: "/services/body-sculpting", title: "體雕・體態調整", desc: "從張力平衡與訓練改善身形線條，而非單純減重。" },
+  { href: "/services/body-sculpting", title: "體雕・體態調理", desc: "從張力平衡與訓練改善身形線條，而非單純減重。" },
   { href: "/courses", title: "課程介紹", desc: "一對一指導課程，結合全身調理與肌力訓練。" },
 ];
 // 最新資訊入口
 const latest = [
   { href: "/health", title: "健康概念分享", desc: "身體保養、體態與運動傷害的觀念分享。" },
-  { href: "/works", title: "成果分享", desc: "實際個案調整前後對比相簿。" },
   { href: "/news", title: "最新消息", desc: "最新優惠、活動與店內動態。" },
 ];
 
@@ -35,7 +34,7 @@ const seoDesc = "鄭骨館體雕中心位於台中市西屯區，結合全身調
   <section class="home-about">
     <div class="home-about__text">
       <h2>關於老K</h2>
-      <p>一開始接觸健美式訓練，了解肌肉運作方式；再接觸全身調理技術，並將二者融合運用。後來接觸人體力學矯正方法，同時處理肌肉發力方式與調整關節排列位置，能夠更快、更有效地解決身體問題。</p>
+      <p>一開始接觸健美式訓練，了解肌肉運作方式；再接觸全身調理技術，並將二者融合運用。後來接觸人體力學矯正方法，同時處理肌肉發力方式與調理關節排列位置，能夠更快、更有效地解決身體問題。</p>
       <a class="home-link" href={withBase("/about")}>更多關於我們 →</a>
     </div>
     <img class="home-about__photo" src={withBase("/images/laok-profile.jpg")} alt="鄭骨館體雕中心主理人老K（鄭博陽）" loading="lazy" width="320" height="320" />

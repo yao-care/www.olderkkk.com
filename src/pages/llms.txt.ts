@@ -38,7 +38,6 @@ ${PERSON.name}（${PERSON.jobTitle}）：${PERSON.description}
 - 名詞解釋（全身調理/體雕/一對一訓練）：${abs("/glossary")}
 - 課程介紹：${abs("/courses")}
 - 健康概念分享：${abs("/health")}
-- 成果分享：${abs("/works")}
 - 媒體報導與體驗分享：${abs("/reviews")}
 - 最新消息：${abs("/news")}
 - 常見問題：${abs("/faq")}
