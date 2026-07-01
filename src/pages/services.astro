@@ -1,9 +1,17 @@
 ---
+import { getEntry } from "astro:content";
 import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import { withBase } from "../lib/withBase";
 import { absUrl, breadcrumbSchema, SITE } from "../lib/site";
 const base = import.meta.env.BASE_URL;
+
+// 與首頁共用同一個 section.hero（資料來源：home.md）
+const home = await getEntry("home", "home");
+const heroCopy = home?.data.heroCopy;
+const heroCards = home?.data.heroCards ?? [];
+const heroSlides = (home?.data.slides ?? []).map((s) => ({ ...s, image: withBase(s.image) }));
 const crumb = breadcrumbSchema([
   { name: "首頁", url: absUrl("/", Astro.site, base) },
   { name: "服務項目", url: absUrl("/services", Astro.site, base) },
@@ -48,8 +56,8 @@ const seoTitle = "服務項目｜台中西屯全身調理・鄭骨館體雕中�
 const seoDesc = "全身調理、體態矯正、痠痛調理、運動動作矯正、肌力訓練、減脂與一對一健身教練——台中西屯鄭骨館體雕中心服務項目與說明。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, catalog]}>
-  <h1>服務項目</h1>
-  <img class="hero" src={withBase("/images/cc685b243660.webp")} alt="鄭骨館體雕中心服務：全身調理、建立正確張力課程與一對一肌力訓練" loading="eager" />
+  {heroSlides.length > 0 && <Hero copy={heroCopy} slides={heroSlides} cards={heroCards} />}
+  <h1 class="sr-only">服務項目</h1>
   <p class="lead">鄭骨館體雕中心結合<strong>整復調理</strong>與<strong>肌力訓練</strong>：先以調理協助身體排列回正，再用訓練讓成果維持住。以下為各項服務說明。</p>
 
   <h2>核心服務</h2>
@@ -80,8 +88,8 @@ const seoDesc = "全身調理、體態矯正、痠痛調理、運動動作矯正
   <ContactCTA />
 </Base>
 <style>
-  .hero { width: 100%; border-radius: 12px; margin: 0.5rem 0 1rem; }
-  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1.5rem 0; }
   .core { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
   .core__card { display: flex; flex-direction: column; gap: 0.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-top: 3px solid var(--color-accent); border-radius: 8px; padding: 1.25rem 1.5rem; }
   .core__card:hover { background: var(--bg-hover); text-decoration: none; }
