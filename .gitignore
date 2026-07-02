@@ -3,3 +3,6 @@ dist/
 .astro/
 .DS_Store
 *.log
+
+# seo-ops 本機分析數據（repo 公開，不入版控）
+data/seo-daily/
