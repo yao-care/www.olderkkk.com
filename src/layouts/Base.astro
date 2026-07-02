@@ -21,6 +21,8 @@ const siteHome = absUrl("/", Astro.site, base);
 const business = localBusinessSchema(siteHome, absUrl(SITE.defaultImage, Astro.site, base), absUrl(SITE.logo, Astro.site, base));
 const founder = personSchema(siteHome);
 const website = websiteSchema(siteHome);
+// GA4：設了 PUBLIC_GA_ID（建置時環境變數）才輸出追蹤碼；未設則完全不載入。
+const gaId = import.meta.env.PUBLIC_GA_ID;
 ---
 <!doctype html>
 <html lang="zh-Hant">
@@ -63,6 +65,18 @@ const website = websiteSchema(siteHome);
     {schemas.map((s) => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
     ))}
+    {/* Google Analytics 4（僅在設定 PUBLIC_GA_ID 時輸出） */}
+    {gaId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
   </head>
   <body>
     <Header />

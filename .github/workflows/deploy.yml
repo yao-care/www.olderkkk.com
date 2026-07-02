@@ -36,6 +36,8 @@ jobs:
         env:
           BASE_PATH: ${{ vars.CUSTOM_DOMAIN != '' && '/' || '/www.olderkkk.com' }}
           SITE_URL: ${{ vars.CUSTOM_DOMAIN != '' && format('https://{0}', vars.CUSTOM_DOMAIN) || 'https://yao-care.github.io' }}
+          # GA4：設 repo 變數 GA_ID=G-XXXXXXXX 即開啟追蹤（未設則不輸出追蹤碼）
+          PUBLIC_GA_ID: ${{ vars.GA_ID }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
