@@ -3,9 +3,11 @@
 鄭骨館體雕中心（台中西屯整骨／整脊／體雕／一對一訓練，**預約制**）官網。
 由原 PHP 站改版為 **Astro 靜態網站**，部署於 **GitHub Pages**。
 
-- 線上（測試／現行）：https://yao-care.github.io/www.olderkkk.com/
+- 正式站（現行）：https://www.olderkkk.com/ ✅ 已上線（2026-07-02 切換）
+  - 裸網域 `olderkkk.com`、`http://` 皆 301 轉到 `https://www.olderkkk.com/`（強制 HTTPS）。
+  - 舊 GitHub 子路徑 `https://yao-care.github.io/www.olderkkk.com/` 亦 301 轉正式站。
 - Repo：`yao-care/www.olderkkk.com`（公開；free 組織的 Pages 僅支援公開 repo）
-- 正式網域（未切換）：www.olderkkk.com — 切換步驟見 `DEPLOY.md`
+- 切換總開關：repo 變數 `CUSTOM_DOMAIN=www.olderkkk.com`（回退步驟見 `DEPLOY.md`）。
 
 ## 技術棧 / 常用指令
 - Astro 6 + @astrojs/mdx + @astrojs/sitemap，純靜態，無 jQuery。**Node ≥ 22.12**。
@@ -52,7 +54,7 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 - **商家資訊唯一來源：`src/lib/site.ts`**（名稱/電話/Email/LINE/FB/地圖/地址/座標/營業時間）。要改 NAP、營業時間、地圖連結 → 改這裡（schema 與多處引用會一起更新）。
 - **結構化資料**：`Base.astro` 全站自動輸出 `LocalBusiness`；各頁可傳 `schemas={[...]}`（已有 Breadcrumb / Article / VideoObject / OfferCatalog / ImageGallery / FAQPage 產生器在 `site.ts`）。
 - **標題/描述**：各頁在 `.astro` 設 `seoTitle`/`seoDesc`（乾淨、唯一、含「台中西屯」）。**不要**再用關鍵字堆砌，**不要**加 `meta keywords`。
-- **robots.txt**：`src/pages/robots.txt.ts`（開放 AI 爬蟲 GPTBot/PerplexityBot/ClaudeBot/Google-Extended，指向 sitemap）。註：現為子路徑，**切到正式網域才會在根目錄生效**。
+- **robots.txt**：`src/pages/robots.txt.ts`（開放 AI 爬蟲 GPTBot/PerplexityBot/ClaudeBot/Google-Extended，指向 sitemap）。已在正式網域根目錄生效：`https://www.olderkkk.com/robots.txt` → `Sitemap: https://www.olderkkk.com/sitemap-index.xml`。
 - **FAQ**：`src/pages/faq.astro`（含 FAQPage schema）。
 - **圖片 alt**：`astro.config.mjs` 的 rehype 會替空 alt 補預設值；新增重要圖片仍建議自己寫 alt。
 - **禁止**把 Google 評論（4.9/245）寫成自家 `AggregateRating`（違反 Google 準則）。
@@ -66,7 +68,15 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 ## 一次性擷取腳本（平時不需執行）
 `scripts/` 內 `extract.mjs`（主要頁）、`extract-works.mjs`（相簿）、`extract-articles.mjs`（文章）、`fix-content.mjs`（連結改寫）為**從舊站擷取內容用**。內容已產出並可直接編輯，無需重跑；若要重抓需注意會覆蓋現有手動修正（如文章文字摘要、contact 清理）。
 
+## 數據追蹤（GA / GSC）
+- **GA4**：評估 ID `G-LRMXNPBRX0`（GA4 property `properties/543939182`）。追蹤碼由 `Base.astro` 讀 `PUBLIC_GA_ID` 輸出；正式開關為 repo 變數 `GA_ID`（未設則全站不輸出）。
+- **GSC**：網域資源 `sc-domain:olderkkk.com`（DNS TXT 驗證）；sitemap 已提交，robots.txt 亦指向，會自動重抓。
+- API 操作（提 sitemap／讀 GA 即時）用 service account `~/.config/olderkkk/ga4-sa.json`（siteOwner + analytics.readonly）。
+
+## 已完成（2026-07-02 上線）
+- 正式網域 `www.olderkkk.com` 切換完成（`CUSTOM_DOMAIN` 變數 + Pages 自訂網域 + 強制 HTTPS）；裸網域與舊子路徑皆 301 轉正式站。
+- GA4 埋碼、GSC sitemap 提交完成。
+
 ## 待辦（交接給後續）
-- **切換正式網域 www.olderkkk.com**：見 `DEPLOY.md`（加 `public/CNAME`、設 `BASE_PATH=/`、`SITE_URL=https://www.olderkkk.com`、Pages 設定 Custom domain、DNS CNAME 指向 yao-care.github.io）。
 - **Google 商家檔案（GBP）**：認領/優化、評論經營（現 4.9／245 則）。
 - 設計／規劃文件：`docs/superpowers/`（spec、plan）。
