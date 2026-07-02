@@ -71,6 +71,7 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 ## 數據追蹤（GA / GSC）
 - **GA4**：評估 ID `G-LRMXNPBRX0`（GA4 property `properties/543939182`）。追蹤碼由 `Base.astro` 讀 `PUBLIC_GA_ID` 輸出；正式開關為 repo 變數 `GA_ID`（未設則全站不輸出）。
 - **GSC**：網域資源 `sc-domain:olderkkk.com`（DNS TXT 驗證）；sitemap 已提交，robots.txt 亦指向，會自動重抓。
+- **GBP（Google 商家檔案）**：**已認領且持續經營中**（現 4.9／245 則）。知識面板 kgmid `/g/11b_23ch3f`，分享連結 https://share.google/v6oTDE5MDUvqfZjW5 。非待辦。
 - API 操作（提 sitemap／讀 GA 即時）用 service account `~/.config/olderkkk/ga4-sa.json`（siteOwner + analytics.readonly）。
 
 ## 已完成（2026-07-02 上線）
@@ -78,5 +79,5 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 - GA4 埋碼、GSC sitemap 提交完成。
 
 ## 待辦（交接給後續）
-- **Google 商家檔案（GBP）**：認領/優化、評論經營（現 4.9／245 則）。
+- （目前無明確待辦；GBP 已在經營，見「數據追蹤」段。）
 - 設計／規劃文件：`docs/superpowers/`（spec、plan）。
