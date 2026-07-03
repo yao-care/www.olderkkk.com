@@ -2,7 +2,7 @@
 import { getCollection, getEntry, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { pickOgImage } from "../../lib/ogImage";
-import { absUrl, breadcrumbSchema, articleSchema, youtubeId, videoObjectSchema } from "../../lib/site";
+import { absUrl, breadcrumbSchema, articleSchema, youtubeId, videoObjectSchema, faqPageSchema } from "../../lib/site";
 export async function getStaticPaths() {
   const items = await getCollection("health");
   return items.map((a) => ({ params: { slug: a.id } }));
@@ -33,12 +33,25 @@ const schemas: object[] = [
 ];
 const vid = youtubeId(entry.body ?? "");
 if (vid) schemas.push(videoObjectSchema({ id: vid, name: entry.data.title, description: seoDesc, uploadDate: entry.data.date }));
+const faqs = entry.data.faq ?? [];
+if (faqs.length) schemas.push(faqPageSchema(faqs));
 const publishedTime = (entry.data.date || "").replace(/\//g, "-");
 ---
 <Base title={seoTitle} description={seoDesc} image={firstImg} schemas={schemas} ogType="article" publishedTime={publishedTime}>
   <h1>{entry.data.title}</h1>
   {entry.data.date && <p class="date">{entry.data.date}</p>}
   <article class="prose"><Content /></article>
+  {faqs.length > 0 && (
+    <section class="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">常見問題</h2>
+      {faqs.map((f) => (
+        <details class="faq__item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </section>
+  )}
 </Base>
 <style>
   .date { font-size: var(--text-sm); color: var(--text-muted); }
@@ -46,4 +59,9 @@ const publishedTime = (entry.data.date || "").replace(/\//g, "-");
   .prose :global(img) { border-radius: 8px; margin: 0.5rem 0; }
   .prose :global(iframe) { width: 100%; max-width: 720px; aspect-ratio: 16 / 9; height: auto; display: block; margin: 1rem auto; border: 0; border-radius: 8px; }
   .prose :global(a) { word-break: break-all; }
+  .faq { margin-top: 2.5rem; border-top: 1px solid var(--border-subtle, #d3dadc); padding-top: 1.5rem; }
+  .faq h2 { font-size: var(--text-lg); margin-bottom: 1rem; }
+  .faq__item { border-bottom: 1px solid var(--border-subtle, #d3dadc); padding: 0.75rem 0; }
+  .faq__item summary { font-size: var(--text-base); font-weight: 600; cursor: pointer; }
+  .faq__item p { font-size: var(--text-base); margin: 0.75rem 0 0; line-height: 1.7; }
 </style>

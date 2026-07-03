@@ -15,6 +15,8 @@ const article = {
   date: z.string().default(""),
   summary: z.string().default(""),
   order: z.number().default(0),
+  // 選填：頁面內嵌 FAQ 問答（同時渲染成可見區塊＋FAQPage schema）
+  faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
 };
 
 const pages = defineCollection({

@@ -156,6 +156,19 @@ export function itemListSchema(o: { name: string; items: { name: string; url: st
   };
 }
 
+// FAQ 問答（頁面內嵌 Q&A → FAQPage 結構化資料，供 AEO/GEO 與語音搜尋）
+export function faqPageSchema(faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
 // 文章（健康概念分享 / 最新消息）
 export function articleSchema(o: {
   headline: string;
