@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
+import { withBase } from "../lib/withBase";
 import { absUrl, breadcrumbSchema, PRICING, pricingOfferCatalogSchema } from "../lib/site";
 const base = import.meta.env.BASE_URL;
 const crumb = breadcrumbSchema([
@@ -28,7 +29,7 @@ const seoDesc = "鄭骨館體雕中心收費方式：全身調理、一對一教
     ))}
   </div>
 
-  <p class="note">調理前，若有骨質疏鬆、心臟支架、脊椎開刀史等狀況請先告知；開刀或剖腹產後建議滿 3 個月再調理。詳見 <a href={`${base}booking`}>預約流程與初次須知</a>。</p>
+  <p class="note">調理前，若有骨質疏鬆、心臟支架、脊椎開刀史等狀況請先告知；開刀或剖腹產後建議滿 3 個月再調理。詳見 <a href={withBase("/booking")}>預約流程與初次須知</a>。</p>
 
   <h2>想了解適合自己的方案？</h2>
   <p>歡迎透過以下方式諮詢與預約：</p>
