@@ -69,6 +69,12 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 `scripts/` 內 `extract.mjs`（主要頁）、`extract-works.mjs`（相簿）、`extract-articles.mjs`（文章）、`fix-content.mjs`（連結改寫）為**從舊站擷取內容用**。內容已產出並可直接編輯，無需重跑；若要重抓需注意會覆蓋現有手動修正（如文章文字摘要、contact 清理）。
 
 ## 數據追蹤（GA / GSC）
+
+> 🤖 **SEO 自動化（2026-07-02 起，2026-07-09 重構為三主層）**：本站已納入主機統一框架 `/root/seo-ops`——每天三主層＋週報：
+> 收集(抓 GA4+GSC→發📊 Slack，已併心跳) → 🧭 反思(自動改站台「經營層」：IA/導覽/內鏈/canonical/sitemap，限白名單) → 🤖 大腦(自動改「單篇內容」/補文章) → 📈 週報(週一)；發到 Slack `C0BEU5RA02G`。
+> **排程時刻的單一真來源＝`/etc/cron.d/seo-ops`**（勿在此寫死，會漂移）。
+> 站台參數 `seo-ops/sites/olderkkk.com.json`、站規＋動手白名單(reflect:scope/brain:scope) `seo-ops/playbooks/olderkkk.com.md`、log `seo-ops/logs/olderkkk.com-*.log`。
+> 回滾自動改動：本 repo `git log --oneline | grep -E 'auto-claude-(seo|reflect)'` → `git revert <sha>`。
 - **GA4**：評估 ID `G-LRMXNPBRX0`（GA4 property `properties/543939182`）。追蹤碼由 `Base.astro` 讀 `PUBLIC_GA_ID` 輸出；正式開關為 repo 變數 `GA_ID`（未設則全站不輸出）。
 - **GSC**：網域資源 `sc-domain:olderkkk.com`（DNS TXT 驗證）；sitemap 已提交，robots.txt 亦指向，會自動重抓。
 - **GBP（Google 商家檔案）**：**已認領且持續經營中**（現 4.9／245 則）。知識面板 kgmid `/g/11b_23ch3f`，分享連結 https://share.google/v6oTDE5MDUvqfZjW5 。非待辦。
