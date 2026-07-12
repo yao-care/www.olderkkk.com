@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import { absUrl, breadcrumbSchema } from "../lib/site";
+import { withBase } from "../lib/withBase";
 const base = import.meta.env.BASE_URL;
 const crumb = breadcrumbSchema([
   { name: "首頁", url: absUrl("/", Astro.site, base) },
@@ -34,7 +35,7 @@ const seoDesc = "全身調理、體雕、一對一訓練、張力平衡、運動
       </div>
     ))}
   </dl>
-  <p>想知道自己的狀況適合哪一種？歡迎先 <a href={`${base}booking`}>預約諮詢與評估</a>。</p>
+  <p>想知道自己的狀況適合哪一種？歡迎先 <a href={withBase("/booking")}>預約諮詢與評估</a>。</p>
   <ContactCTA />
 </Base>
 <style>
