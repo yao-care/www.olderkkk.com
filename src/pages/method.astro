@@ -1,0 +1,120 @@
+---
+import Base from "../layouts/Base.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import { withBase } from "../lib/withBase";
+import { absUrl, breadcrumbSchema, serviceSchema, faqPageSchema, SITE } from "../lib/site";
+const base = import.meta.env.BASE_URL;
+const siteHome = absUrl("/", Astro.site, base);
+const pageUrl = absUrl("/method", Astro.site, base);
+
+const crumb = breadcrumbSchema([
+  { name: "首頁", url: siteHome },
+  { name: "無痛整脊", url: pageUrl },
+]);
+const service = serviceSchema({
+  name: "無痛整脊（自然牽引）",
+  description:
+    "以自然牽引的方式調整脊椎，借身體自身重量把脊椎慢慢拉開、順回，不硬扳、不硬壓，過程溫和；調整後再搭配一對一矯正訓練，協助維持成果。台中西屯，預約制。",
+  serviceType: "無痛整脊・自然牽引",
+  url: pageUrl,
+  siteUrl: siteHome,
+});
+// 可見 FAQ 與 FAQPage 結構化資料一致（AEO / 語音搜尋）
+const faqs = [
+  { q: "整脊會痛嗎？", a: "我們用自然牽引的方式調整，借身體自身的重量把脊椎慢慢拉開、順回，不硬扳、不硬壓，過程溫和，也不會聽到骨頭「喀」的聲音。" },
+  { q: "無痛整脊跟一般整骨、整復差在哪？", a: "差別在施力方式。傳統多半靠師傅雙手把身體壓回、扳回，力道較大；我們讓客人自身的重量去做主要的事，師傅負責引導方向，因此比較溫和。" },
+  { q: "為什麼上次調整完，過幾天又歪回去？", a: "因為結構調回來後，日常的姿勢與發力習慣若沒改變，身體容易又被拉回原本的樣子。我們在調整後會搭配一對一矯正訓練，把正確的用力方式建立起來，成果才比較穩定。" },
+  { q: "無痛整脊適合誰？", a: "特別適合怕痛、第一次想試整脊、或被別家大力「喬」到害怕的人；久坐、姿勢不良造成肩頸腰痠緊的人也適合先來評估。這屬於一般保健範疇，若有明確外傷或神經症狀，建議先就醫。" },
+];
+const faq = faqPageSchema(faqs);
+
+const seoTitle = "整脊會痛嗎？台中西屯無痛整脊，不硬扳也不喀｜鄭骨館體雕中心";
+const seoDesc = "怕整脊被喬到痛？鄭骨館用自然牽引調脊椎，不硬扳、不喀一聲。整脊師是健美選手出身，調完還帶你練，才不會一調又跑掉。台中西屯，預約制。";
+
+// 暫用照片：以下皆為店內既有實拍，攝影師重拍手法照後再替換（TODO：hero、整脊床、鄭師傅工作照）
+const heroImg = "/images/2cd75f2550f7.webp"; // TODO 換手法/自然牽引照
+const laoKImg = "/images/001fee432a3e.jpg";  // 鄭師傅（工作室）
+const trainImg = "/images/42fa30462f66.jpg"; // 一對一訓練實拍
+const caseA = "/images/520ae8a509ef.jpg";     // 調整前後（高低肩）
+const caseB = "/images/c46408bfe6b9.jpg";     // 調整前後（駝背/圓肩）
+---
+<Base title={seoTitle} description={seoDesc} image={heroImg} schemas={[crumb, service, faq]}>
+  <h1>整脊會痛嗎？我們這裡不硬扳，也不會「喀」一聲</h1>
+  <img class="hero" src={withBase(heroImg)} alt="鄭骨館體雕中心師傅以溫和方式為客人調整身體結構與關節排列" loading="eager" width="1200" height="628" />
+
+  <p class="lead">很多人第一次打電話來，第一句不是問價錢，是問：「你們會不會很痛？」</p>
+  <p>這樣問其實不奇怪。整脊給人的印象，就是被大力扳一下、骨頭喀一聲，光想就腿軟。</p>
+  <p>我們這裡不這樣做。我們用的是<strong>自然牽引</strong>，說白了，就是借你自己身體的重量，把脊椎慢慢拉開、順回去，不靠蠻力硬喬。過程很溫和。不會痛到叫，也聽不到那聲「喀」。第一次來的人調完常常愣一下：「這樣就好了喔？」</p>
+
+  <h2>那跟一般整骨、整復差在哪？</h2>
+  <p>差別就在「怎麼施力」這一件事。傳統做法靠師傅的手把你壓回去、扳回去，力道大，才會有那聲響。我們反過來，讓你自己的體重去做事，師傅只負責引導方向。</p>
+  <p>所以怕痛的、被別家喬到怕的、第一次想試整脊的人，在我們這裡通常比較放得下心。</p>
+
+  <h2>能這麼溫和，一半要歸功那張床</h2>
+  <p>一般整復就是一張普通床加一雙手。我們這張不一樣。它是耗資百萬、全台唯一打造的整脊床，能把脊椎一節一節分開來慢慢調。器材夠到位，師傅就不必出蠻力，你也就不用痛。</p>
+  {/* TODO 整脊床特寫照（攝影師重拍後補） */}
+
+  <h2>幫你調的人，是個健美選手</h2>
+  <figure class="portrait">
+    <img src={withBase(laoKImg)} alt="鄭骨館體雕中心整脊師鄭博陽（老K）" loading="lazy" width="360" height="360" />
+    <figcaption>整脊師・鄭博陽（老K）</figcaption>
+  </figure>
+  <p>這大概是我們最不一樣的地方。鄭博陽師傅，本身就是練到上台比賽的<strong>健美選手</strong>。你想想，一個能把肌肉練到舞台等級的人，對「哪裡緊、哪裡沒力、發力方式對不對」的敏感度，跟一般師傅本來就不在同一個層次。他手上還有國際整復師認證，平常也帶一對一健身課。</p>
+  <p>所以他看你的時候，不會只看骨頭正不正，還會看你平常怎麼站、怎麼坐、怎麼用力。這件事為什麼重要，你看下一段就懂。更多他的故事在 <a href={withBase("/about")}>關於我們</a>。</p>
+
+  <h2>為什麼上次喬完，沒幾天又歪回去？</h2>
+  <p>這題我們最常被問。道理不難：骨頭調回來了，可是你每天的姿勢、發力習慣沒變，久了它當然又被拉回老樣子。久坐的上班族最有感，肩頸調鬆了，回去坐三天又硬回來。</p>
+  <p>所以我們不只調，還帶你練。調完會有<strong>一對一矯正訓練</strong>，教你腳底怎麼踩、骨盆擺哪裡、核心怎麼出力、呼吸怎麼配。一項一項把對的用力方式裝回你身上。這樣才有機會調一次撐得久，不用一直回來報到。</p>
+  <img class="wide" src={withBase(trainImg)} alt="鄭骨館體雕中心教練一對一帶客人做矯正與肌力訓練" loading="lazy" width="900" height="900" />
+
+  <h2>說再多，不如看照片</h2>
+  <p>下面是實際的調整前後對比，更多個案在 <a href={withBase("/works")}>成果分享</a>，觀念文章在 <a href={withBase("/health")}>健康概念分享</a>。</p>
+  <div class="cases">
+    <img src={withBase(caseA)} alt="調整前後對比：高低肩與身體歪斜改善" loading="lazy" width="700" height="1000" />
+    <img src={withBase(caseB)} alt="調整前後對比：駝背圓肩體態改善" loading="lazy" width="700" height="1000" />
+  </div>
+
+  <h2>也不是只有我們自己說</h2>
+  <p>udn、vocus、Dcard、PTT 上都有人寫過我們的無痛整脊，你可以自己去看看：</p>
+  <ul class="press">
+    <li><a href="https://woman.udn.com/woman/story/123165/7996113" target="_blank" rel="noopener">聯合新聞網 女子漾：台中整骨店推薦</a></li>
+    <li><a href="https://vocus.cc/article/6846cf15fd897800013dc960" target="_blank" rel="noopener">vocus 實測：無痛整骨＋矯正運動一條龍，西屯整復新體驗</a></li>
+    <li><a href="https://udn.com/news/story/7207/8000264" target="_blank" rel="noopener">聯合新聞網：台中優質整骨店家推薦</a></li>
+  </ul>
+
+  <h2>常見問題</h2>
+  <dl class="faq">
+    {faqs.map((f) => (
+      <>
+        <dt>{f.q}</dt>
+        <dd>{f.a}</dd>
+      </>
+    ))}
+  </dl>
+
+  <p class="note">本中心提供的是身體調理與訓練服務，屬一般保健範疇，不能取代醫療診斷；若有明確外傷、疾病或神經症狀，建議先就醫。</p>
+
+  <h2>你的肩、你的腰，還要再忍多久？</h2>
+  <p>先來讓師傅幫你看一次體態，其他的再說。{SITE.name}，台中西屯，預約制。加 LINE 或打電話都可以。也可以先看 <a href={withBase("/booking")}>預約流程</a>。</p>
+  <ContactCTA />
+</Base>
+<style>
+  h1 { font-size: var(--text-2xl); line-height: 1.3; margin: 0.5rem 0 1rem; }
+  h2 { font-size: var(--text-xl); margin: 2rem 0 0.75rem; }
+  .hero { width: 100%; border-radius: 12px; margin: 0.5rem 0 1.25rem; }
+  .lead { font-size: var(--text-lg); color: var(--text-primary); margin: 1rem 0; }
+  p { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0; line-height: 1.8; }
+  .portrait { float: right; width: 220px; max-width: 45%; margin: 0 0 1rem 1.5rem; }
+  .portrait img { width: 100%; border-radius: 12px; display: block; }
+  .portrait figcaption { font-size: var(--text-sm); color: var(--text-muted); margin-top: 0.5rem; text-align: center; }
+  @media (max-width: 520px) { .portrait { float: none; width: 100%; max-width: 300px; margin: 0.5rem auto 1.25rem; } }
+  .wide { width: 100%; max-width: 520px; border-radius: 12px; margin: 1rem 0; display: block; }
+  .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0 1.5rem; }
+  .cases img { width: 100%; border-radius: 10px; }
+  .press { margin: 1rem 0; padding-left: 1.25rem; }
+  .press li { font-size: var(--text-base); margin: 0.6rem 0; }
+  .faq { margin: 1rem 0; }
+  .faq dt { font-size: var(--text-base); font-weight: 700; color: var(--text-primary); margin-top: 1rem; }
+  .faq dd { font-size: var(--text-base); color: var(--text-secondary); margin: 0.4rem 0 0; line-height: 1.8; }
+  .note { font-size: var(--text-sm); color: var(--text-secondary); background: var(--bg-overlay); border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+</style>
