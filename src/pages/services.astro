@@ -19,6 +19,7 @@ const crumb = breadcrumbSchema([
 
 // 核心服務（有獨立分頁）
 const core = [
+  { href: "/method", title: "無痛整脊", desc: "自然牽引調整脊椎，借自身重量、不硬扳、不喀一聲。" },
   { href: "/services/body-care", title: "全身調理", desc: "全身結構與張力的調理，協助歪斜回正、緩解痠痛。" },
   { href: "/services/personal-training", title: "一對一訓練", desc: "個人化肌力與動作訓練，讓調理成果維持得住。" },
   { href: "/services/body-sculpting", title: "體雕・體態調理", desc: "從張力平衡與訓練改善身形線條，而非單純減重。" },
@@ -52,8 +53,8 @@ const catalog = {
     itemOffered: { "@type": "Service", name: s.name, description: s.desc, areaServed: "台中市", provider: { "@type": "LocalBusiness", name: SITE.name } },
   })),
 };
-const seoTitle = "服務項目｜台中西屯全身調理・鄭骨館體雕中心";
-const seoDesc = "全身調理、體態矯正、痠痛調理、運動動作矯正、肌力訓練、減脂與一對一健身教練——台中西屯鄭骨館體雕中心服務項目與說明。";
+const seoTitle = "服務項目｜台中西屯無痛整脊・全身調理・鄭骨館體雕中心";
+const seoDesc = "無痛整脊、全身調理、體態矯正、痠痛調理、運動動作矯正、肌力訓練與一對一健身教練，台中西屯鄭骨館體雕中心服務項目與說明。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, catalog]}>
   {heroSlides.length > 0 && <Hero copy={heroCopy} slides={heroSlides} cards={heroCards} />}

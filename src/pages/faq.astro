@@ -1,12 +1,17 @@
 ---
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
+import { withBase } from "../lib/withBase";
 import { absUrl, breadcrumbSchema } from "../lib/site";
 
 const faqs = [
   {
+    q: "你們的整脊會痛嗎？跟一般整骨、整復差在哪？",
+    a: "我們以自然牽引的方式調整脊椎，借身體自身重量慢慢拉開、順回，不硬扳、不硬壓，過程溫和，也不會聽到骨頭「喀」的聲音。這也是和傳統按壓、扳動式整骨整復最大的不同。詳細說明可參考本站「無痛整脊」介紹頁。",
+  },
+  {
     q: "鄭骨館體雕中心在哪裡？",
-    a: "本中心位於台中市西屯區工業區一路58巷11弄83號，鄰近西屯工業區，提供全身調理、體雕與一對一訓練服務。",
+    a: "本中心位於台中市西屯區工業區一路58巷11弄83號，鄰近西屯工業區，提供無痛整脊、全身調理、體雕與一對一訓練服務。",
   },
   {
     q: "如何預約或聯絡？",
@@ -88,8 +93,8 @@ const faqSchema = {
     acceptedAnswer: { "@type": "Answer", text: f.a },
   })),
 };
-const seoTitle = "常見問題 FAQ｜台中西屯・鄭骨館體雕中心";
-const seoDesc = "鄭骨館體雕中心常見問題：地址、預約方式、服務項目、費用與全身調理疑問解答。台中市西屯區全身調理體雕。";
+const seoTitle = "常見問題 FAQ｜台中西屯無痛整脊・鄭骨館體雕中心";
+const seoDesc = "鄭骨館體雕中心常見問題：無痛整脊會不會痛、跟整骨整復差在哪、地址、預約方式、服務項目與費用解答。台中市西屯區無痛整脊・全身調理體雕。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, faqSchema]}>
   <h1>常見問題</h1>
@@ -101,6 +106,7 @@ const seoDesc = "鄭骨館體雕中心常見問題：地址、預約方式、服
       </details>
     ))}
   </div>
+  <p class="more">想了解我們怎麼調整脊椎，看 <a href={withBase("/method")}>無痛整脊・自然牽引介紹</a>。</p>
   <ContactCTA />
 </Base>
 <style>
@@ -113,4 +119,5 @@ const seoDesc = "鄭骨館體雕中心常見問題：地址、預約方式、服
     font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); cursor: pointer;
   }
   .faq__item p { font-size: var(--text-base); color: var(--text-secondary); margin-top: 0.75rem; }
+  .more { font-size: var(--text-base); color: var(--text-secondary); margin: 1.5rem 0; }
 </style>
