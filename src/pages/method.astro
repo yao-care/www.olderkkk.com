@@ -31,10 +31,11 @@ const faq = faqPageSchema(faqs);
 const seoTitle = "整脊會痛嗎？台中西屯無痛整脊，不硬扳也不喀｜鄭骨館體雕中心";
 const seoDesc = "怕整脊被喬到痛？鄭骨館用自然牽引調脊椎，不硬扳、不喀一聲。整脊師是健美選手出身，調完還帶你練，才不會一調又跑掉。台中西屯，預約制。";
 
-// 暫用照片：以下皆為店內既有實拍，攝影師重拍手法照後再替換（TODO：hero、整脊床、鄭師傅工作照）
-const heroImg = "/images/2cd75f2550f7.webp"; // TODO 換手法/自然牽引照
+// 照片：店內既有實拍（日後有更好的手法照可再升級替換）
+const heroImg = "/images/2cd75f2550f7.webp"; // 師傅徒手調理
 const laoKImg = "/images/001fee432a3e.jpg";  // 鄭師傅（工作室）
 const trainImg = "/images/42fa30462f66.jpg"; // 一對一訓練實拍
+const clinicImg = "/images/4d65b160c8b4.jpg"; // 診療空間（櫃檯／診療區／門面）
 const caseA = "/images/520ae8a509ef.jpg";     // 調整前後（高低肩）
 const caseB = "/images/c46408bfe6b9.jpg";     // 調整前後（駝背/圓肩）
 ---
@@ -52,7 +53,7 @@ const caseB = "/images/c46408bfe6b9.jpg";     // 調整前後（駝背/圓肩）
 
   <h2>能這麼溫和，一半要歸功那張床</h2>
   <p>一般整復就是一張普通床加一雙手。我們這張不一樣。它是耗資百萬、全台唯一打造的整脊床，能把脊椎一節一節分開來慢慢調。器材夠到位，師傅就不必出蠻力，你也就不用痛。</p>
-  {/* TODO 整脊床特寫照（攝影師重拍後補） */}
+  <img class="wide" src={withBase(clinicImg)} alt="鄭骨館體雕中心診療空間與整脊床環境" loading="lazy" width="1000" height="500" />
 
   <h2>幫你調的人，是個健美選手</h2>
   <figure class="portrait">
