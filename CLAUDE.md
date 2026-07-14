@@ -33,6 +33,7 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 | 服務項目 | `src/content/pages/services.md` | `/services` |
 | 課程介紹 | `src/content/pages/courses.md` | `/courses` |
 | 聯絡我們 | `src/content/pages/contact.md` | `/contact` |
+| 無痛整脊招牌頁 | `src/pages/method.astro`（差異軸主打：自然牽引/整脊床/健美選手/一條龍） | `/method` |
 | 健康概念分享 | `src/content/health/<id>.md`（列表＋文章） | `/health`、`/health/<id>` |
 | 最新消息 | `src/content/news/<id>.md` | `/news`、`/news/<id>` |
 | 成果分享 | `src/content/works/{body,feet}.md`（相簿，`photos:` 陣列） | `/works`、`/works/<album>` |
@@ -85,5 +86,7 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 - GA4 埋碼、GSC sitemap 提交完成。
 
 ## 待辦（交接給後續）
-- （目前無明確待辦；GBP 已在經營，見「數據追蹤」段。）
+- **/method 招牌頁照片替換**（2026-07-14 上線，暫用店內既有實拍）：攝影師重拍後替換 hero、整脊床特寫、鄭師傅工作照（檔內 `TODO` 標記處）。
+- **/method 事實核實**：整脊床「全台唯一・耗資百萬」宣稱需能舉證（公平法）；補鄭博陽「國際整復師認證」證照全名／發證單位。
+- （GBP 已在經營，見「數據追蹤」段。）
 - 設計／規劃文件：`docs/superpowers/`（spec、plan）。
