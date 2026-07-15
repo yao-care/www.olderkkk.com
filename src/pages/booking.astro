@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
+import { withBase } from "../lib/withBase";
 import { absUrl, breadcrumbSchema, bookingHowToSchema, BOOKING, PARKING, SITE } from "../lib/site";
 const base = import.meta.env.BASE_URL;
 const crumb = breadcrumbSchema([
@@ -36,6 +37,8 @@ const seoDesc = "鄭骨館體雕中心採預約制：如何用 LINE 或電話預
   <p>場館地址：{SITE.addressText}。可導航至 <a href={SITE.map}>Google 地圖</a>；鄰近可停 <a href={PARKING.map}>{PARKING.name}</a>。</p>
   <p>營業時間：{SITE.hoursText}。</p>
 
+  <p class="faq-link">預約前還有疑問？可以先看看 <a href={withBase("/faq")}>常見問題</a>。</p>
+
   <h2>現在就預約</h2>
   <ContactCTA />
 </Base>
@@ -48,4 +51,5 @@ const seoDesc = "鄭骨館體雕中心採預約制：如何用 LINE 或電話預
   .confirm { font-size: var(--text-base); font-weight: 700; color: var(--color-link); background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem 1.25rem; }
   .notice { margin: 1rem 0 1.5rem; padding-left: 1.25rem; }
   .notice li { font-size: var(--text-base); color: var(--text-secondary); margin: 0.5rem 0; }
+  .faq-link { font-size: var(--text-base); color: var(--text-secondary); margin: 1rem 0 1.5rem; }
 </style>
