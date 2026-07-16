@@ -3,10 +3,7 @@ import { withBase } from "../lib/withBase";
 // 分層導覽：有 children 者為下拉群組；預約獨立為 CTA。
 const nav = [
   { href: "/", label: "首頁" },
-  { label: "關於", children: [
-    { href: "/about", label: "關於我們" },
-    { href: "/faq", label: "常見問題" },
-  ] },
+  { href: "/about", label: "關於" },
   { label: "服務", children: [
     { href: "/method", label: "無痛整脊介紹" },
     { href: "/services", label: "服務項目" },
@@ -17,6 +14,7 @@ const nav = [
     { href: "/health", label: "健康概念分享" },
     { href: "/news", label: "最新消息" },
   ] },
+  { href: "/faq", label: "常見問題" },
   { href: "/contact", label: "聯絡我們" },
 ];
 const cta = { href: "/booking", label: "預約" };
