@@ -10,17 +10,29 @@ import sitemap from '@astrojs/sitemap';
 const BASE = process.env.BASE_PATH ?? '/www.olderkkk.com';
 const SITE = process.env.SITE_URL ?? 'https://yao-care.github.io';
 
-// rehype 外掛：把 Markdown 內以 "/" 開頭的內部連結/圖片加上 base 前綴。
-// 當 BASE 為 "/"（根網域）時不做任何事，避免產生 "//path"。
+// rehype 外掛：把 Markdown 內以 "/" 開頭的內部連結/圖片加上 base 前綴，
+// 並替內部「頁面」連結補結尾斜線（對應靜態輸出 /path/index.html，避免
+// GitHub Pages 對無斜線網址多一次 301——那會被 GSC 記成「頁面會重新導向」）。
+// 注意：base 前綴僅在 BASE≠"/" 時加；補斜線邏輯需在 BASE="/"（正式站）時照樣執行。
 function rehypeBasePrefix() {
   const prefix = BASE === '/' ? '' : BASE;
+  // 僅對 href（頁面連結）補斜線：拆出 ?query / #hash，路徑段無副檔名才補。
+  const ensureTrailingSlash = (v) => {
+    const m = v.match(/^([^?#]*)([?#].*)?$/);
+    let path = m[1];
+    const suffix = m[2] ?? '';
+    const last = path.split('/').pop() ?? '';
+    if (path && !path.endsWith('/') && !last.includes('.')) path += '/';
+    return path + suffix;
+  };
   const fix = (node) => {
-    if (prefix && node.type === 'element' && node.properties) {
+    if (node.type === 'element' && node.properties) {
       for (const attr of ['href', 'src']) {
-        const v = node.properties[attr];
-        if (typeof v === 'string' && v.startsWith('/') && !v.startsWith('//') && !v.startsWith(prefix + '/')) {
-          node.properties[attr] = prefix + v;
-        }
+        let v = node.properties[attr];
+        if (typeof v !== 'string' || !v.startsWith('/') || v.startsWith('//')) continue;
+        if (prefix && !v.startsWith(prefix + '/')) v = prefix + v;
+        if (attr === 'href') v = ensureTrailingSlash(v);
+        node.properties[attr] = v;
       }
     }
     if (node.children) node.children.forEach(fix);
