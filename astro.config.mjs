@@ -64,6 +64,11 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
+      // 排除 noindex 的舊網址轉址樁（如 /services/chiropractic → /services/body-care）：
+      // 這些頁帶 <meta robots="noindex">，放進 sitemap 會對 Google 送出矛盾訊號
+      // （一邊提交、一邊叫它別收），造成「已找到/已檢索－尚未建立索引」。
+      // 保留頁面本身以承接舊連結，但不在 sitemap 宣告。新增此類樁頁時一併加入。
+      filter: (url) => !/\/services\/chiropractic\/?$/.test(url),
       // 依頁面重要性差異化 priority / changefreq（預設全為 0.5 / weekly）
       serialize(item) {
         // 取站內路徑（去掉網域與 base 前綴），結尾不含斜線方便比對
