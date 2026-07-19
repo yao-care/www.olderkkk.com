@@ -10,7 +10,7 @@ export const GET: APIRoute = ({ site }) => {
 
   const body = `# ${SITE.name}
 
-> ${SITE.tagline}。位於${SITE.address.region}${SITE.address.locality}的全身調理／體雕與一對一肌力訓練中心，採預約制。結合健美式訓練與人體力學矯正，處理身體歪斜、痠痛與動作矯正。
+> ${SITE.tagline}。位於${SITE.address.region}${SITE.address.locality}的運動矯正／體雕與一對一肌力訓練中心，採預約制。結合健美式訓練與人體力學，用運動矯正改善身體歪斜、痠痛與動作模式。
 
 ## 商家資訊
 - 名稱：${SITE.name}
@@ -25,7 +25,7 @@ export const GET: APIRoute = ({ site }) => {
 - 預約方式：採預約制，請先以電話或 LINE 預約時段
 
 ## 服務項目
-全身調理、身體調理、歪斜調理、痠痛調理、運動動作矯正、動作失能矯正、運動按摩矯正、肌力訓練、減脂計畫、重量肌力訓練、全身張力平衡、一對一健身教練。
+全身運動矯正、體態運動矯正、痠痛運動矯正、運動矯正動作、動作失能運動矯正、運動按摩放鬆、肌力訓練、減脂計畫、重量肌力訓練、全身張力平衡、一對一健身教練。
 
 ## 主理人
 ${PERSON.name}（${PERSON.jobTitle}）：${PERSON.description}
@@ -35,7 +35,7 @@ ${PERSON.name}（${PERSON.jobTitle}）：${PERSON.description}
 - 服務項目：${abs("/services")}
 - 收費方式：${abs("/pricing")}
 - 預約流程與初次須知：${abs("/booking")}
-- 名詞解釋（全身調理/體雕/一對一訓練）：${abs("/glossary")}
+- 名詞解釋（全身運動矯正/體雕/一對一訓練）：${abs("/glossary")}
 - 課程介紹：${abs("/courses")}
 - 健康概念分享：${abs("/health")}
 - 媒體報導與體驗分享：${abs("/reviews")}

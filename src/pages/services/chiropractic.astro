@@ -1,5 +1,5 @@
 ---
-// 舊網址轉址：本服務已更名為「全身調理」，網址改為 /services/body-care。
+// 舊網址轉址：本服務已更名為「全身運動矯正」，網址改為 /services/body-care。
 // 保留此頁做 301-style 轉址（meta refresh + canonical + noindex），避免舊連結 404。
 import { withBase } from "../../lib/withBase";
 const target = withBase("/services/body-care");
@@ -12,9 +12,9 @@ const target = withBase("/services/body-care");
     <meta http-equiv="refresh" content={`0; url=${target}`} />
     <link rel="canonical" href={target} />
     <meta name="robots" content="noindex, follow" />
-    <title>頁面已搬移：全身調理</title>
+    <title>頁面已搬移：全身運動矯正</title>
   </head>
   <body>
-    <p style="font-size:18px;font-family:sans-serif">本頁已更名為「全身調理」。若未自動跳轉，請點 <a href={target}>前往新頁面</a>。</p>
+    <p style="font-size:18px;font-family:sans-serif">本頁已更名為「全身運動矯正」。若未自動跳轉，請點 <a href={target}>前往新頁面</a>。</p>
   </body>
 </html>

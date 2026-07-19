@@ -13,11 +13,11 @@ const slides = (entry.data.slides ?? []).map((s) => ({ ...s, image: withBase(s.i
 
 // 首頁服務／課程入口卡
 const services = [
-  { href: "/method", title: "脊椎調理", desc: "借自身重量、自然牽引調理脊椎，不硬扳、不喀一聲。" },
-  { href: "/services/body-care", title: "全身調理", desc: "全身結構與張力的調理，協助歪斜回正、緩解痠痛。" },
-  { href: "/services/personal-training", title: "一對一訓練", desc: "個人化肌力與動作訓練，讓調理成果維持得住。" },
-  { href: "/services/body-sculpting", title: "體雕・體態調理", desc: "從張力平衡與訓練改善身形線條，而非單純減重。" },
-  { href: "/courses", title: "課程介紹", desc: "一對一指導課程，結合全身調理與肌力訓練。" },
+  { href: "/method", title: "運動矯正", desc: "帶你把發力做在對的位置，重建站姿與出力，不硬扳、不喀一聲。" },
+  { href: "/services/body-care", title: "全身運動矯正", desc: "從發力與排列全面評估，用運動矯正協助歪斜回正、緩解痠痛。" },
+  { href: "/services/personal-training", title: "一對一訓練", desc: "個人化肌力與動作訓練，讓運動矯正的成果維持得住。" },
+  { href: "/services/body-sculpting", title: "體雕・體態訓練", desc: "從張力平衡與訓練改善身形線條，而非單純減重。" },
+  { href: "/courses", title: "課程介紹", desc: "一對一指導課程，結合全身運動矯正與肌力訓練。" },
 ];
 // 最新資訊入口
 const latest = [
@@ -25,18 +25,18 @@ const latest = [
   { href: "/news", title: "最新消息", desc: "最新優惠、活動與店內動態。" },
 ];
 
-const seoTitle = "台中西屯脊椎調理・全身調理體雕｜鄭骨館體雕中心";
-const seoDesc = "台中西屯鄭骨館體雕中心，由健美選手出身的老K主理，主打自然牽引脊椎調理，不硬扳、不喀一聲，結合全身調理、體雕與一對一訓練，處理身體歪斜、痠痛與姿勢問題。預約電話 0970686319。";
+const seoTitle = "台中西屯運動矯正・肌力訓練體雕｜鄭骨館體雕中心";
+const seoDesc = "台中西屯鄭骨館體雕中心，由健美選手出身的老K主理，主打運動矯正與肌力訓練，不硬扳、不喀一聲，結合全身運動矯正、體雕與一對一訓練，改善身體歪斜、痠痛與姿勢問題。預約電話 0970686319。";
 ---
 <Base title={seoTitle} description={seoDesc}>
   {slides.length > 0 && <Hero copy={copy} slides={slides} cards={heroCards} />}
-  <h1 class="sr-only">台中西屯脊椎調理・全身調理・一對一訓練｜鄭骨館體雕中心</h1>
+  <h1 class="sr-only">台中西屯運動矯正・肌力訓練・一對一訓練｜鄭骨館體雕中心</h1>
 
   <!-- 關於老K -->
   <section class="home-about">
     <div class="home-about__text">
       <h2>關於老K</h2>
-      <p>一開始接觸健美式訓練，了解肌肉運作方式；再接觸全身調理技術，並將二者融合運用。後來接觸人體力學矯正方法，同時處理肌肉發力方式與調理關節排列位置，更有效地協助改善身體的使用方式與痠緊狀況。</p>
+      <p>一開始接觸健美式訓練，了解肌肉運作方式；再學會全身運動矯正的技術，並將二者融合運用。後來鑽研人體力學，用運動矯正同時處理肌肉發力方式與關節排列位置，更有效地協助改善身體的使用方式與痠緊狀況。</p>
       <a class="home-link" href={withBase("/about")}>更多關於我們 →</a>
     </div>
     <img class="home-about__photo" src={withBase("/images/laok-profile.jpg")} alt="鄭骨館體雕中心主理人老K（鄭博陽）" loading="lazy" width="320" height="320" />

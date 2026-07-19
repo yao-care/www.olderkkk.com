@@ -1,7 +1,7 @@
 // 商家基本資訊與結構化資料（SEO / AEO / GEO 共用）
 export const SITE = {
   name: "鄭骨館體雕中心",
-  tagline: "台中西屯・自然牽引・全身調理・體雕・一對一訓練",
+  tagline: "台中西屯・運動矯正・肌力訓練・體雕・一對一訓練",
   tel: "0970686319",
   telE164: "+886-970-686-319",
   email: "d28281778@gmail.com",
@@ -39,16 +39,16 @@ export const SITE = {
 
 // 師傅／教練（對外公開）。鄭師傅即主理人老K（本名鄭博陽）。
 export const PRACTITIONERS = [
-  { name: "鄭師傅", aka: "老K（鄭博陽）", role: "全身調理・張力訓練" },
-  { name: "何師傅", role: "全身調理" },
+  { name: "鄭師傅", aka: "老K（鄭博陽）", role: "運動矯正・肌力訓練" },
+  { name: "何師傅", role: "運動矯正・肌力訓練" },
 ];
 
 // 收費方式（價格以現場或 LINE 最新公告為準）。
 export const PRICING = [
-  { name: "全身調理（鄭師傅）", price: 1100, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的全身調理" },
-  { name: "全身調理（何師傅）", price: 1000, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的全身調理" },
+  { name: "運動矯正・肌力訓練（鄭師傅）", price: 1100, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的運動矯正與肌力訓練" },
+  { name: "運動矯正・肌力訓練（何師傅）", price: 1000, unit: "次", duration: "約 30–40 分鐘", desc: "含骨盆、膝蓋、腳踝、肩膀的運動矯正與肌力訓練" },
   { name: "一對一教練課", price: 2000, unit: "堂", desc: "依個人張力失衡、身體協調與肌力進行個人化訓練" },
-  { name: "預約諮詢與評估", price: null as number | null, desc: "先了解身體狀況，再一起決定合適的調理與訓練方向" },
+  { name: "預約諮詢與評估", price: null as number | null, desc: "先了解身體狀況，再一起決定合適的運動矯正與訓練方向" },
 ];
 
 // 停車（場館鄰近合作/推薦停車場）
@@ -57,18 +57,18 @@ export const PARKING = { name: "天佑停車場", map: "https://maps.app.goo.gl/
 // 預約流程與初次須知（對外公開；採預約制）
 export const BOOKING = {
   steps: [
-    { name: "選擇服務", text: "決定想預約的服務（全身調理評估、一對一教練課）。不確定時可先選「預約諮詢與評估」。" },
+    { name: "選擇服務", text: "決定想預約的服務（運動矯正評估、一對一教練課）。不確定時可先選「預約諮詢與評估」。" },
     { name: "聯繫預約", text: "透過 LINE（@275nxace）或電話 0970686319 告知欲預約的項目與希望時段。" },
     { name: "提供姓名電話", text: "預約時請提供姓名與聯絡電話，方便確認與聯繫。" },
     { name: "等待確認", text: "小編回覆並確認姓名、電話後，才算預約成功。" },
     { name: "依約到場", text: "依約定時間前往台中市西屯區工業區一路58巷11弄83號，鄰近可停天佑停車場。" },
   ],
-  // 調理前需主動告知的狀況（安全評估）
+  // 運動矯正前需主動告知的狀況（安全評估）
   notice: [
     "女生請避免穿著裙裝，以方便活動與檢查。",
     "有骨質疏鬆、曾耳石滑脫、裝有心臟支架者，請於預約與到場時主動告知。",
-    "脊椎曾開刀（打釘、骨漿等）者請先告知，由師傅評估。",
-    "開刀或剖腹生產者，建議滿 3 個月後再進行調理。",
+    "背部或關節曾開刀（打釘、骨漿等）者請先告知，由師傅評估。",
+    "開刀或剖腹生產者，建議滿 3 個月後再進行運動矯正與訓練。",
     "若有明確外傷、急性疼痛或神經症狀（麻、無力），建議先就醫診斷。",
   ],
   confirm: "本中心採預約制；小編回覆並確認姓名、電話後才算預約成功。",
@@ -223,10 +223,10 @@ export function videoObjectSchema(o: { id: string; name: string; description: st
 export const PERSON = {
   name: "老K",
   alternateName: "鄭博陽", // 本名（用戶確認）；畫面顯示暱稱「老K」，結構化資料兩者並陳以利 AI 實體串接
-  jobTitle: "全身調理體雕暨一對一訓練教練",
-  knowsAbout: ["健美式訓練", "全身調理", "人體力學矯正", "肌力訓練", "體態矯正"],
+  jobTitle: "運動矯正體雕暨一對一訓練教練",
+  knowsAbout: ["健美式訓練", "運動矯正", "肌力訓練", "人體力學", "體態訓練"],
   description:
-    "結合健美式訓練與人體力學矯正，同時處理肌肉發力方式與調理關節排列位置，協助改善身體使用方式與痠緊狀況。",
+    "結合健美式訓練與運動矯正，同時處理肌肉發力方式與關節排列，協助改善身體使用方式與痠緊狀況。",
 };
 
 // Person 結構化資料（全站輸出一次，供 LocalBusiness.founder 與文章 author 以 @id 參照）
@@ -253,7 +253,7 @@ export function localBusinessSchema(siteUrl: string, image: string, logo?: strin
     name: SITE.name,
     ...(logo ? { logo } : {}),
     description:
-      "台中市西屯區體雕中心，主打自然牽引脊椎調理（不硬扳、不喀一聲），結合健美式訓練與人體力學矯正，提供脊椎調理、全身調理、歪斜調理、痠痛調理、運動矯正與一對一肌力訓練。",
+      "台中市西屯區體雕中心，主打運動矯正與肌力訓練（不硬扳、不喀一聲），結合健美式訓練，提供運動矯正、肌力訓練、體態訓練與一對一教練課。",
     image,
     telephone: SITE.telE164,
     email: SITE.email,
@@ -271,7 +271,7 @@ export function localBusinessSchema(siteUrl: string, image: string, logo?: strin
       { "@type": "OpeningHoursSpecification", dayOfWeek: SITE.openDays, opens: "14:00", closes: "17:00" },
       { "@type": "OpeningHoursSpecification", dayOfWeek: SITE.openDays, opens: "20:00", closes: "22:00" },
     ],
-    // 服務範圍：主市 + 鄰近行政區（吃下「附近全身調理」類在地查詢）
+    // 服務範圍：主市 + 鄰近行政區（吃下「附近運動矯正」類在地查詢）
     areaServed: [
       { "@type": "City", name: "台中市" },
       ...["西屯區", "北屯區", "南屯區", "西區", "北區"].map((n) => ({ "@type": "AdministrativeArea", name: `台中市${n}` })),
