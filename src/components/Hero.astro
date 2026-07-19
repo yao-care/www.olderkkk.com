@@ -93,7 +93,7 @@ const { copy, slides, cards = [] } = Astro.props;
   .hero__lines { margin: 0; color: var(--text-secondary); }
   .hero__line { display: block; font-size: var(--text-sm); line-height: 1.7; }
 
-  /* 中欄：照片框——撐滿整個 section 高度（含上下內距） */
+  /* 中欄：照片框，撐滿整個 section 高度（含上下內距） */
   .hero__stage { position: relative; display: grid; margin-block: calc(-1 * clamp(16px, 2vw, 32px)); }
   .hero__slide { grid-area: 1 / 1; display: grid; place-items: stretch; opacity: 0; pointer-events: none; }
   .hero__slide.is-active { opacity: 1; pointer-events: auto; }

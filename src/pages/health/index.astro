@@ -14,7 +14,7 @@ const list = itemListSchema({
   items: articles.map((a) => ({ name: a.data.title, url: absUrl(`/health/${a.id}`, Astro.site, base) })),
 });
 const seoTitle = "健康概念分享｜台中西屯・鄭骨館體雕中心";
-const seoDesc = "全身運動矯正、體態訓練與運動傷害的健康知識分享——台中西屯鄭骨館體雕中心。";
+const seoDesc = "全身運動矯正、體態訓練與運動傷害的健康知識分享，台中西屯鄭骨館體雕中心。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, list]}>
   <h1>健康概念分享</h1>

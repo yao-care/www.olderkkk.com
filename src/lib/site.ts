@@ -140,7 +140,7 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
   };
 }
 
-// 列表頁清單（健康/消息/相簿索引）—— 幫 AI 理解內容目錄與其順序
+// 列表頁清單（健康/消息/相簿索引）：幫 AI 理解內容目錄與其順序
 export function itemListSchema(o: { name: string; items: { name: string; url: string }[] }) {
   return {
     "@context": "https://schema.org",

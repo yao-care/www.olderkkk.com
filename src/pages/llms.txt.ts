@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { SITE, PERSON } from "../lib/site";
 
-// /llms.txt —— 供大型語言模型快速取用的純文字摘要（新興慣例）。
+// /llms.txt：供大型語言模型快速取用的純文字摘要（新興慣例）。
 // 內容皆取自 site.ts 既有事實，不杜撰。
 export const GET: APIRoute = ({ site }) => {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");

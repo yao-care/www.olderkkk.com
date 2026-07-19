@@ -15,7 +15,7 @@ const firstImg = pickOgImage(entry.body ?? "");
 const base = import.meta.env.BASE_URL;
 const pageUrl = absUrl(`/news/${slug}`, Astro.site, base);
 const seoTitle = `${entry.data.title}｜最新消息｜鄭骨館體雕中心`;
-const seoDesc = entry.data.summary || `${entry.data.title}——台中西屯鄭骨館體雕中心最新消息。`;
+const seoDesc = entry.data.summary || `${entry.data.title}，台中西屯鄭骨館體雕中心最新消息。`;
 const schemas: object[] = [
   breadcrumbSchema([
     { name: "首頁", url: absUrl("/", Astro.site, base) },

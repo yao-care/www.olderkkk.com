@@ -14,7 +14,7 @@ const list = itemListSchema({
   items: articles.map((a) => ({ name: a.data.title, url: absUrl(`/news/${a.id}`, Astro.site, base) })),
 });
 const seoTitle = "最新消息｜台中西屯・鄭骨館體雕中心";
-const seoDesc = "鄭骨館體雕中心最新優惠與活動消息——台中西屯全身運動矯正體雕。";
+const seoDesc = "鄭骨館體雕中心最新優惠與活動消息，台中西屯全身運動矯正體雕。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, list]}>
   <h1>最新消息</h1>
