@@ -13,7 +13,7 @@ const slides = (entry.data.slides ?? []).map((s) => ({ ...s, image: withBase(s.i
 
 // 首頁服務／課程入口卡
 const services = [
-  { href: "/method", title: "無痛整脊", desc: "借自身重量、自然牽引調整脊椎，不硬扳、不喀一聲。" },
+  { href: "/method", title: "脊椎調理", desc: "借自身重量、自然牽引調理脊椎，不硬扳、不喀一聲。" },
   { href: "/services/body-care", title: "全身調理", desc: "全身結構與張力的調理，協助歪斜回正、緩解痠痛。" },
   { href: "/services/personal-training", title: "一對一訓練", desc: "個人化肌力與動作訓練，讓調理成果維持得住。" },
   { href: "/services/body-sculpting", title: "體雕・體態調理", desc: "從張力平衡與訓練改善身形線條，而非單純減重。" },
@@ -25,12 +25,12 @@ const latest = [
   { href: "/news", title: "最新消息", desc: "最新優惠、活動與店內動態。" },
 ];
 
-const seoTitle = "台中西屯無痛整脊・全身調理體雕｜鄭骨館體雕中心";
-const seoDesc = "台中西屯鄭骨館體雕中心，由健美選手出身的老K主理，主打無痛整脊（整骨）・自然牽引，不硬扳、不喀一聲，結合全身調理、體雕與一對一訓練，處理身體歪斜、痠痛與姿勢問題。預約電話 0970686319。";
+const seoTitle = "台中西屯脊椎調理・全身調理體雕｜鄭骨館體雕中心";
+const seoDesc = "台中西屯鄭骨館體雕中心，由健美選手出身的老K主理，主打自然牽引脊椎調理，不硬扳、不喀一聲，結合全身調理、體雕與一對一訓練，處理身體歪斜、痠痛與姿勢問題。預約電話 0970686319。";
 ---
 <Base title={seoTitle} description={seoDesc}>
   {slides.length > 0 && <Hero copy={copy} slides={slides} cards={heroCards} />}
-  <h1 class="sr-only">台中西屯無痛整脊・全身調理・一對一訓練｜鄭骨館體雕中心</h1>
+  <h1 class="sr-only">台中西屯脊椎調理・全身調理・一對一訓練｜鄭骨館體雕中心</h1>
 
   <!-- 關於老K -->
   <section class="home-about">

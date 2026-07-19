@@ -9,7 +9,7 @@ const crumb = breadcrumbSchema([
   { name: "名詞解釋", url: absUrl("/glossary", Astro.site, base) },
 ]);
 const terms = [
-  { term: "無痛整脊・自然牽引", def: "借客人自身的重量與角度，把脊椎慢慢拉開、順回，由師傅引導方向，不靠蠻力硬壓或硬扳，過程溫和，也不會有骨頭「喀」的聲音。屬身體保健調理，非醫療行為。" },
+  { term: "脊椎調理・自然牽引", def: "借客人自身的重量與角度，把脊椎慢慢拉開、順回，由師傅引導方向，不靠蠻力硬壓或硬扳，過程溫和，也不會有骨頭「喀」的聲音。屬身體保健調理，並非醫療診斷。" },
   { term: "全身調理", def: "以徒手方式整體放鬆過度緊繃的部位、協助關節排列回到較理想的位置，通常涵蓋骨盆、膝蓋、腳踝與肩膀，著重身體結構調理與張力平衡，並非醫療骨科手術。" },
   { term: "體雕", def: "透過張力平衡、姿勢調理與訓練，協助改善身形線條與體態的服務，著重肌肉發力方式與身體排列，而非單純減重。" },
   { term: "一對一訓練", def: "由教練一對一帶領，針對個人的張力失衡、身體協調與肌力進行個人化訓練，幫助身體支撐的張力維持在較中立的位置，讓調理後的成果更穩定。" },
@@ -22,8 +22,8 @@ const termSet = {
   name: "全身調理・體雕・一對一訓練 名詞解釋",
   hasDefinedTerm: terms.map((t) => ({ "@type": "DefinedTerm", name: t.term, description: t.def })),
 };
-const seoTitle = "無痛整脊、全身調理、體雕、一對一訓練 名詞解釋｜鄭骨館體雕中心";
-const seoDesc = "無痛整脊、自然牽引、全身調理、體雕、張力平衡有什麼不同？台中西屯鄭骨館體雕中心用淺白方式說明這些常見名詞。";
+const seoTitle = "脊椎調理、全身調理、體雕、一對一訓練 名詞解釋｜鄭骨館體雕中心";
+const seoDesc = "脊椎調理、自然牽引、全身調理、體雕、張力平衡有什麼不同？台中西屯鄭骨館體雕中心用淺白方式說明這些常見名詞。";
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, termSet]}>
   <h1>名詞解釋：全身調理、體雕、一對一訓練</h1>
@@ -36,7 +36,7 @@ const seoDesc = "無痛整脊、自然牽引、全身調理、體雕、張力平
       </div>
     ))}
   </dl>
-  <p>想了解我們怎麼調整脊椎，可看 <a href={withBase("/method")}>無痛整脊介紹</a>；不確定自己適合哪一種，歡迎先 <a href={withBase("/booking")}>預約諮詢與評估</a>。</p>
+  <p>想了解我們怎麼調理脊椎，可看 <a href={withBase("/method")}>脊椎調理介紹</a>；不確定自己適合哪一種，歡迎先 <a href={withBase("/booking")}>預約諮詢與評估</a>。</p>
   <ContactCTA />
 </Base>
 <style>

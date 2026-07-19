@@ -1,7 +1,7 @@
 // 商家基本資訊與結構化資料（SEO / AEO / GEO 共用）
 export const SITE = {
   name: "鄭骨館體雕中心",
-  tagline: "台中西屯・無痛整脊・全身調理・體雕・一對一訓練",
+  tagline: "台中西屯・自然牽引・全身調理・體雕・一對一訓練",
   tel: "0970686319",
   telE164: "+886-970-686-319",
   email: "d28281778@gmail.com",
@@ -253,7 +253,7 @@ export function localBusinessSchema(siteUrl: string, image: string, logo?: strin
     name: SITE.name,
     ...(logo ? { logo } : {}),
     description:
-      "台中市西屯區體雕中心，主打無痛整脊・自然牽引（不硬扳、不喀一聲），結合健美式訓練與人體力學矯正，提供無痛整脊、全身調理、歪斜調理、痠痛調理、運動矯正與一對一肌力訓練。",
+      "台中市西屯區體雕中心，主打自然牽引脊椎調理（不硬扳、不喀一聲），結合健美式訓練與人體力學矯正，提供脊椎調理、全身調理、歪斜調理、痠痛調理、運動矯正與一對一肌力訓練。",
     image,
     telephone: SITE.telE164,
     email: SITE.email,
