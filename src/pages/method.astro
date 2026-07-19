@@ -36,8 +36,6 @@ const heroImg = "/images/2cd75f2550f7.webp"; // 師傅徒手調理
 const laoKImg = "/images/001fee432a3e.jpg";  // 鄭師傅（工作室）
 const trainImg = "/images/42fa30462f66.jpg"; // 一對一訓練實拍
 const clinicImg = "/images/4d65b160c8b4.jpg"; // 診療空間（櫃檯／診療區／門面）
-const caseA = "/images/520ae8a509ef.jpg";     // 調整前後（高低肩）
-const caseB = "/images/c46408bfe6b9.jpg";     // 調整前後（駝背/圓肩）
 ---
 <Base title={seoTitle} description={seoDesc} image={heroImg} schemas={[crumb, service, faq]}>
   <h1>整脊會痛嗎？我們這裡不硬扳，也不會「喀」一聲</h1>
@@ -52,8 +50,8 @@ const caseB = "/images/c46408bfe6b9.jpg";     // 調整前後（駝背/圓肩）
   <p>所以怕痛的、被別家喬到怕的、第一次想試整脊的人，在我們這裡通常比較放得下心。</p>
 
   <h2>能這麼溫和，一半要歸功那張床</h2>
-  <p>一般整復就是一張普通床加一雙手。我們這張不一樣。它是耗資百萬、全台唯一打造的整脊床，能把脊椎一節一節分開來慢慢調。器材夠到位，師傅就不必出蠻力，你也就不用痛。</p>
-  <img class="wide" src={withBase(clinicImg)} alt="鄭骨館體雕中心診療空間與整脊床環境" loading="lazy" width="1000" height="500" />
+  <p>一般整復就是一張普通床加一雙手。我們這張不一樣。它是耗資百萬、全台唯一打造的中軸定位床，能把脊椎一節一節分開來慢慢調。器材夠到位，師傅就不必出蠻力，你也就不用痛。</p>
+  <img class="wide" src={withBase(clinicImg)} alt="鄭骨館體雕中心診療空間與中軸定位床環境" loading="lazy" width="1000" height="500" />
 
   <h2>幫你調的人，是個健美選手</h2>
   <figure class="portrait">
@@ -68,12 +66,7 @@ const caseB = "/images/c46408bfe6b9.jpg";     // 調整前後（駝背/圓肩）
   <p>所以我們不只調，還帶你練。調完會有<strong>一對一矯正訓練</strong>，教你腳底怎麼踩、骨盆擺哪裡、核心怎麼出力、呼吸怎麼配。一項一項把對的用力方式裝回你身上。這樣才有機會調一次撐得久，不用一直回來報到。</p>
   <img class="wide" src={withBase(trainImg)} alt="鄭骨館體雕中心教練一對一帶客人做矯正與肌力訓練" loading="lazy" width="900" height="900" />
 
-  <h2>說再多，不如看照片</h2>
-  <p>下面是實際的調整前後對比，更多個案在 <a href={withBase("/works")}>成果分享</a>，觀念文章在 <a href={withBase("/health")}>健康概念分享</a>。</p>
-  <div class="cases">
-    <img src={withBase(caseA)} alt="調整前後對比：高低肩與身體歪斜改善" loading="lazy" width="700" height="1000" />
-    <img src={withBase(caseB)} alt="調整前後對比：駝背圓肩體態改善" loading="lazy" width="700" height="1000" />
-  </div>
+  <p>更多觀念文章在 <a href={withBase("/health")}>健康概念分享</a>。</p>
 
   <h2>也不是只有我們自己說</h2>
   <p>udn、vocus、Dcard、PTT 上都有人寫過我們的無痛整脊，你可以自己去看看：</p>
