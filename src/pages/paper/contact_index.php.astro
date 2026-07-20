@@ -1,0 +1,18 @@
+---
+// 舊 PHP 站轉址樁（回傳 200 + meta refresh + canonical + noindex），承接 Google 舊索引網址。
+const target = "/contact";
+const canonical = "https://www.olderkkk.com" + (target === "/" ? "/" : target + "/");
+---
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="noindex, follow" />
+    <title>頁面已搬移｜鄭骨館體雕中心</title>
+  </head>
+  <body>
+    <p style="font-family:sans-serif">本頁已搬移，若未自動跳轉，請點 <a href={target}>前往新頁面</a>。</p>
+  </body>
+</html>
