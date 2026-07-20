@@ -33,7 +33,7 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 | 服務項目 | `src/content/pages/services.md` | `/services` |
 | 課程介紹 | `src/content/pages/courses.md` | `/courses` |
 | 聯絡我們 | `src/content/pages/contact.md` | `/contact` |
-| 無痛整脊招牌頁 | `src/pages/method.astro`（差異軸主打：自然牽引/整脊床/健美選手/一條龍） | `/method` |
+| 招牌頁 | `src/pages/method.astro`（差異軸主打：運動矯正/肌力訓練/中軸定位床/健美選手/一條龍） | `/method` |
 | 健康概念分享 | `src/content/health/<id>.md`（列表＋文章） | `/health`、`/health/<id>` |
 | 最新消息 | `src/content/news/<id>.md` | `/news`、`/news/<id>` |
 | 成果分享 | `src/content/works/{body,feet}.md`（相簿，`photos:` 陣列） | `/works`、`/works/<album>` |
@@ -93,8 +93,8 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 - GA4 埋碼、GSC sitemap 提交完成。
 
 ## 待辦（交接給後續）
-- **/method 招牌頁照片（可選升級）**：現用店內既有實拍（hero＝師傅徒手調理、整脊床段＝診療空間、鄭師傅、一對一訓練、調整前後）。用戶已同意用舊照上線；日後有更好的手法照/整脊床特寫可再替換（變數集中在 `method.astro` frontmatter 區）。
-- **/method 事實核實**：整脊床「全台唯一・耗資百萬」宣稱需能舉證（公平法）。
+- **/method 招牌頁照片**：✅ 2026-07-20 已換上實拍新照（hero＝師傅操作中軸定位床、中軸定位床段＝客人躺床實拍、一對一段＝站姿運動矯正）；`body-care` 過程段、`personal-training` 課程段亦各補一張實拍直式配圖。鄭師傅頭像 `laoKImg` 仍為舊照，日後有更好頭像可換。照片一律走 `photo-inbox/` 上傳流程（見 `photo-inbox/README.md`）。
+- **/method 事實核實（未結，屬店主）**：中軸定位床「全台唯一・耗資百萬」宣稱需能舉證（公平法）。
 - **證照定調（勿再放回頁面）**：鄭博陽證照＝**台灣整復協會**發（非「國際」，媒體寫法有誇大）。**決定不強調、頁面不放**——圈內反感證照，放了反而扣公信力；可信度靠健美選手實績＋成果對比，不靠證書。
 - （GBP 已在經營，見「數據追蹤」段。）
 - 設計／規劃文件：`docs/superpowers/`（spec、plan）。
