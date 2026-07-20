@@ -13,6 +13,24 @@ const links = [
   { href: "/contact", label: "聯絡我們" },
 ];
 ---
+<!-- 舊 PHP 站（/paper/*.php?title_id=…）轉址：GitHub Pages 把所有未命中路徑導到本 404 頁，
+     靜態主機無法讀 query string 做伺服器轉址，故在此以 client-side 依「路徑檔名」對應新頁面。
+     命中舊站路徑者立即 location.replace 到新頁；其餘沿用下方友善 404 內容。 -->
+<script is:inline>
+  (function () {
+    var p = location.pathname;
+    var m = p.match(/\/paper\/([^/?#]*)/);
+    if (!m) return;
+    var key = m[1].replace(/\.php$/i, "");
+    var map = {
+      share_index: "/",          // 舊分享/首頁式落地頁
+      services_index: "/services",
+      contact_index: "/contact",
+      other_page: "/courses",
+    };
+    location.replace(map[key] || "/");
+  })();
+</script>
 <Base title={seoTitle} description={seoDesc}>
   <section class="nf">
     <p class="nf__code">404</p>

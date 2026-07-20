@@ -10,6 +10,11 @@ const ROOT = "src";
 const exts = new Set([".astro", ".md", ".mdx", ".ts", ".js", ".css"]);
 const hits = [];
 
+// 客戶要求的唯一特例（2026-07-20）：nav 標籤「全身調理」准用，除此之外「調理」等禁詞仍全禁。
+// 掃描前先把這串整體挖掉，因此「調理」單獨出現、或「身體調理」等變體仍會被擋。
+const ALLOW = ["全身調理"];
+const stripAllowed = (line) => ALLOW.reduce((s, a) => s.split(a).join(""), line);
+
 function walk(dir) {
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
@@ -20,8 +25,9 @@ function walk(dir) {
 
 function scan(file) {
   const lines = readFileSync(file, "utf8").split("\n");
-  lines.forEach((line, i) => {
+  lines.forEach((rawLine, i) => {
     const at = `${file}:${i + 1}`;
+    const line = stripAllowed(rawLine); // 白名單詞（全身調理）先挖掉再驗
     for (const w of GUARD.forbidden || [])
       if (line.includes(w)) hits.push(`${at}: 療效/醫療宣稱字「${w}」`);
     for (const w of GUARD.bannedTerms || [])
