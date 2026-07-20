@@ -109,7 +109,7 @@ const { copy, slides, cards = [] } = Astro.props;
   .hero__card {
     background: var(--color-brand-deep); color: var(--text-on-dark);
     border-radius: 10px; padding: 12px 16px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+    box-shadow: var(--shadow-card);
   }
   .hero__card-head { margin: 0 0 4px; font-weight: 700; font-size: var(--text-sm); }
   .hero__card-no { color: var(--color-accent); font-style: italic; }
@@ -132,7 +132,7 @@ const { copy, slides, cards = [] } = Astro.props;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__char, .hero__rule, .hero__line, .hero__frame, .hero__card { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+    .hero__char, .hero__rule, .hero__line, .hero__frame, .hero__card { opacity: 1; visibility: visible; transform: none; } /* GSAP 以 if(!reduce) 守門不落 inline style，毋需 important 覆寫 */
   }
 </style>
 <script>

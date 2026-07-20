@@ -28,7 +28,7 @@ if [ "${DRY_RUN:-0}" = "1" ]; then log "DRY_RUN — 不 build/commit/push（STAT
 
 case "$STATUS" in
   PUBLISH)
-    if ! node scripts/check-fontsize.mjs >/tmp/olderkkk-series-gate.log 2>&1 || ! npm run build >>/tmp/olderkkk-series-gate.log 2>&1; then
+    if ! node scripts/check-design.mjs >/tmp/olderkkk-series-gate.log 2>&1 || ! npm run build >>/tmp/olderkkk-series-gate.log 2>&1; then
       log "build gate 失敗，回退文章與游標"
       git checkout -- pipeline/state/cursor.json 2>/dev/null || true
       rm -f "src/content/health/$SLUG.md"

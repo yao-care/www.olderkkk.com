@@ -16,12 +16,12 @@ npm install
 npm run dev       # 本機開發（注意：因有 base，網址是 http://localhost:4321/www.olderkkk.com/）
 npm run build     # 產生 dist/
 npm run preview   # 預覽 build（http://localhost:4326/www.olderkkk.com/）
-node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
+npm run check:design              # 設計規範守門 v2（build 已內含，手動跑用這個）
 ```
 
 ## 部署
 - push 到 `main` → GitHub Actions（`.github/workflows/deploy.yml`，已釘 Node 22）自動 build & 部署 Pages。
-- 修改後務必：`npm run build` 成功 + `node scripts/check-fontsize.mjs` 通過，再 commit/push。
+- 修改後務必：`npm run build` 成功（已內含 `scripts/check-design.mjs` 設計守門），再 commit/push。
 - commit 訊息結尾請接 `Co-Authored-By: ...`（沿用既有慣例）。
 
 ## 內容維護（最常見任務）
@@ -48,9 +48,14 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 2. **首頁多欄版面**用 CSS 處理（`src/pages/index.astro`：去項目符號、`ul:last-of-type` 格狀、聯絡圖示列）。
 3. 大圖請轉 WebP（範例：課程橫幅 `ok-class-banner.webp`，用 `cwebp -q 80 -resize 1600 0`）。
 
-## 設計規範
-- OKLCH 配色 + hex fallback、字型/字級在 `src/styles/tokens.css`、`global.css`。
-- **最小字級 18px（`--text-xs`），無例外**；`scripts/check-fontsize.mjs` 會擋 px<18（CI/手動）。
+## 設計規範（v2，2026-07-20 全站統一）
+`scripts/check-design.mjs` 於 `npm run build` 前自動守門（違規即 build fail，CI 同步擋）：
+1. **font-size 禁用 px**——一律 `var(--text-*)` 階梯（最小 18px＝`--text-xs`，無例外）。
+2. **顏色（hex/rgb()/hsl()）只准出現在 `src/styles/variables.css`**（OKLCH + hex fallback；原 `tokens.css` 已於 2026-07-20 更名）。
+3. **禁 important 覆寫**。
+4. **禁外部 CDN**（Google Fonts、公共 JS/CSS CDN；資源自託管或系統字型堆疊）。
+5. **css 檔白名單**：`src/` 下 .css 只准 `src/styles/{variables,global}.css`；元件樣式寫 scoped `<style>`。
+守門連註解裡的字面違規字串都擋，寫註解時避開。CI fail 會由 deploy.yml 的 notify-failure job 發 Slack（`C0BEU5RA02G`）。
 
 ## SEO / AEO / GEO 慣例
 - **商家資訊唯一來源：`src/lib/site.ts`**（名稱/電話/Email/LINE/FB/地圖/地址/座標/營業時間）。要改 NAP、營業時間、地圖連結 → 改這裡（schema 與多處引用會一起更新）。

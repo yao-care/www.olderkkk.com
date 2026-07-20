@@ -47,5 +47,5 @@ Claude 會 pull 下來自動處理，處理完把原圖清掉。
    - 相簿 → `src/content/works/<album>.md` 的 `photos:`（`src`＋`caption`）。
    - 文章配圖 → 對應 `.md` 內用 **Markdown 語法** `![alt](/images/xxx)`（禁 raw HTML `<img>`，會 404）。
    - `alt`／`caption` 須符合站台用詞政策（禁詞見 `CLAUDE.md` 與 seo-ops `check-terms` gate）。
-4. gate 全過再 push：`npm run build`＋`node scripts/check-fontsize.mjs`＋`node scripts/check-terms.mjs`。
+4. gate 全過再 push：`npm run build`（已內含 `check-design.mjs` 設計守門）＋`node scripts/check-terms.mjs`。
 5. **`git rm` 掉本資料夾的原圖**（原圖不入正式 `public/`，避免重複與肥大），連同頁面改動一起 commit/push。

@@ -1,6 +1,8 @@
 // 商家基本資訊與結構化資料（SEO / AEO / GEO 共用）
 export const SITE = {
   name: "鄭骨館體雕中心",
+  // 行動瀏覽器 UI 色（<meta theme-color>）。與 src/styles/variables.css 的 --color-brand-deep 同步；HTML meta 無法吃 CSS var，故集中此處。
+  themeColor: "#005060",
   tagline: "台中西屯・運動矯正・肌力訓練・體雕・一對一訓練",
   tel: "0970686319",
   telE164: "+886-970-686-319",

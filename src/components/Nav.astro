@@ -79,7 +79,7 @@ const isCurrent = (href: string) => (path === withBase(href) ? "page" : undefine
     position: absolute; top: 100%; right: 0; z-index: 50;
     min-width: 11rem; margin-top: 0.25rem; padding: 0.4rem;
     background: var(--bg-base); border: 1px solid var(--border-subtle);
-    border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+    border-radius: 10px; box-shadow: var(--shadow-menu);
     list-style: none; display: none;
   }
   .nav__item--group:hover .nav__menu,
@@ -94,7 +94,7 @@ const isCurrent = (href: string) => (path === withBase(href) ? "page" : undefine
   /* 預約 CTA 按鈕 */
   .nav__cta {
     display: inline-block; padding: 0.5rem 1.1rem; border-radius: 999px;
-    background: var(--color-link); color: #fff; font-weight: 700;
+    background: var(--color-link); color: var(--color-white); font-weight: 700;
     font-size: clamp(1.125rem, 1.4vw, 1.375rem); white-space: nowrap;
   }
   .nav__cta:hover { background: var(--color-brand-deep); text-decoration: none; }

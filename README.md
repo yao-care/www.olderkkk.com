@@ -11,7 +11,7 @@
 npm install
 npm run dev       # 開發（網址含 base：/www.olderkkk.com/）
 npm run build     # 產生 dist/
-node scripts/check-fontsize.mjs   # 字級守門（最小 18px）
+node scripts/check-design.mjs     # 設計規範守門 v2（npm run build 已內含）
 ```
 
 ## 重點提醒

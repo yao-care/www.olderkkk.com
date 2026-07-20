@@ -33,5 +33,5 @@
 npm run dev       # 開發
 npm run build     # 產生 dist/
 npm run preview   # 預覽 build 結果
-node scripts/check-fontsize.mjs   # 字級守門（最小 18px）
+node scripts/check-design.mjs     # 設計規範守門 v2（npm run build 已內含）
 ```
