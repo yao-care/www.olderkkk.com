@@ -1,38 +1,51 @@
-# 📥 照片收件夾（photo-inbox）
+# 📥 照片收件夾（photo-inbox）— 全站照片上傳的唯一入口
 
-**站主上傳原圖的地方。** 把新照片丟進這個資料夾，Claude 會 pull 下來自動處理
-（轉 WebP → 放進 `public/images/` → 換到對應頁面 → 過 gate → 上線），
-處理完會把這裡的原圖清掉。
+**本站以後所有要換／新增的照片，一律丟這裡。** 不分頁面、不分用途
+（首頁輪播、招牌頁、相簿、文章配圖、各頁 banner… 全部走這條）。
+Claude 會 pull 下來自動處理，處理完把原圖清掉。
 
 > 這個資料夾不在 `public/`／`src/` 底下，**不會被 build 打包、不會上線**，
-> 純粹當「進料暫存區」。
+> 純粹當「進料暫存區」。聊天室夾帶圖常常靜默失敗傳不到 Claude，所以改走 git 進料。
 
 ## 怎麼上傳（GitHub 網頁，手機電腦都行）
 
-1. 打開 repo：<https://github.com/yao-care/www.olderkkk.com>
-2. 點進 **`photo-inbox`** 資料夾 → 右上 **Add file → Upload files**
-   （或直接在 repo 首頁 **Add file → Upload files**，把檔案拖到 `photo-inbox/` 路徑）。
-3. 把新照片拖進去。**檔名隨便取沒關係**，中文檔名也行。
-4. 下方 **Commit changes**（直接 commit 到 `main` 即可）。
-5. 回來跟 Claude 說一聲：**「傳好了」** ＋ 這張要換頁面上的哪一張。
+1. 打開 repo：<https://github.com/yao-care/www.olderkkk.com/tree/main/photo-inbox>
+2. 右上 **Add file → Upload files**（或 repo 首頁 Add file→Upload files，拖到 `photo-inbox/` 路徑）。
+3. 把照片拖進去。**檔名隨便取、中文檔名都行**，可一次傳多張。
+4. 下方綠色 **Commit changes**（直接 commit 到 `main`）。
+5. 回來跟 Claude 說：**「傳好了」** ＋ 一句話講這些圖要放哪。
 
-## 命名小撇步（非必須）
+## 「放哪」怎麼講（一句話就夠）
 
-檔名開頭寫用途，Claude 一眼就知道要換哪張，你就不用再解釋：
+不用管尺寸、格式、檔名規則——只要講清楚「哪一張、擺到哪」，例如：
 
-| 開頭 | 對應 /method 頁位置 |
-|------|--------------------|
-| `hero-xxx.jpg`   | 最上方大圖（師傅帶客人做運動矯正） |
-| `clinic-xxx.jpg` | 中段寬圖（診療空間／中軸定位床環境） |
-| `laok-xxx.jpg`   | 鄭師傅頭像（方形） |
-| `train-xxx.jpg`  | 下方寬圖（一對一訓練） |
+- 「換 **/method** 最上面那張大圖」
+- 「加到 **手部保養相簿**（/works/body）最後面」
+- 「這是 **《手繞到背後扣不起來》那篇文章** 的配圖」
+- 「換 **首頁輪播** 第 2 張」
+- 「**課程頁**的橫幅換這張」
 
-其它頁面的照片也一樣丟這裡，講一下要放哪頁哪個位置就行。
+一次傳多張時，用檔名或順序標一下對應（「`a.jpg` 換 hero、`b.jpg` 換師傅頭像」）即可。
 
-## 給 Claude 的處理備忘
+### 選用：檔名開頭帶用途，可省去解釋
 
-- pull 後在本資料夾找新圖 → `cwebp -q 80`（大圖加 `-resize 1600 0`）輸出到 `public/images/`，
-  沿用既有 hash 式命名或語意檔名皆可。
-- 更新對應頁面變數＋`alt`（`alt` 須符合站台用詞政策，禁詞見 `CLAUDE.md` 與 seo-ops gate）。
-- **處理完把本資料夾的原圖 `git rm` 掉**（原圖不入正式 `public/`，避免重複與肥大）。
-- gate：`npm run build`＋`node scripts/check-fontsize.mjs`＋`node scripts/check-terms.mjs` 全過再 push。
+| 開頭範例 | 對應位置 |
+|---------|---------|
+| `home-slide-*` | 首頁輪播 |
+| `method-hero-*` / `method-clinic-*` / `method-laok-*` / `method-train-*` | 招牌頁四張 |
+| `works-body-*` / `works-feet-*` | 相簿 |
+| `article-<slug>-*` | 某篇 health／news 文章配圖 |
+| `services-*` / `courses-*` | 服務／課程頁 banner |
+
+## 給 Claude 的處理備忘（標準流程，勿走捷徑）
+
+1. `git pull` → 在本資料夾找新圖。
+2. `cwebp -q 80`（大橫圖加 `-resize 1600 0`；相簿／頭像視情況）輸出到 `public/images/`。
+3. 接到對應位置：
+   - 頁面固定圖 → 改該 `.astro` 變數＋`alt`（如 `method.astro`）。
+   - 首頁輪播 → `src/content/home.md` 的 `slides:`。
+   - 相簿 → `src/content/works/<album>.md` 的 `photos:`（`src`＋`caption`）。
+   - 文章配圖 → 對應 `.md` 內用 **Markdown 語法** `![alt](/images/xxx)`（禁 raw HTML `<img>`，會 404）。
+   - `alt`／`caption` 須符合站台用詞政策（禁詞見 `CLAUDE.md` 與 seo-ops `check-terms` gate）。
+4. gate 全過再 push：`npm run build`＋`node scripts/check-fontsize.mjs`＋`node scripts/check-terms.mjs`。
+5. **`git rm` 掉本資料夾的原圖**（原圖不入正式 `public/`，避免重複與肥大），連同頁面改動一起 commit/push。

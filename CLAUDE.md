@@ -41,7 +41,7 @@ node scripts/check-fontsize.mjs   # 字級守門：禁止任何 font-size < 18px
 - **新增一篇健康/最新消息**：在對應資料夾新增 `<id>.md`，frontmatter 需 `title, date(YYYY/MM/DD), summary, order`（數字越小越前面）；body 寫 Markdown。圖片放 `public/images/` 並以 `/images/xxx` 引用。
 - **新增相簿照片**：編輯 `works/<album>.md` 的 `photos:`（`src` + `caption`），圖片放 `public/images/`。
 - **圖片一律放 `public/images/`，用 `/images/檔名` 引用**（會自動加 base 前綴）。
-- **站主上傳照片流程**：站主把原圖丟到 repo 的 `photo-inbox/`（GitHub 網頁 Add file→Upload files，直接 commit main）→ Claude `git pull` → 轉 WebP 進 `public/images/` → 換到對應頁面＋`alt` → 過 gate → push →`git rm` 掉 inbox 原圖。細節見 `photo-inbox/README.md`。（聊天室夾帶圖常靜默失敗傳不到 Claude，故走 git 進料。）
+- **站主上傳照片流程（全站唯一入口，之後所有換／新增照片一律走這條，不分頁面用途）**：站主把原圖丟到 repo 的 `photo-inbox/`（GitHub 網頁 Add file→Upload files，直接 commit main）→ Claude `git pull` → 轉 WebP 進 `public/images/` → 接到對應位置（頁面 `.astro` 變數／home.md `slides:`／works `photos:`／文章 Markdown 圖）＋`alt` → 過 gate → push →`git rm` 掉 inbox 原圖。細節與「放哪怎麼講」見 `photo-inbox/README.md`。（聊天室夾帶圖常靜默失敗傳不到 Claude，故一律走 git 進料，不要再要求站主用附件貼圖。）
 
 ## ⚠️ 重要陷阱（踩過的雷）
 1. **內部連結／圖片只用 Markdown 語法，不要用 raw HTML `<img>/<a>`**。Markdown 的 `/images`、`/services` 會被 rehype 自動加上 base 前綴；**raw HTML 不會 → 上線變 404**。需要格狀版面時用 CSS（見 services/courses/index 的 `.astro` style），不要在 .md 內寫 `<div><img></div>`。
