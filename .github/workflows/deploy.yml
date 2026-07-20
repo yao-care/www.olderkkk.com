@@ -48,6 +48,21 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+  # 上線後把 sitemap URL 送 IndexNow（Bing/Yandex/Seznam/Naver 即時收錄；Google 不吃 IndexNow）。
+  # 金鑰非機密（本就公開託管於 /<key>.txt），直接寫在 env。任何失敗 exit 0，不擋部署。
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Submit sitemap URLs to IndexNow
+        env:
+          SITE_URL: https://www.olderkkk.com
+          INDEXNOW_KEY: 908a673f8a061dd061b629db168857b6
+        run: node scripts/indexnow-submit.mjs
   # 任一階段 fail → 發 Slack 要求修改；修正 push 後 workflow 自動重跑＝重審。
   # 需 repo secrets：SLACK_BOT_TOKEN、SLACK_CHANNEL_ID（缺則靜默略過）。
   notify-failure:
