@@ -7,10 +7,12 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-design.mjs && astro build",
+    "build": "node scripts/check-design.mjs && node scripts/check-content.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check:design": "node scripts/check-design.mjs"
+    "check:design": "node scripts/check-design.mjs",
+    "check:content": "node scripts/check-content.mjs",
+    "check:content:all": "node scripts/check-content.mjs --all"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.3",

@@ -17,6 +17,8 @@ npm run dev       # 本機開發（注意：因有 base，網址是 http://local
 npm run build     # 產生 dist/
 npm run preview   # 預覽 build（http://localhost:4326/www.olderkkk.com/）
 npm run check:design              # 設計規範守門 v2（build 已內含，手動跑用這個）
+npm run check:content             # 內容守門（去 AI 味，build 已內含，手動跑用這個）
+npm run check:content:all         # 全站盤點（永遠放行，供人工普查曝光）
 ```
 
 ## 部署
@@ -56,6 +58,12 @@ npm run check:design              # 設計規範守門 v2（build 已內含，�
 4. **禁外部 CDN**（Google Fonts、公共 JS/CSS CDN；資源自託管或系統字型堆疊）。
 5. **css 檔白名單**：`src/` 下 .css 只准 `src/styles/{variables,global}.css`；元件樣式寫 scoped `<style>`。
 守門連註解裡的字面違規字串都擋，寫註解時避開。CI fail 會由 deploy.yml 的 notify-failure job 發 Slack（`C0BEU5RA02G`）。
+
+## 內容守門（去 AI 味）
+`scripts/check-content.mjs` 於 `npm run build` 時排在 `check-design` 之後、`astro build` 之前自動守門（違規即 build fail，CI 同步擋）。為 `/root/.claude/skills/new-astro-site/templates/check-content.mjs` 統一引擎的副本（跨站共用核心規則，站台特化才在檔內 `SITE_ERROR_TELLS`/`SITE_WARN_LAYERS` 擴充）。
+- **兩級判定**：ERROR（擋 build）＝near-zero 誤判的強 AI 指紋（「不是X而是Y」「值得注意的是」「隨著…的發展」「研究顯示」…）＋模板化開頭，單一命中即擋；WARN（只印不擋）＝軟訊號分詞彙/句式/結構/語氣四層，**單檔跨 ≥3 層才升級為 ERROR**。
+- **掃描範圍（存量 grandfather）**：預設只掃「相對 `origin/main` 的變動檔」中的 `src/**/*.md(x)`；抓不到 git base（CI 淺 checkout）→ 掃 0 檔 exit 0，永不誤擋既有內容。`--all` 全站盤點永遠放行（人工普查）；`<file>...` 只掃指定檔（產線產文後自檢）。
+- **產線接口**：`pipeline/` 產文後可用 `node scripts/check-content.mjs <檔>` 自檢；seo-ops 反思/大腦的 `npm run build` gate 亦自動繼承本守門。
 
 ## SEO / AEO / GEO 慣例
 - **商家資訊唯一來源：`src/lib/site.ts`**（名稱/電話/Email/LINE/FB/地圖/地址/座標/營業時間）。要改 NAP、營業時間、地圖連結 → 改這裡（schema 與多處引用會一起更新）。
