@@ -98,7 +98,8 @@ npm run check:content:all         # 全站盤點（永遠放行，供人工普�
 > 回滾自動改動：本 repo `git log --oneline | grep -E 'auto-claude-(seo|reflect)'` → `git revert <sha>`。
 - **GA4**：評估 ID `G-LRMXNPBRX0`（GA4 property `properties/543939182`）。追蹤碼由 `Base.astro` 讀 `PUBLIC_GA_ID` 輸出；正式開關為 repo 變數 `GA_ID`（未設則全站不輸出）。
 - **GSC**：網域資源 `sc-domain:olderkkk.com`（DNS TXT 驗證）；sitemap 已提交，robots.txt 亦指向，會自動重抓。
-- **GBP（Google 商家檔案）**：**已認領且持續經營中**（現 4.9／245 則）。知識面板 kgmid `/g/11b_23ch3f`，分享連結 https://share.google/v6oTDE5MDUvqfZjW5 。非待辦。
+- **GBP（Google 商家檔案）**：**已認領且持續經營中**（現 4.9／245 則）。知識面板 kgmid `/g/11b_23ch3f`，分享連結 https://share.google/v6oTDE5MDUvqfZjW5 。非待辦。此連結已進站：`site.ts` `googleBusiness` → LocalBusiness `sameAs`（官網↔商家檔案實體綁定）＋ `/contact` 頁「看位置與評論」導流。**主類別策略＝整復推拿**（吃「整骨」在地流量；配套：商家簡介點明「運動矯正、不硬扳、不喀一聲」過濾期望，狂拚評論勝過傳統老店）。
+- **每週排名追蹤（2026-07-23 起，用戶要求「每週一次」）**：`/root/seo-ops/bin/rank-track.mjs --site olderkkk.com`（cron 台北週一 09:00），拉「整骨/整復/整脊類」字本週 vs 上週排名/曝光→Slack `C0BEU5RA02G`。目標字定義在 `seo-ops/sites/olderkkk.com.json` 的 `rankTrack.pattern`。**診斷**：本站早已在多個整骨字排第一頁邊緣卻近乎 0 點擊（搜整骨者要傳統手法、與本站運動矯正定位不對味）→ 策略靠**地圖三包（商家檔案評論）**贏在地，非衝藍色連結自然排名。禁詞政策只禁官網文案，追蹤「別人搜什麼」不衝突。
 - API 操作（提 sitemap／讀 GA 即時）用 service account `~/.config/olderkkk/ga4-sa.json`（siteOwner + analytics.readonly）。
 
 ## 已完成（2026-07-02 上線）
