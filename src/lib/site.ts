@@ -14,6 +14,8 @@ export const SITE = {
   threads: "https://www.threads.com/@cheng_spine_fit_center",
   youtube: "https://www.youtube.com/@KKK0524TW",
   map: "https://maps.app.goo.gl/dx4tE1qBJhFficMz6",
+  // Google 商家檔案（分享連結）：sameAs 實體綁定 + 「看位置與評論」導流。
+  googleBusiness: "https://share.google/v6oTDE5MDUvqfZjW5",
   logo: "/images/logo.png",
   addressText: "台中市西屯區工業區一路58巷11弄83號",
   hoursText: "週一、二、三、五、六 14:00–17:00、20:00–22:00（週四、日公休）",
@@ -280,7 +282,7 @@ export function localBusinessSchema(siteUrl: string, image: string, logo?: strin
     ],
     knowsAbout: PERSON.knowsAbout,
     hasMap: SITE.map,
-    sameAs: [SITE.facebook, SITE.instagram, SITE.threads, SITE.youtube, SITE.line, SITE.map],
+    sameAs: [SITE.facebook, SITE.instagram, SITE.threads, SITE.youtube, SITE.line, SITE.map, SITE.googleBusiness],
     founder: { "@type": "Person", "@id": siteUrl + "#founder", name: PERSON.name },
     priceRange: "$$",
   };

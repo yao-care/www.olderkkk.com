@@ -2,10 +2,12 @@
 import { getEntry, render } from "astro:content";
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
-import { absUrl, breadcrumbSchema } from "../lib/site";
+import { SITE, absUrl, breadcrumbSchema } from "../lib/site";
 const entry = await getEntry("pages", "contact");
 const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL;
+// Google 地圖嵌入（output=embed 免 API key）：pin 指向商家、可一鍵導航
+const mapEmbed = `https://maps.google.com/maps?q=${encodeURIComponent(`${SITE.name} ${SITE.addressText}`)}&hl=zh-TW&z=17&output=embed`;
 const crumb = breadcrumbSchema([
   { name: "首頁", url: absUrl("/", Astro.site, base) },
   { name: "聯絡我們", url: absUrl("/contact", Astro.site, base) },
@@ -16,9 +18,26 @@ const seoDesc = "台中市西屯區工業區一路58巷11弄83號，電話 09706
 <Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
   <h1>聯絡我們</h1>
   <article class="prose"><Content /></article>
+  <section class="location">
+    <h2>交通位置</h2>
+    <iframe
+      class="location__map"
+      title={`${SITE.name} Google 地圖位置`}
+      src={mapEmbed}
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen></iframe>
+    <p class="location__link">
+      <a href={SITE.googleBusiness} target="_blank" rel="noopener">在 Google 地圖看我們的位置與評論 →</a>
+    </p>
+  </section>
   <ContactCTA />
 </Base>
 <style>
   .prose :global(p) { font-size: var(--text-base); margin: 1rem 0; }
   .prose :global(h5) { font-size: var(--text-lg); margin: 1.5rem 0 0.5rem; }
+  .location { margin: 2rem 0; }
+  .location h2 { font-size: var(--text-lg); margin: 0 0 1rem; }
+  .location__map { width: 100%; aspect-ratio: 3 / 2; border: 0; border-radius: 8px; display: block; }
+  .location__link { font-size: var(--text-base); margin-top: 0.75rem; }
 </style>
