@@ -123,10 +123,14 @@ export function bookingHowToSchema() {
 }
 
 // 以 site(URL) + base 產生絕對網址；path 以 "/" 開頭視為站內路徑
+// 頁面路徑（非檔案，如圖片）一律補結尾斜線，與實際路由網址／canonical 一致
 export function absUrl(path: string, site: URL | undefined, baseUrl: string): string {
   const base = baseUrl.replace(/\/$/, "");
   if (/^https?:\/\//.test(path)) return path;
-  const p = path.startsWith("/") ? base + path : "/" + path;
+  let normalized = path;
+  const lastSegment = normalized.split("/").pop() ?? "";
+  if (!normalized.endsWith("/") && !lastSegment.includes(".")) normalized += "/";
+  const p = normalized.startsWith("/") ? base + normalized : "/" + normalized;
   return site ? new URL(p, site).href : p;
 }
 
