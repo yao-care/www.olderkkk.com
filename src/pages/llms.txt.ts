@@ -42,6 +42,9 @@ ${PERSON.name}（${PERSON.jobTitle}）：${PERSON.description}
 - 最新消息：${abs("/news")}
 - 常見問題：${abs("/faq")}
 - 聯絡我們：${abs("/contact")}
+
+## 全文內容
+健康概念分享與最新消息全文（供完整取用）：${abs("/llms-full.txt")}
 `;
 
   return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
