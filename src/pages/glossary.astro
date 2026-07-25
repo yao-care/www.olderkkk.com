@@ -3,19 +3,13 @@ import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import { absUrl, breadcrumbSchema } from "../lib/site";
 import { withBase } from "../lib/withBase";
+import { GLOSSARY_TERMS } from "../lib/glossary";
 const base = import.meta.env.BASE_URL;
 const crumb = breadcrumbSchema([
   { name: "首頁", url: absUrl("/", Astro.site, base) },
   { name: "名詞解釋", url: absUrl("/glossary", Astro.site, base) },
 ]);
-const terms = [
-  { term: "運動矯正・肌力訓練", def: "借客人自身的重量與角度，帶你把發力做在對的位置、讓身體慢慢回正，由師傅引導方向，不靠蠻力硬壓或硬扳，過程溫和，也不會有骨頭「喀」的聲音。屬身體保健運動，並非醫療診斷。" },
-  { term: "全身運動矯正", def: "整體放鬆過度緊繃的部位、協助關節排列回到較理想的位置，通常涵蓋骨盆、膝蓋、腳踝與肩膀，著重身體結構與張力平衡，並非醫療骨科手術。" },
-  { term: "體雕", def: "透過張力平衡、姿勢練習與訓練，協助改善身形線條與體態的服務，著重肌肉發力方式與身體排列，而非單純減重。" },
-  { term: "一對一訓練", def: "由教練一對一帶領，針對個人的張力失衡、身體協調與肌力進行個人化訓練，幫助身體支撐的張力維持在較中立的位置，讓運動矯正後的成果更穩定。" },
-  { term: "張力平衡", def: "重建全身肌肉張力的左右、前後平衡，減少代償，讓身體學會用較正確的方式出力，是運動矯正與訓練共同的目標。" },
-  { term: "運動按摩", def: "針對運動後或長期緊繃的肌肉與筋膜，進行按摩與拉伸放鬆，協助緩解痠痛、恢復活動度。" },
-];
+const terms = GLOSSARY_TERMS;
 const termSet = {
   "@context": "https://schema.org",
   "@type": "DefinedTermSet",

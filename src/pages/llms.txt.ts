@@ -44,7 +44,7 @@ ${PERSON.name}（${PERSON.jobTitle}）：${PERSON.description}
 - 聯絡我們：${abs("/contact")}
 
 ## 全文內容
-健康概念分享與最新消息全文（供完整取用）：${abs("/llms-full.txt")}
+本站主要內容全文（商家資訊、招牌做法、服務項目與各服務分頁、課程、收費、預約須知、名詞解釋、常見問題，以及健康概念分享與最新消息全文）：${abs("/llms-full.txt")}
 `;
 
   return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });

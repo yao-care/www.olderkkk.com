@@ -70,7 +70,8 @@ npm run check:content:all         # 全站盤點（永遠放行，供人工普�
 - **結構化資料**：`Base.astro` 全站自動輸出 `LocalBusiness`；各頁可傳 `schemas={[...]}`（已有 Breadcrumb / Article / VideoObject / OfferCatalog / ImageGallery / FAQPage 產生器在 `site.ts`）。
 - **標題/描述**：各頁在 `.astro` 設 `seoTitle`/`seoDesc`（乾淨、唯一、含「台中西屯」）。**不要**再用關鍵字堆砌，**不要**加 `meta keywords`。
 - **robots.txt**：`src/pages/robots.txt.ts`（開放 AI 爬蟲 GPTBot/PerplexityBot/ClaudeBot/Google-Extended，指向 sitemap）。已在正式網域根目錄生效：`https://www.olderkkk.com/robots.txt` → `Sitemap: https://www.olderkkk.com/sitemap-index.xml`。
-- **FAQ**：`src/pages/faq.astro`（含 FAQPage schema）。
+- **FAQ**：`src/pages/faq.astro`（含 FAQPage schema）；問答資料在 `src/lib/faqs.ts`（`FAQS`＝/faq、`METHOD_FAQS`＝/method），頁面與 `/llms-full.txt` 共用同一份。
+- **llms.txt / llms-full.txt**（給 AI 助理讀的純文字）：`src/pages/llms.txt.ts` ＝ **目錄**（站台簡介＋分區連結）；`src/pages/llms-full.txt.ts` ＝ **全文**（商家資訊、招牌做法、服務項目與各服務分頁、課程、收費、預約須知、名詞解釋、常見問題，以及 health／news 全部文章正文，約 110 KB）。全文版不另抄文案：資料取自 `src/lib/site.ts`、共用資料模組（`faqs.ts`／`glossary.ts`／`services-catalog.ts`）、content collections，服務／招牌頁則以 `import.meta.glob(?raw)` 讀 `.astro` 原始碼去標籤取正文——**新增服務分頁會自動被收錄，不需再改本檔**。
 - **圖片 alt**：`astro.config.mjs` 的 rehype 會替空 alt 補預設值；新增重要圖片仍建議自己寫 alt。
 - **禁止**把 Google 評論（4.9/245）寫成自家 `AggregateRating`（違反 Google 準則）。
 

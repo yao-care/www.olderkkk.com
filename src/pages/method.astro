@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import { withBase } from "../lib/withBase";
+import { METHOD_FAQS } from "../lib/faqs";
 import { absUrl, breadcrumbSchema, serviceSchema, faqPageSchema, SITE } from "../lib/site";
 const base = import.meta.env.BASE_URL;
 const siteHome = absUrl("/", Astro.site, base);
@@ -19,13 +20,8 @@ const service = serviceSchema({
   url: pageUrl,
   siteUrl: siteHome,
 });
-// 可見 FAQ 與 FAQPage 結構化資料一致（AEO / 語音搜尋）
-const faqs = [
-  { q: "會痛嗎？", a: "我們不用大力去喬、去扳。做法是運動矯正加肌力訓練，帶你主動用對的方式動、把肌肉練起來，過程你自己在出力，不會被壓到痛，也不會聽到骨頭「喀」一聲。" },
-  { q: "運動矯正跟被「喬」差在哪？", a: "差在誰出力。傳統是師傅用手把你壓回、扳回，力道大；我們讓你自己的肌肉學會撐住身體，力氣長在你身上，成果才不會幾天就跑掉。" },
-  { q: "為什麼上次弄完，過幾天又跑回去？", a: "因為被動喬回來後，日常的站姿與發力習慣若沒變，身體很快又被拉回原本的樣子。我們用運動矯正改發力、用肌力訓練把力量練起來，成果才比較穩定。" },
-  { q: "運動矯正適合誰？", a: "特別適合怕痛、第一次想試、或被別家大力「喬」到害怕的人；久坐、站姿不良造成肩頸腰痠緊的人也適合先來評估。這屬於一般保健與運動訓練範疇，若有明確外傷或神經症狀，建議先就醫。" },
-];
+// 可見 FAQ 與 FAQPage 結構化資料一致（AEO / 語音搜尋）；資料共用 src/lib/faqs.ts
+const faqs = METHOD_FAQS;
 const faq = faqPageSchema(faqs);
 
 const seoTitle = "會痛嗎？台中西屯運動矯正＋肌力訓練，不喬也不扳｜鄭骨館體雕中心";
