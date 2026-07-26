@@ -6,7 +6,11 @@ import { SITE, PERSON } from "../lib/site";
 export const GET: APIRoute = ({ site }) => {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   const origin = site ?? new URL("https://www.olderkkk.com");
-  const abs = (p: string) => new URL(`${base}${p}`, origin).href;
+  const abs = (p: string) => {
+    const lastSegment = p.split("/").pop() ?? "";
+    const normalized = !p.endsWith("/") && !lastSegment.includes(".") ? `${p}/` : p;
+    return new URL(`${base}${normalized}`, origin).href;
+  };
 
   const body = `# ${SITE.name}
 
