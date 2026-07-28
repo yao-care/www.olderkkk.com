@@ -24,9 +24,9 @@ const links = [
     var key = m[1].replace(/\.php$/i, "");
     var map = {
       share_index: "/",          // 舊分享/首頁式落地頁
-      services_index: "/services",
-      contact_index: "/contact",
-      other_page: "/courses",
+      services_index: "/services/",
+      contact_index: "/contact/",
+      other_page: "/courses/",
     };
     location.replace(map[key] || "/");
   })();
