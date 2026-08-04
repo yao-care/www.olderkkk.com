@@ -4,7 +4,7 @@
 
 ## 流程
 
-`cron.sh`（包裝）→ `run.mjs`（編排）：取題 → `claude.mjs` 生成 → `guard.mjs` 標點正規化＋合規閘門 → 過關寫檔＋推進游標 → 回 `cron.sh` 跑 build gate → commit+push（文章＋游標）→ Slack。
+`cron.sh`（包裝）→ `run.mjs`（編排）：取題 → `claude.mjs` 生成 → `guard.mjs` 標點正規化＋合規閘門 → **閘門未過先自動送修一輪**（把草稿＋違規理由回餵 claude 做最小改寫再過閘門，2026-08-05 加：高頻通用禁詞「調整/脊椎」靠一次生成很難全避開，曾同題連擋 4 班）→ 仍不過才 BLOCK（**被擋草稿落檔 `pipeline/.cache/blocked-<slug>-<ts>.md` 供稽核**，.cache 不進 repo）→ 過關寫檔＋推進游標 → 回 `cron.sh` 跑 build gate → commit+push（文章＋游標）→ Slack。
 
 - **claude.mjs**：`claude -p --output-format json --max-turns 1 --tools ""`（本機訂閱帳戶，單輪純文字、不 agentic；失敗診斷落 `.cache/claude-errors.log`）。
 - **guard.mjs**（自動上線防呆，不過就不寫檔）：禁療效字（治療/根治/療效/治好/痊癒/醫療行為）、需就醫/專業安全提醒、需 `(/method)` 導流、frontmatter 需齊；另做中文半形逗號→全形正規化。

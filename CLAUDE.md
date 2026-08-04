@@ -87,7 +87,7 @@ npm run check:content:all         # 全站盤點（永遠放行，供人工普�
 ## 內容自動產線（`pipeline/`）— 「身體小卡關」自助文系列
 
 > ✍️ **每 3 天自動寫 1 篇**「解決生理小不便」的衛教自助文（肌肉/骨頭/筋膜相關），過閘門後**直接上線**，站主在網站上事後審。結構對齊 dreamer868 的 `pipeline/` 慣例。**放在本 repo `pipeline/`，勿搬回 seo-ops/bin。**
-> 流程：`cron.sh`（flock 互斥＋git 同步＋build gate＋commit/push＋Slack）→ `run.mjs`（編排）：取題 → `claude.mjs`（`claude -p` JSON 信封、`cwd=/tmp` 避免載入本 CLAUDE.md 幻覺）生成 → `guard.mjs`（合規閘門：禁療效字、需就醫提醒、需 `(/method)` 導流、frontmatter 齊＋半形逗號正規化）→ 過關寫檔＋推進游標。
+> 流程：`cron.sh`（flock 互斥＋git 同步＋build gate＋commit/push＋Slack）→ `run.mjs`（編排）：取題 → `claude.mjs`（`claude -p` JSON 信封、`cwd=/tmp` 避免載入本 CLAUDE.md 幻覺）生成 → `guard.mjs`（合規閘門：禁療效字、需就醫提醒、需 `(/method)` 導流、frontmatter 齊＋半形逗號正規化）→ 閘門未過先自動送修一輪（草稿＋理由回餵 claude 最小改寫；仍不過才 BLOCK，草稿落 `pipeline/.cache/` 供稽核；2026-08-05 加）→ 過關寫檔＋推進游標。
 > 題材佇列 `pipeline/topics.tsv`（一行一題）、游標帳本 `pipeline/state/cursor.json`（隨文章 commit）；見底自動 Slack 提醒補題。乾測 `DRY_RUN=1 pipeline/cron.sh`。細節 `pipeline/README.md`；系列定調（格式/串聯判讀/合規）見主機記憶 `olderkkk-daily-life-fix-series`。排程單一真來源＝`/etc/cron.d/seo-ops`（台北 01:00／每 3 天）。
 
 ## 數據追蹤（GA / GSC）
