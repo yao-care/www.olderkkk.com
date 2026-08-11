@@ -24,6 +24,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # sitemap 的 lastmod 由 astro.config.mjs 讀每頁原始檔的最後一次 commit 日期算出。
+          # 淺 clone（預設 depth 1）只看得到一個 commit，會讓全站日期一起變成最後那次 push。
+          fetch-depth: 0
       # 正式網域切換總開關：設 repo 變數 CUSTOM_DOMAIN=www.olderkkk.com 即切換；
       # 未設時維持 GitHub Pages 子路徑（不影響現站）。
       - name: Write CNAME for custom domain

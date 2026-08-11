@@ -2,6 +2,53 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { execFileSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
+const REPO = dirname(fileURLToPath(import.meta.url));
+
+/**
+ * sitemap 的 lastmod 取自該頁原始檔的 **最後一次 git commit 日期**，不是建置時間。
+ *
+ * 為什麼要有（2026-08-11 站主回報：Google 上顯示的招牌頁文案是 7 月中的舊版）：
+ * 該頁 7/19 改過三次，Google 最後一次爬取卻停在 7/16，之後 26 天沒回來。sitemap 當時
+ * 每一條都只有 changefreq，沒有任何時間戳 → 搜尋引擎沒有線索知道哪一頁真的變了，
+ * 每天重新提交的 sitemap 對它來說內容完全相同。
+ *
+ * 為什麼不用建置時間：那會讓每次建置都宣稱全站都更新了。假訊號多了以後，這個欄位
+ * 就再也不會被當一回事，真的改版那次也跟著被埋掉。
+ *
+ * 只看該頁自己的原始檔，**不把共用版型/元件的異動算進來**：那會把全站 65 頁的日期一起拉到
+ * 同一天（實測共用檔一次改動就蓋掉 60 頁的個別日期），而搜尋引擎要的正是「哪一頁真的變了」。
+ * 版型微調本來就不該宣稱內容更新——每天的 sitemap 重新提交機制另外會處理網址增減。
+ * ⚠️ CI 的 checkout 必須 fetch-depth: 0；淺 clone 只有一個 commit，會讓全站日期一起變成
+ * 最後那次 push，等於退回建置時間的假訊號（deploy.yml 已一併設定）。
+ * ⚠️ 未 commit 的改動不會反映在 lastmod——改完要讓搜尋引擎知道，就得 commit。
+ */
+const gitDate = (paths) => {
+  let newest = null;
+  for (const p of paths) {
+    if (!existsSync(join(REPO, p))) continue;
+    try {
+      const d = execFileSync('git', ['log', '-1', '--format=%cI', '--', p], { cwd: REPO, encoding: 'utf8' }).trim();
+      if (d && (!newest || d > newest)) newest = d;
+    } catch { /* 不是 git checkout 或該檔無 commit：略過，退化成沒有 lastmod */ }
+  }
+  return newest;
+};
+
+/** 站內路徑（無結尾斜線，首頁為 '/'）→ 可能的原始檔清單 */
+const sourceFor = (path) => {
+  const p = path.replace(/^\//, '');
+  if (p === '') return ['src/content/home.md', 'src/pages/index.astro'];
+  const coll = p.match(/^(health|news|works)\/(.+)$/);
+  const cands = [];
+  if (coll) cands.push(`src/content/${coll[1]}/${coll[2]}.md`, `src/content/${coll[1]}/${coll[2]}.mdx`);
+  cands.push(`src/pages/${p}.astro`, `src/pages/${p}/index.astro`, `src/content/pages/${p}.md`);
+  return cands;
+};
 
 // 部署設定：預設為 GitHub Pages 專案頁（子路徑）。
 // 未來切換到根網域 www.olderkkk.com 時，只要設環境變數：
@@ -85,6 +132,8 @@ export default defineConfig({
           // 內頁文章
           item.priority = 0.6; item.changefreq = 'monthly';
         }
+        const lastmod = gitDate(sourceFor(path));
+        if (lastmod) item.lastmod = lastmod;
         return item;
       },
     }),
