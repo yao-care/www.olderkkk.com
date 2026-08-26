@@ -1,8 +1,10 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import Card from "../../components/Card.astro";
 import { pickOgImage } from "../../lib/ogImage";
 import { absUrl, breadcrumbSchema, articleSchema, youtubeId, videoObjectSchema, faqPageSchema } from "../../lib/site";
+import { withBase } from "../../lib/withBase";
 export async function getStaticPaths() {
   const items = await getCollection("health");
   return items.map((a) => ({ params: { slug: a.id } }));
@@ -36,6 +38,10 @@ if (vid) schemas.push(videoObjectSchema({ id: vid, name: entry.data.title, descr
 const faqs = entry.data.faq ?? [];
 if (faqs.length) schemas.push(faqPageSchema(faqs));
 const publishedTime = (entry.data.date || "").replace(/\//g, "-");
+const related = (await getCollection("health"))
+  .filter((a) => a.id !== slug)
+  .sort((a, b) => (b.data.date || "").localeCompare(a.data.date || ""))
+  .slice(0, 3);
 ---
 <Base title={seoTitle} description={seoDesc} image={firstImg} schemas={schemas} ogType="article" publishedTime={publishedTime}>
   <h1>{entry.data.title}</h1>
@@ -52,6 +58,17 @@ const publishedTime = (entry.data.date || "").replace(/\//g, "-");
       ))}
     </section>
   )}
+  {related.length > 0 && (
+    <section class="related" aria-labelledby="related-title">
+      <h2 id="related-title">延伸閱讀</h2>
+      <div class="related__grid">
+        {related.map((a) => (
+          <Card href={`/health/${a.id}`} title={a.data.title} excerpt={a.data.summary} meta={a.data.date} />
+        ))}
+      </div>
+    </section>
+  )}
+  <p class="method-cta"><a href={withBase("/method")}>想了解鄭骨館的運動矯正／肌力訓練做法，可以看看招牌頁介紹</a></p>
 </Base>
 <style>
   .date { font-size: var(--text-sm); color: var(--text-muted); }
@@ -64,4 +81,8 @@ const publishedTime = (entry.data.date || "").replace(/\//g, "-");
   .faq__item { border-bottom: 1px solid var(--border-subtle); padding: 0.75rem 0; }
   .faq__item summary { font-size: var(--text-base); font-weight: 600; cursor: pointer; }
   .faq__item p { font-size: var(--text-base); margin: 0.75rem 0 0; line-height: 1.7; }
+  .related { margin-top: 2.5rem; border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; }
+  .related h2 { font-size: var(--text-lg); margin-bottom: 1rem; }
+  .related__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .method-cta { font-size: var(--text-base); margin-top: 2rem; }
 </style>
