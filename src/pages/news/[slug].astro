@@ -1,8 +1,10 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import Card from "../../components/Card.astro";
 import { pickOgImage } from "../../lib/ogImage";
 import { absUrl, breadcrumbSchema, articleSchema, youtubeId, videoObjectSchema } from "../../lib/site";
+import { withBase } from "../../lib/withBase";
 export async function getStaticPaths() {
   const items = await getCollection("news");
   return items.map((a) => ({ params: { slug: a.id } }));
@@ -34,11 +36,25 @@ const schemas: object[] = [
 const vid = youtubeId(entry.body ?? "");
 if (vid) schemas.push(videoObjectSchema({ id: vid, name: entry.data.title, description: seoDesc, uploadDate: entry.data.date }));
 const publishedTime = (entry.data.date || "").replace(/\//g, "-");
+const relatedHealth = (await getCollection("health"))
+  .sort((a, b) => (b.data.date || "").localeCompare(a.data.date || ""))
+  .slice(0, 3);
 ---
 <Base title={seoTitle} description={seoDesc} image={firstImg} schemas={schemas} ogType="article" publishedTime={publishedTime}>
   <h1>{entry.data.title}</h1>
   {entry.data.date && <p class="date">{entry.data.date}</p>}
   <article class="prose"><Content /></article>
+  {relatedHealth.length > 0 && (
+    <section class="related" aria-labelledby="related-title">
+      <h2 id="related-title">延伸閱讀：身體小卡關自助文</h2>
+      <div class="related__grid">
+        {relatedHealth.map((a) => (
+          <Card href={`/health/${a.id}`} title={a.data.title} excerpt={a.data.summary} meta={a.data.date} />
+        ))}
+      </div>
+    </section>
+  )}
+  <p class="method-cta"><a href={withBase("/method")}>想了解鄭骨館的運動矯正／肌力訓練做法，可以看看招牌頁介紹</a></p>
 </Base>
 <style>
   .date { font-size: var(--text-sm); color: var(--text-muted); }
@@ -46,4 +62,8 @@ const publishedTime = (entry.data.date || "").replace(/\//g, "-");
   .prose :global(img) { border-radius: 8px; margin: 0.5rem 0; }
   .prose :global(iframe) { width: 100%; max-width: 720px; aspect-ratio: 16 / 9; height: auto; display: block; margin: 1rem auto; border: 0; border-radius: 8px; }
   .prose :global(a) { word-break: break-all; }
+  .related { margin-top: 2.5rem; border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; }
+  .related h2 { font-size: var(--text-lg); margin-bottom: 1rem; }
+  .related__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .method-cta { font-size: var(--text-base); margin-top: 2rem; }
 </style>
