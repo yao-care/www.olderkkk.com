@@ -1,7 +1,9 @@
 ---
 import { getEntry, render } from "astro:content";
 import Base from "../layouts/Base.astro";
+import { withBase } from "../lib/withBase";
 import { absUrl, breadcrumbSchema } from "../lib/site";
+import { TRAIN_SERVICES } from "../lib/services-catalog";
 const entry = await getEntry("pages", "courses");
 const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL;
@@ -14,9 +16,22 @@ const seoDesc = "一對一指導課程，結合全身運動矯正與肌力訓練
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
   <h1>{entry.data.title.split("-")[0]}</h1>
+  <p class="lead">課程採一對一上課，教練依評估結果安排訓練方向，把運動矯正的成果透過肌力訓練維持住。以下是常見的訓練方向：</p>
+  <div class="train-grid">
+    {TRAIN_SERVICES.map((s) => (
+      <div class="train-card"><h3>{s.name}</h3><p>{s.desc}</p></div>
+    ))}
+  </div>
   <article class="prose"><Content /></article>
+  <p class="note">課程對應的一對一訓練說明請見 <a href={withBase("/services/personal-training")}>一對一訓練</a>；收費請見 <a href={withBase("/pricing")}>收費方式</a>；想安排上課時間，歡迎先 <a href={withBase("/booking")}>預約諮詢與評估</a>。</p>
 </Base>
 <style>
+  .lead { font-size: var(--text-base); color: var(--text-secondary); margin: 1.5rem 0; }
+  .train-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
+  .train-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem 1.25rem; }
+  .train-card h3 { font-size: var(--text-lg); margin: 0 0 0.5rem; }
+  .train-card p { font-size: var(--text-base); color: var(--text-secondary); margin: 0; }
+  .note { font-size: var(--text-sm); color: var(--text-secondary); background: var(--bg-overlay); border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
   .prose :global(p) { font-size: var(--text-base); margin: 1rem 0; }
   .prose :global(h4) { font-size: var(--text-xl); margin: 2rem 0 1rem; }
   .prose :global(img) { border-radius: 8px; margin: 0; }
