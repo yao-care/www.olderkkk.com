@@ -2,7 +2,7 @@
 # pipeline/cron.sh — 身體小卡關系列 cron 包裝：flock 互斥 → git 同步 → run.mjs（生成＋合規閘門）→
 #   build gate → commit+push（文章＋游標帳本）→ Slack。失敗清檔不推進游標、發🔴。
 # 安裝（台北 01:00＝UTC 17:00，每 3 天；離峰、落 UTC 午後 claude 空檔）：
-#   /etc/cron.d/seo-ops：0 17 */3 * * root /root/www.olderkkk.com/pipeline/cron.sh >> /root/seo-ops/logs/olderkkk.com-series.log 2>&1
+#   /etc/cron.d/seo-ops：0 17 */3 * * root /mnt/customer/www.olderkkk.com/pipeline/cron.sh >> /root/seo-ops/logs/olderkkk.com-series.log 2>&1
 # 前置：`claude` 已登入（訂閱帳戶，root headless 靠 IS_SANDBOX=1）。乾測：DRY_RUN=1 pipeline/cron.sh
 set -uo pipefail
 export PATH="/root/.local/bin:/usr/local/bin:/usr/bin:/bin"
