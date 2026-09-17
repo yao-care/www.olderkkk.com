@@ -1,6 +1,7 @@
 ---
 // 舊 PHP 站轉址樁（回傳 200 + meta refresh + canonical + noindex），承接 Google 舊索引網址。
-const target = "/health/";
+// /workshow/ 與 /workshow/?group_id=629、4744（靜態站讀不到 query；舊「成果分享」相簿在改版後無對應頁，收到服務項目總覽）
+const target = "/services/";
 const canonical = "https://www.olderkkk.com" + target;
 ---
 <!doctype html>

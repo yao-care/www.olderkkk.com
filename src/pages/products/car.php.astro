@@ -1,6 +1,7 @@
 ---
 // 舊 PHP 站轉址樁（回傳 200 + meta refresh + canonical + noindex），承接 Google 舊索引網址。
-const target = "/health/";
+// /products/car.php?title_id=…（舊站商品頁，無對應新頁，收到首頁）
+const target = "/";
 const canonical = "https://www.olderkkk.com" + target;
 ---
 <!doctype html>

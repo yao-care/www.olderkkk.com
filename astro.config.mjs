@@ -103,6 +103,15 @@ function rehypeAltFill() {
   return (tree) => fix(tree);
 }
 
+// 舊站轉址樁（帶 noindex）的網址樣式，一律排除在 sitemap 之外。新增樁頁時一併加入這份清單。
+const STUB_PATTERNS = [
+  /\/services\/chiropractic\/?$/,   // → /services/body-care
+  /\/paper\//,                      // 舊 PHP 站 /paper/*（services_index、other_page、share_index、contact_index、promotions_index）
+  /\/workshow\//,                   // 舊相簿 /workshow/、/workshow/index.php → /works
+  /\/products\//,                   // 舊商品頁 /products/car.php → /
+  /\/index\.php\/?$/,               // 舊站首頁 /index.php → /
+];
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE,
@@ -115,7 +124,7 @@ export default defineConfig({
       // 這些頁帶 <meta robots="noindex">，放進 sitemap 會對 Google 送出矛盾訊號
       // （一邊提交、一邊叫它別收），造成「已找到/已檢索－尚未建立索引」。
       // 保留頁面本身以承接舊連結，但不在 sitemap 宣告。新增此類樁頁時一併加入。
-      filter: (url) => !/\/services\/chiropractic\/?$/.test(url) && !/\/paper\//.test(url),
+      filter: (url) => !STUB_PATTERNS.some((re) => re.test(url)),
       // 依頁面重要性差異化 priority / changefreq（預設全為 0.5 / weekly）
       serialize(item) {
         // 取站內路徑（去掉網域與 base 前綴），結尾不含斜線方便比對
