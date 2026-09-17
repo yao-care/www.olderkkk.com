@@ -24,7 +24,7 @@ const pages = defineCollection({
   schema: z.object(seo),
 });
 const health = defineCollection({
-  loader: glob({ pattern: "*.md", base: "src/content/health" }),
+  loader: glob({ pattern: "*.{md,mdx}", base: "src/content/health" }),
   schema: z.object(article),
 });
 const news = defineCollection({
