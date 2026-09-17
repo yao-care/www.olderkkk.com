@@ -1,4 +1,5 @@
 ---
+import { SITE } from "../lib/site";
 import { getEntry } from "astro:content";
 import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
@@ -26,7 +27,7 @@ const latest = [
 ];
 
 const seoTitle = "台中西屯運動矯正・肌力訓練體雕｜鄭骨館體雕中心";
-const seoDesc = "台中西屯鄭骨館體雕中心，由健美選手出身的老K主理，主打運動矯正與肌力訓練，不硬扳、不喀一聲，結合全身運動矯正、體雕與一對一訓練，改善身體歪斜、痠痛與姿勢問題。預約電話 0970686319。";
+const seoDesc = `台中西屯鄭骨館體雕中心，由健美選手出身的老K主理，主打運動矯正與肌力訓練，不硬扳、不喀一聲，結合全身運動矯正、體雕與一對一訓練，改善身體歪斜、痠痛與姿勢問題。預約電話 ${SITE.tel}。`;
 ---
 <Base title={seoTitle} description={seoDesc}>
   {slides.length > 0 && <Hero copy={copy} slides={slides} cards={heroCards} />}

@@ -20,7 +20,7 @@ const article = {
 };
 
 const pages = defineCollection({
-  loader: glob({ pattern: "*.md", base: "src/content/pages" }),
+  loader: glob({ pattern: "*.{md,mdx}", base: "src/content/pages" }),
   schema: z.object(seo),
 });
 const health = defineCollection({
@@ -28,7 +28,7 @@ const health = defineCollection({
   schema: z.object(article),
 });
 const news = defineCollection({
-  loader: glob({ pattern: "*.md", base: "src/content/news" }),
+  loader: glob({ pattern: "*.{md,mdx}", base: "src/content/news" }),
   schema: z.object(article),
 });
 const heroCard = z.object({

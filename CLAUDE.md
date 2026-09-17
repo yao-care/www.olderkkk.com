@@ -18,6 +18,7 @@ npm run build     # 產生 dist/
 npm run preview   # 預覽 build（http://localhost:4326/www.olderkkk.com/）
 npm run check:design              # 設計規範守門 v2（build 已內含，手動跑用這個）
 npm run check:content             # 內容守門（去 AI 味，build 已內含，手動跑用這個）
+npm run check:terms               # 禁用詞守門（build 已內含，手動跑用這個）
 npm run check:content:all         # 全站盤點（永遠放行，供人工普查曝光）
 ```
 
@@ -36,14 +37,14 @@ npm run check:content:all         # 全站盤點（永遠放行，供人工普�
 | 課程介紹 | `src/content/pages/courses.md` | `/courses` |
 | 聯絡我們 | `src/content/pages/contact.md` | `/contact` |
 | 招牌頁 | `src/pages/method.astro`（差異軸主打：運動矯正/肌力訓練/中軸定位床/健美選手/一條龍） | `/method` |
-| 健康概念分享 | `src/content/health/<id>.md`（列表＋文章） | `/health`、`/health/<id>` |
-| 最新消息 | `src/content/news/<id>.md` | `/news`、`/news/<id>` |
-| 成果分享 | `src/content/works/{body,feet}.md`（相簿，`photos:` 陣列） | `/works`、`/works/<album>` |
+| 健康概念分享 | `src/content/health/<id>.md(x)`（列表＋文章） | `/health`、`/health/<id>` |
+| 最新消息 | `src/content/news/<id>.md(x)` | `/news`、`/news/<id>` |
 
 - **新增一篇健康/最新消息**：在對應資料夾新增 `<id>.md`，frontmatter 需 `title, date(YYYY/MM/DD), summary, order`（數字越小越前面）；body 寫 Markdown。圖片放 `public/images/` 並以 `/images/xxx` 引用。
-- **新增相簿照片**：編輯 `works/<album>.md` 的 `photos:`（`src` + `caption`），圖片放 `public/images/`。
+  **要引用商家資訊（電話／地址／營業時間…）就存成 `.mdx`**，`import { SITE } from "../../lib/site"` 後寫 `{SITE.tel}`；`pages`／`health`／`news` 三個 collection 都吃 `.md` 與 `.mdx`。⚠️ 轉 `.mdx` 時檔內的 raw HTML 會被當 JSX 解析：`allowfullscreen=""` 會被當 falsy 丟掉，要改成裸屬性 `allowfullscreen`。
+- **⚠️ 沒有成果分享／相簿功能**：站上無 `/works` 路由、無 `works` content collection，`services/body-sculpting.astro` 的 `.proof` 樣式是孤兒 CSS（2026-09-17 查證）。舊站 `/workshow/` 的相簿網址目前收到 `/services`。要做相簿得先建 collection 與路由。
 - **圖片一律放 `public/images/`，用 `/images/檔名` 引用**（會自動加 base 前綴）。
-- **站主上傳照片流程（全站唯一入口，之後所有換／新增照片一律走這條，不分頁面用途）**：站主把原圖丟到 repo 的 `photo-inbox/`（GitHub 網頁 Add file→Upload files，直接 commit main）→ Claude `git pull` → 轉 WebP 進 `public/images/` → 接到對應位置（頁面 `.astro` 變數／home.md `slides:`／works `photos:`／文章 Markdown 圖）＋`alt` → 過 gate → push →`git rm` 掉 inbox 原圖。細節與「放哪怎麼講」見 `photo-inbox/README.md`。（聊天室夾帶圖常靜默失敗傳不到 Claude，故一律走 git 進料，不要再要求站主用附件貼圖。）
+- **站主上傳照片流程（全站唯一入口，之後所有換／新增照片一律走這條，不分頁面用途）**：站主把原圖丟到 repo 的 `photo-inbox/`（GitHub 網頁 Add file→Upload files，直接 commit main）→ Claude `git pull` → 轉 WebP 進 `public/images/` → 接到對應位置（頁面 `.astro` 變數／home.md `slides:`／文章 Markdown 圖）＋`alt` → 過 gate → push →`git rm` 掉 inbox 原圖。細節與「放哪怎麼講」見 `photo-inbox/README.md`。（聊天室夾帶圖常靜默失敗傳不到 Claude，故一律走 git 進料，不要再要求站主用附件貼圖。）
 
 ## ⚠️ 重要陷阱（踩過的雷）
 1. **內部連結／圖片只用 Markdown 語法，不要用 raw HTML `<img>/<a>`**。Markdown 的 `/images`、`/services` 會被 rehype 自動加上 base 前綴；**raw HTML 不會 → 上線變 404**。需要格狀版面時用 CSS（見 services/courses/index 的 `.astro` style），不要在 .md 內寫 `<div><img></div>`。
@@ -67,6 +68,11 @@ npm run check:content:all         # 全站盤點（永遠放行，供人工普�
 
 ## SEO / AEO / GEO 慣例
 - **商家資訊唯一來源：`src/lib/site.ts`**（名稱/電話/Email/LINE/FB/地圖/地址/座標/營業時間）。要改 NAP、營業時間、地圖連結 → 改這裡（schema 與多處引用會一起更新）。
+  **嚴禁在任何檔案裡留死值**（文章、元件、`seoDesc`、`faqs.ts` 都一樣），一律從 `SITE.*` 取。稽核指令：
+  ```bash
+  grep -rnE '0970686319|d28281778@|@275nxace|工業區一路58巷11弄83號' src/ scripts/ pipeline/ | grep -v '^src/lib/site.ts'
+  ```
+  應該只有 `src/lib/site.ts` 一處（2026-09-17 已全站清掉 25 處死值）。
 - **結構化資料**：`Base.astro` 全站自動輸出 `LocalBusiness`；各頁可傳 `schemas={[...]}`（已有 Breadcrumb / Article / VideoObject / OfferCatalog / ImageGallery / FAQPage 產生器在 `site.ts`）。
 - **標題/描述**：各頁在 `.astro` 設 `seoTitle`/`seoDesc`（乾淨、唯一、含「台中西屯」）。**不要**再用關鍵字堆砌，**不要**加 `meta keywords`。
 - **sitemap 的 `lastmod`**（2026-08-11 起）：`astro.config.mjs` 的 `serialize` 讀**該頁原始檔最後一次 commit 日期**（內容頁對到 `src/content/**`，其餘對到 `src/pages/**`）。刻意不算共用版型/元件的異動——實測那會把 65 頁裡的 60 頁拉到同一天，反而蓋掉「哪一頁真的改了」。⚠️ `deploy.yml` 的 checkout 依賴 `fetch-depth: 0`，**改 workflow 時別把它拿掉**（淺 clone 只有一個 commit，全站日期會一起變成最後那次 push）。⚠️ 未 commit 的改動不會反映在 lastmod。

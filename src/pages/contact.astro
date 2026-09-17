@@ -13,7 +13,7 @@ const crumb = breadcrumbSchema([
   { name: "聯絡我們", url: absUrl("/contact", Astro.site, base) },
 ]);
 const seoTitle = "聯絡我們｜台中西屯・鄭骨館體雕中心";
-const seoDesc = "台中市西屯區工業區一路58巷11弄83號，鄰近天佑停車場，電話 0970686319，LINE @275nxace。鄭骨館體雕中心採預約制。";
+const seoDesc = `${SITE.addressText}，鄰近天佑停車場，電話 ${SITE.tel}，LINE ${SITE.lineId}。鄭骨館體雕中心採預約制。`;
 ---
 <Base title={seoTitle} description={seoDesc} schemas={[crumb]}>
   <h1>聯絡我們</h1>
