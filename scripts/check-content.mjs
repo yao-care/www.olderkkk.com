@@ -71,7 +71,11 @@ const WARN_LAYERS = {
 const SITE_ERROR_TELLS = [];
 const SITE_WARN_LAYERS = { 詞彙: [], 句式: [], 結構: [], 語氣: [] };
 // 站台可在此加白名單（命中不算違規）。預設空。例：credo 法律用語 /民國\d+年/、/第\d+條/。
-const ALLOW = [];
+// 2026-09-25 客戶已審核的〈什麼是脊椎調理？〉逐字上線：下面兩句整句放行（只認完全一致的句子）。
+const ALLOW = [
+  /^隨著電腦、手機與久坐工作型態普及，許多人一天當中有很長時間維持坐姿。$/,
+  /^脊椎調理的重點並不是把所有身體問題都歸因於脊椎，而是從整體活動與身體使用方式出發。$/,
+];
 
 // 合併核心＋站台特化
 for (const t of SITE_ERROR_TELLS) ERROR_TELLS.push(t);
