@@ -8,11 +8,13 @@ const crumb = breadcrumbSchema([
   { name: "首頁", url: absUrl("/", Astro.site, base) },
   { name: "預約流程", url: absUrl("/booking", Astro.site, base) },
 ]);
+// bookingHowToSchema 2026-09-27 起回傳 null（HowTo rich result 已於 2023-09 移除），
+// 這裡濾掉 null 避免往 schemas 塞一個空節點。
 const howto = bookingHowToSchema();
 const seoTitle = "預約流程與初次須知｜台中西屯・鄭骨館體雕中心";
 const seoDesc = "鄭骨館體雕中心採預約制：如何用 LINE 或電話預約、第一次來的注意事項、運動矯正前需告知事項與停車資訊。台中西屯。";
 ---
-<Base title={seoTitle} description={seoDesc} schemas={[crumb, howto]}>
+<Base title={seoTitle} description={seoDesc} schemas={[crumb, howto].filter(Boolean)}>
   <h1>預約流程與初次須知</h1>
   <p class="lead">本中心採預約制，請先預約時段再前往，以確保有合適的時段與充分的服務時間。</p>
 

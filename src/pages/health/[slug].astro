@@ -50,8 +50,13 @@ const related = (await getCollection("health"))
   {faqs.length > 0 && (
     <section class="faq" aria-labelledby="faq-title">
       <h2 id="faq-title">常見問題</h2>
+      {/*
+        open：預設展開，理由同 src/pages/faq.astro——FAQ rich result 2026-05-07 全面退場後，
+        問答要被 featured snippet／PAA／AI Overviews 取用，官方唯一的要求就是內容對人類
+        立即可見（https://developers.google.com/search/docs/appearance/snippet ）。
+      */}
       {faqs.map((f) => (
-        <details class="faq__item">
+        <details class="faq__item" open>
           <summary>{f.q}</summary>
           <p>{f.a}</p>
         </details>

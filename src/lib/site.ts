@@ -111,15 +111,16 @@ export function serviceSchema(o: { name: string; description: string; url: strin
   };
 }
 
-// 預約流程 HowTo
+/**
+ * 預約流程 HowTo —— 2026-09-27 起回傳 null，不再輸出。
+ *
+ * Google 於 2023-09 全面移除 HowTo 複合式搜尋結果，標記已無任何曝光效果。
+ * BOOKING.steps 本身仍渲染在 /booking 頁上（步驟對使用者可見），那部分不受影響——
+ * 可見的步驟才是現在唯一可能被 snippet 與 AI 取用的形式。
+ * 判準來源：seo-ops rules/jsonld-rules.json（structuredData.deprecated）。
+ */
 export function bookingHowToSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: "如何預約鄭骨館體雕中心",
-    description: "鄭骨館體雕中心採預約制，透過 LINE 或電話完成預約。",
-    step: BOOKING.steps.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.name, text: s.text })),
-  };
+  return null;
 }
 
 // 以 site(URL) + base 產生絕對網址；path 以 "/" 開頭視為站內路徑

@@ -27,8 +27,15 @@ const seoDesc = "鄭骨館體雕中心常見問題：運動矯正會不會痛、
 <Base title={seoTitle} description={seoDesc} schemas={[crumb, faqSchema]}>
   <h1>常見問題</h1>
   <div class="faq">
+    {/*
+      open：預設展開，答案不要藏在要點一下才看得到的地方。
+      2026-09-27 起這是這頁唯一還有效的槓桿——FAQ rich result 已於 2026-05-07 完全退場，
+      問答要被 featured snippet／PAA／AI Overviews 取用，官方要求的就是「內容對人類立即可見，
+      不可藏在展開區或分頁介面」（https://developers.google.com/search/docs/appearance/snippet ）。
+      保留 <details> 讓使用者仍可收合；拿掉 open 等於把那個槓桿關掉。
+    */}
     {faqs.map((f) => (
-      <details class="faq__item">
+      <details class="faq__item" open>
         <summary>{f.q}</summary>
         <p>{f.a}</p>
       </details>
