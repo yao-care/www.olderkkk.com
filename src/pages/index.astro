@@ -26,8 +26,8 @@ const latest = [
   { href: "/news", title: "最新消息", desc: "最新優惠、活動與店內動態。" },
 ];
 
-const seoTitle = "台中西屯運動矯正・肌力訓練體雕｜鄭骨館體雕中心";
-const seoDesc = `台中西屯鄭骨館體雕中心，由健美選手出身的老K主理，主打運動矯正與肌力訓練，不硬扳、不喀一聲，結合全身運動矯正、體雕與一對一訓練，改善身體歪斜、痠痛與姿勢問題。預約電話 ${SITE.tel}。`;
+const seoTitle = "鄭骨館體雕中心｜台中西屯運動矯正・肌力訓練・一對一";
+const seoDesc = `鄭骨館體雕中心位於${SITE.addressText}，預約電話 ${SITE.tel}。由健美選手出身的老K主理，主打運動矯正與肌力訓練，不硬扳、不喀一聲，結合全身運動矯正、體雕與一對一訓練，改善身體歪斜、痠痛與姿勢問題。`;
 ---
 <Base title={seoTitle} description={seoDesc}>
   {slides.length > 0 && <Hero copy={copy} slides={slides} cards={heroCards} />}
@@ -75,6 +75,12 @@ const seoDesc = `台中西屯鄭骨館體雕中心，由健美選手出身的老
     </div>
   </section>
 
+  <section class="home-block">
+    <h2>評論與媒體報導</h2>
+    <p class="home-reviews__text">想先看看別人怎麼說鄭骨館體雕中心？部落客與媒體的走訪分享，加上 Google 商家檔案上的客人<a href={withBase("/reviews")}>評論</a>，都整理在同一頁。</p>
+    <a class="home-link" href={withBase("/reviews")}>看評論與媒體報導 →</a>
+  </section>
+
   <ContactCTA />
 </Base>
 <style>
@@ -86,6 +92,7 @@ const seoDesc = `台中西屯鄭骨館體雕中心，由健美選手出身的老
   .home-about { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem 2rem; align-items: center; }
   .home-about__text p { font-size: var(--text-base); color: var(--text-secondary); margin: 0 0 1rem; line-height: var(--leading); }
   .home-about__photo { width: 240px; max-width: 38vw; border-radius: 12px; display: block; }
+  .home-reviews__text { font-size: var(--text-base); color: var(--text-secondary); margin: 0 0 1rem; line-height: var(--leading); }
   .home-link { font-size: var(--text-base); font-weight: 700; color: var(--color-link); }
 
   /* 卡片格 */
