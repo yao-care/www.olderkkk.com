@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-design.mjs && node scripts/check-content.mjs && node scripts/check-terms.mjs && astro build",
+    "build": "node scripts/check-design.mjs && node scripts/check-content.mjs && node scripts/check-terms.mjs && astro build && node scripts/check-sitemap-noindex.mjs dist",
     "preview": "astro preview",
     "astro": "astro",
     "check:design": "node scripts/check-design.mjs",
