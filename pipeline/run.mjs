@@ -4,7 +4,7 @@
 // 只往 stdout 印一行 STATUS（給 cron.sh 解析）；其餘走 stderr。
 // 環境變數 DRY_RUN=1：寫檔供審，但不推進游標（cron.sh 也不 commit）。
 import { promises as fs } from 'node:fs';
-import { PATHS } from './config.mjs';
+import { PATHS, GUARD } from './config.mjs';
 import { askText } from './claude.mjs';
 import { lint, normalizePunct, extractMd } from './guard.mjs';
 
@@ -75,10 +75,59 @@ function buildRepairPrompt(md, reason) {
 ${md}`;
 }
 
+// ── 題材見底自動補題（2026-11-09 站主裁示：見底就自動補、照常產文）──────────────
+// 參考既有題目格式與近期 GSC 查詢，請 Claude 補 REFILL_N 題（slug \t 困擾 \t 部位提示），
+// 驗格式、去重（slug 與困擾文字）、擋合規禁詞後附加到 topics.tsv；文章本身照舊過 guard 合規閘門。
+// 補了幾題、哪幾題寫到 pipeline/state/refill-last.txt，cron.sh 讀來 commit 與發 Slack。
+const REFILL_N = 14;
+async function gscQueries() {
+  try {
+    const dir = 'data/seo-daily';
+    const f = (await fs.readdir(dir)).filter((x) => /^\d{4}-\d{2}-\d{2}\.json$/.test(x)).sort().pop();
+    const d = JSON.parse(await fs.readFile(`${dir}/${f}`, 'utf8'));
+    return (d.gsc?.topQueries || []).map((q) => q.query).filter(Boolean).slice(0, 25);
+  } catch { return []; }
+}
+const banned = (t) => [...GUARD.forbidden, ...GUARD.bannedTerms].some((w) => t.includes(w)) || GUARD.correctionRule.test(t);
+export async function refillTopics(topics) {
+  const qs = await gscQueries();
+  const prompt = `你在幫「身體小卡關」系列補題目。這個系列寫的是日常生活裡身體卡住、做不到的小狀況，給一般人看的運動保健自助文。
+既有題目（不要重複，也不要只是換句話說）：
+${topics.map((t) => `- ${t.slug}｜${t.topic}`).join('\n')}
+
+近期網站在 Google 被搜的詞（可參考讀者在意什麼，但品牌詞、店名不要拿來當題目）：
+${qs.join('、') || '（無資料）'}
+
+請給 ${REFILL_N} 個新題目，每行一題、三欄用 tab 分隔，不要任何其他文字：
+slug（英文小寫與連字號，3–40 字元）<TAB>困擾（一句生活情境，像既有題目那樣口語）<TAB>部位提示（可能相關的肌群、關節活動度或習慣）
+不准出現這些字：${[...GUARD.forbidden, ...GUARD.bannedTerms].join('、')}；不准寫「矯正」（除非是「運動矯正」）。`;
+  const raw = await askText(prompt);
+  const have = new Set(topics.map((t) => t.slug)); const haveT = new Set(topics.map((t) => t.topic));
+  const out = [];
+  for (const line of String(raw).split('\n')) {
+    const [slug, topic, hint] = line.split('\t').map((x) => (x || '').trim());
+    if (!slug || !topic || !/^[a-z0-9][a-z0-9-]{2,39}$/.test(slug)) continue;
+    if (have.has(slug) || haveT.has(topic) || banned(topic) || banned(hint || '')) continue;
+    have.add(slug); haveT.add(topic); out.push({ slug, topic, hint: hint || '' });
+    if (out.length >= REFILL_N) break;
+  }
+  return out;
+}
+
 async function main() {
-  const topics = await readTopics();
+  let topics = await readTopics();
   const cur = await readCursor();
-  if (cur >= topics.length) { status('STATUS=EMPTY'); return; }
+  if (cur >= topics.length) {
+    let added = [];
+    try { added = await refillTopics(topics); } catch (e) { err(`自動補題失敗：${e.message}`); }
+    if (!added.length) { status('STATUS=EMPTY'); return; }
+    if (!DRY) {
+      await fs.appendFile(PATHS.topics, added.map((t) => [t.slug, t.topic, t.hint].join('\t')).join('\n') + '\n');
+      await fs.writeFile('pipeline/state/refill-last.txt', added.map((t) => `${t.slug}｜${t.topic}`).join('\n') + '\n');
+    }
+    err(`題材見底，自動補 ${added.length} 題：${added.map((t) => t.topic).join('、')}`);
+    topics = DRY ? [...topics, ...added] : await readTopics();
+  }
 
   const t = topics[cur];
   const target = `${PATHS.health}/${t.slug}.md`;

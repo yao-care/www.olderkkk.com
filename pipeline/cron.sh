@@ -26,9 +26,30 @@ BODY="${OUT#STATUS=}"; STATUS="${BODY%%|*}"; REST="${BODY#*|}"; SLUG="${REST%%|*
 
 if [ "${DRY_RUN:-0}" = "1" ]; then log "DRY_RUN — 不 build/commit/push（STATUS=$STATUS，檔案保留供審）"; exit 0; fi
 
+# 題材見底時 run.mjs 會自動補題（2026-11-09 站主裁示）：補了就先單獨 commit topics.tsv，並在 Slack 列出補了哪些
+if [ -s pipeline/state/refill-last.txt ] && ! git diff --quiet -- pipeline/topics.tsv; then
+  git add pipeline/topics.tsv
+  git commit -q -m "content: 身體小卡關題材見底，自動補題
+
+$(cat pipeline/state/refill-last.txt)" && git push origin main 2>&1 || log "補題 commit/push 失敗（續行）"
+  slack "🧩 身體小卡關：題材見底，已自動補 $(grep -c . pipeline/state/refill-last.txt) 題（之後照常每 3 天 1 篇）：
+$(sed 's/^/• /' pipeline/state/refill-last.txt)"
+  rm -f pipeline/state/refill-last.txt
+fi
+
+GATE_LOG=/mnt/customers/seo-ops/logs/olderkkk.com-series-gate.log   # 原本在 /tmp（2026-11-09 移）
 case "$STATUS" in
   PUBLISH)
-    if ! node scripts/check-design.mjs >/tmp/olderkkk-series-gate.log 2>&1 || ! npm run build >>/tmp/olderkkk-series-gate.log 2>&1; then
+    # 全站 build 走全機 build 輪流（site-build-run；最多等 30 分）。等鎖逾時（75）＝本輪跳過：回退文章與游標、不發 🔴
+    BRC=0
+    node scripts/check-design.mjs >"$GATE_LOG" 2>&1 || BRC=1
+    if [ "$BRC" = 0 ]; then SITE_BUILD_WAIT=1800 site-build-run olderkkk.com -- npm run build >>"$GATE_LOG" 2>&1 || BRC=$?; fi
+    if [ "$BRC" = 75 ]; then
+      log "等全機 build 鎖逾時，本輪跳過（回退文章與游標，下輪再寫這題）"
+      git checkout -- pipeline/state/cursor.json 2>/dev/null || true
+      rm -f "src/content/health/$SLUG.md"; exit 0
+    fi
+    if [ "$BRC" != 0 ]; then
       log "build gate 失敗，回退文章與游標"
       git checkout -- pipeline/state/cursor.json 2>/dev/null || true
       rm -f "src/content/health/$SLUG.md"
@@ -46,7 +67,7 @@ Claude-Session: https://claude.ai/code/session_01EEVrHiJRWP4UFEpcKyDmPN" || { lo
     ;;
   SKIP)  log "檔案已存在，游標已推進：$SLUG" ;;
   BLOCK) log "guard 擋下：$SLUG｜$TOPIC"; slack "🔴 身體小卡關：guard 擋下（$SLUG）：$TOPIC，未上線、不推進游標" ;;
-  EMPTY) log "題材佇列見底"; slack "📭 身體小卡關：題材佇列見底，請補題（pipeline/topics.tsv）" ;;
+  EMPTY) log "題材佇列見底且自動補題失敗"; slack "📭 身體小卡關：題材佇列見底，自動補題沒成功（看 olderkkk.com-series.log），這輪沒產文" ;;
   ERROR) log "生成錯誤：$REST"; slack "🔴 身體小卡關：生成錯誤 — $REST" ;;
   *)     log "未知狀態：$OUT" ;;
 esac
